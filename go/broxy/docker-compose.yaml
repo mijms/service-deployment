@@ -12,6 +12,8 @@ services:
       - SERVER_PORT
       - MONGODB_URL
       - MONGODB_DATABASE
+      - MONGODB_USER
+      - MONGODB_PASS
       - JWT_SECRET
       - JWT_EXPIRATION_MS
     ports:
@@ -20,6 +22,7 @@ services:
       - ../build/broxy:/app/server
       - ../templates:/app/templates
       - ../.env.prod:/app/.env
+      - ../go.mod:/app/go.mod
     command: ./server
     networks:
       - ukkera
