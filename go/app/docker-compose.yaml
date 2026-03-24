@@ -21,7 +21,7 @@ services:
     volumes:
       - ../build/server:/app/server
       - ../templates:/app/templates
-      - ../.env.prod:/app/.env
+      - ../env.prod:/app/.env
     command: ./server
     networks:
       - ukkera
