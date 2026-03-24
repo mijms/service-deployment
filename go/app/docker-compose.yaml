@@ -12,6 +12,8 @@ services:
       - SERVER_PORT
       - MONGODB_URL
       - MONGODB_DATABASE
+      - MONGODB_USER
+      - MONGODB_PASS
       - JWT_SECRET
       - JWT_EXPIRATION_MS
     ports:
