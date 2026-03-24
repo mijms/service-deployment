@@ -19,11 +19,11 @@ services:
     ports:
       - ${SERVER_PORT}:${SERVER_PORT}
     volumes:
-      - ../build/server:/app/server
+      - ../build/server:/app/cmd/server
       - ../templates:/app/templates
       - ../env.prod:/app/.env
       - ../go.mod:/app/go.mod
-    command: ./server
+    command: ./cmd/server
     networks:
       - ukkera
 networks:
