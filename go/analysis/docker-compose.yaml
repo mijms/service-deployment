@@ -9,7 +9,7 @@ services:
       - .env.prod
     environment:
       - APP_ROOT=/app
-      - APP_NAME=appdata
+      - APP_NAME=analysis
       - TZ
       - SERVER_PORT
       - MONGODB_URL
@@ -21,9 +21,9 @@ services:
     ports:
       - ${SERVER_PORT}:${SERVER_PORT}
     volumes:
-      - ../build/server:/app/server
+      - ../build/analysis:/app/server
       - ../templates:/app/templates
-      - ../env.prod:/app/.env
+      - ../.env.prod:/app/.env
       - ../go.mod:/app/go.mod
     command: ./server
     networks:
