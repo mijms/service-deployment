@@ -1,0 +1,407 @@
+flow__work_flow:
+  fields:
+    name:
+      type: string
+      field: name
+      name: name
+      group: main
+    type:
+      type: string
+      field: type
+      name: type
+      group: main
+    role:
+      type: relation
+      model: common__role
+      field: role
+      name: role
+      group: main
+    department:
+      type: relation
+      model: org__department
+      field: department
+      name: department
+      group: main
+    setting:
+      type: raw
+      field: setting
+      name: setting
+      group: main
+    org:
+      type: string
+      field: org
+      name: org
+      group: main
+    company:
+      type: string
+      field: company
+      name: company
+      group: main
+    app:
+      type: string
+      field: app
+      name: app
+      group: main
+    user:
+      type: relation
+      model: auth__account
+      field: user
+      name: user
+      group: main
+  search:
+    - name
+  filters:
+    - CurrentApps
+    - Org
+    - Company
+  mappings:
+    org: org
+    company: company
+    user: id
+  analysis:
+    main: {}
+flow__step:
+  fields:
+    name:
+      type: string
+      field: name
+      name: name
+      group: main
+    work_flow:
+      type: relation
+      model: flow__work_flow
+      field: work_flow
+      name: work_flow
+      group: main
+    type:
+      type: string
+      field: type
+      name: type
+      group: main
+    actions:
+      type: hasMany
+      model: flow__action
+      field: actions
+      name: actions
+      group: main
+    next:
+      type: relation
+      model: flow__step
+      field: next
+      name: next
+      group: main
+    role:
+      type: relation
+      model: common__role
+      field: role
+      name: role
+      group: main
+    department:
+      type: relation
+      model: org__department
+      field: department
+      name: department
+      group: main
+    index:
+      type: integer
+      field: index
+      name: index
+      group: main
+    org:
+      type: string
+      field: org
+      name: org
+      group: main
+    company:
+      type: string
+      field: company
+      name: company
+      group: main
+    app:
+      type: string
+      field: app
+      name: app
+      group: main
+  search:
+    - name
+  filters:
+    - CurrentApps
+    - Org
+    - Company
+  mappings:
+    org: org
+    company: company
+    user: id
+  analysis:
+    main:
+      index: index
+flow__action:
+  fields:
+    type:
+      type: string
+      field: type
+      name: type
+      group: main
+    name:
+      type: string
+      field: name
+      name: name
+      group: main
+    setting:
+      type: raw
+      field: setting
+      name: setting
+      group: main
+flow__section:
+  fields:
+    type:
+      type: string
+      field: type
+      name: type
+      group: main
+    name:
+      type: string
+      field: name
+      name: name
+      group: main
+    setting:
+      type: raw
+      field: setting
+      name: setting
+      group: main
+    fields:
+      type: raw
+      field: fields
+      name: fields
+      group: main
+    model:
+      type: string
+      field: model
+      name: model
+      group: main
+    step:
+      type: relation
+      model: flow__step
+      field: step
+      name: step
+      group: main
+    org:
+      type: string
+      field: org
+      name: org
+      group: main
+    company:
+      type: string
+      field: company
+      name: company
+      group: main
+    app:
+      type: string
+      field: app
+      name: app
+      group: main
+  search:
+    - name
+  filters:
+    - CurrentApps
+    - Org
+    - Company
+  mappings:
+    org: org
+    company: company
+    user: id
+  analysis:
+    main: {}
+flow__submission:
+  fields:
+    type:
+      type: string
+      field: type
+      name: type
+      group: main
+    name:
+      type: string
+      field: name
+      name: name
+      group: main
+    current:
+      type: relation
+      model: flow__step
+      field: current
+      name: current
+      group: main
+    role:
+      type: relation
+      model: common__role
+      field: role
+      name: role
+      group: main
+    document:
+      type: relation
+      model: common__document
+      field: document
+      name: document
+      group: main
+    user:
+      type: relation
+      model: auth__account
+      field: user
+      name: user
+      group: main
+    creator:
+      type: relation
+      model: auth__account
+      field: creator
+      name: creator
+      group: main
+    data:
+      type: raw
+      field: data
+      name: data
+      group: main
+    org:
+      type: string
+      field: org
+      name: org
+      group: main
+    company:
+      type: string
+      field: company
+      name: company
+      group: main
+    app:
+      type: string
+      field: app
+      name: app
+      group: main
+  search:
+    - name
+  filters:
+    - CurrentApps
+    - Org
+    - Company
+  mappings:
+    org: org
+    company: company
+    user: id
+  analysis:
+    main: {}
+flow__submittion_data:
+  fields:
+    submission:
+      type: relation
+      model: flow__submission
+      field: submission
+      name: submission
+      group: main
+    key:
+      type: string
+      field: key
+      name: key
+      group: main
+    data:
+      type: raw
+      field: data
+      name: data
+      group: main
+    org:
+      type: string
+      field: org
+      name: org
+      group: main
+    company:
+      type: string
+      field: company
+      name: company
+      group: main
+    app:
+      type: string
+      field: app
+      name: app
+      group: main
+  search:
+    - key
+  filters:
+    - CurrentApps
+    - Org
+    - Company
+  mappings:
+    org: org
+    company: company
+    user: id
+  analysis:
+    main: {}
+flow__submission_history:
+  fields:
+    submission:
+      type: relation
+      model: flow__submission
+      field: submission
+      name: submission
+      group: main
+    step:
+      type: relation
+      model: flow__step
+      field: step
+      name: step
+      group: main
+    action:
+      type: relation
+      model: flow__action
+      field: action
+      name: action
+      group: main
+    user:
+      type: relation
+      model: auth__account
+      field: user
+      name: user
+      group: main
+    next_step:
+      type: relation
+      model: flow__step
+      field: next_step
+      name: next_step
+      group: main
+    comment:
+      type: string
+      field: comment
+      name: comment
+      group: main
+    data:
+      type: raw
+      field: data
+      name: data
+      group: main
+    changes:
+      type: raw
+      field: changes
+      name: changes
+      group: main
+    org:
+      type: string
+      field: org
+      name: org
+      group: main
+    company:
+      type: string
+      field: company
+      name: company
+      group: main
+    app:
+      type: string
+      field: app
+      name: app
+      group: main
+  search:
+    - key
+  filters:
+    - CurrentApps
+    - Org
+    - Company
+  mappings:
+    org: org
+    company: company
+    user: id
+  analysis:
+    main: {}

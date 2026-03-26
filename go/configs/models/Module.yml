@@ -1,0 +1,659 @@
+module__module:
+  fields:
+    Name:
+      field: name
+      name: Name
+      group: main
+    ModuleName:
+      field: module_name
+      name: ModuleName
+      group: main
+    Path:
+      field: path
+      name: Path
+      group: main
+    Code:
+      field: code
+      name: Code
+      group: main
+    IsSystem:
+      field: is_system
+      name: IsSystem
+      group: main
+    Status:
+      field: status
+      name: Status
+      group: main
+    ModuleType:
+      field: module_type
+      name: ModuleType
+      group: main
+    Description:
+      field: description
+      name: Description
+      group: main
+    Documentation:
+      field: documentation
+      name: Documentation
+      group: main
+    Version:
+      field: version
+      name: Version
+      group: main
+    Priority:
+      field: priority
+      name: Priority
+      group: main
+    Sequence:
+      field: sequence
+      name: Sequence
+      group: main
+    CompletionPercentage:
+      field: completion_percentage
+      name: CompletionPercentage
+      group: main
+    ReleaseDate:
+      field: release_date
+      name: ReleaseDate
+      group: main
+    DeprecationDate:
+      field: deprecation_date
+      name: DeprecationDate
+      group: main
+    LastModified:
+      field: last_modified
+      name: LastModified
+      group: main
+    App:
+      field: app
+      name: App
+      group: main
+    ParentModule:
+      field: parent_module
+      name: ParentModule
+      group: main
+    ChildModules:
+      field: child_modules
+      name: ChildModules
+      group: main
+    Owner:
+      field: owner
+      name: Owner
+      group: main
+    CreatedBy:
+      field: created_by
+      name: CreatedBy
+      group: main
+    ModifiedBy:
+      field: modified_by
+      name: ModifiedBy
+      group: main
+    Department:
+      field: department
+      name: Department
+      group: main
+    DefaultRole:
+      field: default_role
+      name: DefaultRole
+      group: main
+    Org:
+      field: org
+      name: Org
+      group: main
+    Company:
+      field: company
+      name: Company
+      group: main
+    Category:
+      field: category
+      name: Category
+      group: main
+    Tags:
+      field: tags
+      name: Tags
+      group: main
+    Config:
+      field: config
+      name: Config
+      group: main
+    Settings:
+      field: settings
+      name: Settings
+      group: main
+    Dependencies:
+      field: dependencies
+      name: Dependencies
+      group: main
+    Features:
+      field: features
+      name: Features
+      group: main
+    Collection:
+      field: collection
+      name: Collection
+      group: main
+    HasDatabase:
+      field: has_database
+      name: HasDatabase
+      group: main
+    Icon:
+      field: icon
+      name: Icon
+      group: main
+    Color:
+      field: color
+      name: Color
+      group: main
+    IsActive:
+      field: is_active
+      name: IsActive
+      group: main
+    Permissions:
+      field: permissions
+      name: Permissions
+      group: main
+  filters:
+    - CurrentApps
+    - Org
+    - Company
+  search:
+    - name
+    - module_name
+    - path
+    - code
+  generate:
+    - app
+    - path
+    - code
+  mappings:
+    app: app
+    org: org
+    company: company
+  order_by:
+    created_at: desc
+  hooks:
+    pre_save:
+      validate_system_module:
+        fun: check_system_module_permission
+        from:
+          is_system: false
+        to:
+          is_system: true
+    post_save:
+      create_default_permissions:
+        fun: create_module_permissions
+        action: create
+module__workflow:
+  fields:
+    Name:
+      field: name
+      name: Name
+      group: main
+    Module:
+      field: module
+      name: Module
+      group: main
+    WorkflowType:
+      field: workflow_type
+      name: WorkflowType
+      group: main
+    CurrentStatus:
+      field: current_status
+      name: CurrentStatus
+      group: main
+    CurrentStep:
+      field: current_step
+      name: CurrentStep
+      group: main
+    AssignedTo:
+      field: assigned_to
+      name: AssignedTo
+      group: main
+    StartDate:
+      field: start_date
+      name: StartDate
+      group: main
+    EndDate:
+      field: end_date
+      name: EndDate
+      group: main
+    Progress:
+      field: progress
+      name: Progress
+      group: main
+    WorkflowData:
+      field: workflow_data
+      name: WorkflowData
+      group: main
+    Org:
+      field: org
+      name: Org
+      group: main
+    Company:
+      field: company
+      name: Company
+      group: main
+    App:
+      field: app
+      name: App
+      group: main
+  filters:
+    - CurrentApps
+    - Org
+    - Company
+  search:
+    - name
+    - module.name
+  mappings:
+    org: org
+    company: company
+  hooks:
+    pre_save:
+      update_module_status:
+        fun: sync_workflow_status
+        action: updateOne
+        filter:
+          module: value.module.id
+        update:
+          $set:
+            status: value.current_status
+module__role_profile:
+  fields:
+    Name:
+      field: name
+      name: Name
+      group: main
+    Module:
+      field: module
+      name: Module
+      group: main
+    Role:
+      field: role
+      name: Role
+      group: main
+    CanCreate:
+      field: can_create
+      name: CanCreate
+      group: main
+    CanRead:
+      field: can_read
+      name: CanRead
+      group: main
+    CanUpdate:
+      field: can_update
+      name: CanUpdate
+      group: main
+    CanDelete:
+      field: can_delete
+      name: CanDelete
+      group: main
+    CanExport:
+      field: can_export
+      name: CanExport
+      group: main
+    CanImport:
+      field: can_import
+      name: CanImport
+      group: main
+    CanApprove:
+      field: can_approve
+      name: CanApprove
+      group: main
+    CanSubmit:
+      field: can_submit
+      name: CanSubmit
+      group: main
+    CanCancel:
+      field: can_cancel
+      name: CanCancel
+      group: main
+    AccessLevel:
+      field: access_level
+      name: AccessLevel
+      group: main
+    PermissionsData:
+      field: permissions_data
+      name: PermissionsData
+      group: main
+    Org:
+      field: org
+      name: Org
+      group: main
+    Company:
+      field: company
+      name: Company
+      group: main
+    App:
+      field: app
+      name: App
+      group: main
+  filters:
+    - CurrentApps
+    - Org
+    - Company
+  search:
+    - name
+    - role.name
+    - module.name
+  generate:
+    - module
+    - role
+  mappings:
+    org: org
+    company: company
+module__field:
+  fields:
+    FieldName:
+      field: field_name
+      name: FieldName
+      group: main
+    Label:
+      field: label
+      name: Label
+      group: main
+    Module:
+      field: module
+      name: Module
+      group: main
+    FieldType:
+      field: field_type
+      name: FieldType
+      group: main
+    Sequence:
+      field: sequence
+      name: Sequence
+      group: main
+    IsRequired:
+      field: is_required
+      name: IsRequired
+      group: main
+    IsUnique:
+      field: is_unique
+      name: IsUnique
+      group: main
+    IsIndexed:
+      field: is_indexed
+      name: IsIndexed
+      group: main
+    ShowInList:
+      field: show_in_list
+      name: ShowInList
+      group: main
+    IsHidden:
+      field: is_hidden
+      name: IsHidden
+      group: main
+    IsReadonly:
+      field: is_readonly
+      name: IsReadonly
+      group: main
+    DefaultValue:
+      field: default_value
+      name: DefaultValue
+      group: main
+    RelationModel:
+      field: relation_model
+      name: RelationModel
+      group: main
+    RelationShow:
+      field: relation_show
+      name: RelationShow
+      group: main
+    MinLength:
+      field: min_length
+      name: MinLength
+      group: main
+    MaxLength:
+      field: max_length
+      name: MaxLength
+      group: main
+    MinValue:
+      field: min_value
+      name: MinValue
+      group: main
+    MaxValue:
+      field: max_value
+      name: MaxValue
+      group: main
+    Pattern:
+      field: pattern
+      name: Pattern
+      group: main
+    FrontendType:
+      field: frontend_type
+      name: FrontendType
+      group: main
+    Options:
+      field: options
+      name: Options
+      group: main
+    HelpText:
+      field: help_text
+      name: HelpText
+      group: main
+    Placeholder:
+      field: placeholder
+      name: Placeholder
+      group: main
+    FieldConfig:
+      field: field_config
+      name: FieldConfig
+      group: main
+    Org:
+      field: org
+      name: Org
+      group: main
+    Company:
+      field: company
+      name: Company
+      group: main
+    App:
+      field: app
+      name: App
+      group: main
+  filters:
+    - CurrentApps
+    - Org
+    - Company
+  search:
+    - field_name
+    - label
+    - module.name
+  generate:
+    - module
+    - field_name
+  mappings:
+    org: org
+    company: company
+  order_by:
+    sequence: asc
+module__custom_form:
+  fields:
+    Name:
+      field: name
+      name: Name
+      group: main
+    Module:
+      field: module
+      name: Module
+      group: main
+    FormType:
+      field: form_type
+      name: FormType
+      group: main
+    IsDefault:
+      field: is_default
+      name: IsDefault
+      group: main
+    Layout:
+      field: layout
+      name: Layout
+      group: main
+    Sections:
+      field: sections
+      name: Sections
+      group: main
+    Fields:
+      field: fields
+      name: Fields
+      group: main
+    ValidationRules:
+      field: validation_rules
+      name: ValidationRules
+      group: main
+    FormConfig:
+      field: form_config
+      name: FormConfig
+      group: main
+    IsActive:
+      field: is_active
+      name: IsActive
+      group: main
+    Org:
+      field: org
+      name: Org
+      group: main
+    Company:
+      field: company
+      name: Company
+      group: main
+    App:
+      field: app
+      name: App
+      group: main
+  filters:
+    - CurrentApps
+    - Org
+    - Company
+  search:
+    - name
+    - module.name
+  mappings:
+    org: org
+    company: company
+module__serial_number:
+  fields:
+    Name:
+      field: name
+      name: Name
+      group: main
+    Module:
+      field: module
+      name: Module
+      group: main
+    Prefix:
+      field: prefix
+      name: Prefix
+      group: main
+    Suffix:
+      field: suffix
+      name: Suffix
+      group: main
+    CurrentValue:
+      field: current_value
+      name: CurrentValue
+      group: main
+    Padding:
+      field: padding
+      name: Padding
+      group: main
+    Format:
+      field: format
+      name: Format
+      group: main
+    ResetFrequency:
+      field: reset_frequency
+      name: ResetFrequency
+      group: main
+    LastResetDate:
+      field: last_reset_date
+      name: LastResetDate
+      group: main
+    IsActive:
+      field: is_active
+      name: IsActive
+      group: main
+    Org:
+      field: org
+      name: Org
+      group: main
+    Company:
+      field: company
+      name: Company
+      group: main
+    App:
+      field: app
+      name: App
+      group: main
+  filters:
+    - CurrentApps
+    - Org
+    - Company
+  search:
+    - name
+    - module.name
+    - prefix
+  generate:
+    - module
+    - prefix
+  mappings:
+    org: org
+    company: company
+module__version_history:
+  fields:
+    Module:
+      field: module
+      name: Module
+      group: main
+    Version:
+      field: version
+      name: Version
+      group: main
+    VersionType:
+      field: version_type
+      name: VersionType
+      group: main
+    Changes:
+      field: changes
+      name: Changes
+      group: main
+    Changelog:
+      field: changelog
+      name: Changelog
+      group: main
+    ReleasedBy:
+      field: released_by
+      name: ReleasedBy
+      group: main
+    ReleaseDate:
+      field: release_date
+      name: ReleaseDate
+      group: main
+    IsStable:
+      field: is_stable
+      name: IsStable
+      group: main
+    Org:
+      field: org
+      name: Org
+      group: main
+    Company:
+      field: company
+      name: Company
+      group: main
+    App:
+      field: app
+      name: App
+      group: main
+  filters:
+    - CurrentApps
+    - Org
+    - Company
+  search:
+    - module.name
+    - version
+  mappings:
+    org: org
+    company: company
+  order_by:
+    created_at: desc

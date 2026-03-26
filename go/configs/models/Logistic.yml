@@ -1,0 +1,1035 @@
+logistic__setting:
+  fields:
+    name:
+      type: string
+      field: name
+      name: name
+      group: main
+    setting:
+      type: raw
+      field: setting
+      name: setting
+      group: main
+    key:
+      type: string
+      field: key
+      name: key
+      group: main
+    company:
+      type: string
+      hide: true
+      field: company
+      name: company
+      group: main
+    org:
+      type: string
+      hide: true
+      field: org
+      name: org
+      group: main
+  mappings:
+    org: org
+    company: company
+  filters:
+    - Company
+    - Org
+  analysis:
+    main: {}
+logistic__vehicle_type:
+  fields:
+    name:
+      type: string
+      list: true
+      field: name
+      name: name
+      group: main
+    image:
+      type: relation
+      model: files__file
+      list: true
+      field: image
+      name: image
+      group: main
+logistic__vehicle_brand:
+  fields:
+    name:
+      type: string
+      list: true
+      field: name
+      name: name
+      group: main
+    logo:
+      type: relation
+      list: true
+      model: files__file
+      field: logo
+      name: logo
+      group: main
+logistic__vehicle_size:
+  fields:
+    name:
+      type: string
+      list: true
+      field: name
+      name: name
+      group: main
+    image:
+      type: relation
+      list: true
+      model: files__file
+      field: image
+      name: image
+      group: main
+    type:
+      type: relation
+      list: true
+      model: logistic__vehicle_type
+      field: type
+      name: type
+      group: main
+    setting:
+      type: raw
+      field: setting
+      name: setting
+      group: main
+logistic__vehicle_model:
+  fields:
+    brand:
+      type: relation
+      list: true
+      filter: true
+      model: logistic__vehicle_brand
+      field: brand
+      name: brand
+      group: main
+    name:
+      type: string
+      list: true
+      field: name
+      name: name
+      group: main
+logistic__vehicle:
+  fields:
+    brand:
+      type: relation
+      list: true
+      model: logistic__vehicle_brand
+      field: brand
+      name: brand
+      group: main
+    model:
+      type: relation
+      list: true
+      model: logistic__vehicle_model
+      field: model
+      name: model
+      group: main
+    type:
+      type: relation
+      model: logistic__vehicle_type
+      field: type
+      name: type
+      group: main
+    size:
+      type: relation
+      model: logistic__vehicle_size
+      field: size
+      name: size
+      group: main
+    vin:
+      type: string
+      field: vin
+      name: vin
+      group: main
+    seq_number:
+      type: string
+      list: true
+      field: seq_number
+      name: seq_number
+      group: main
+    year:
+      type: string
+      list: true
+      field: year
+      name: year
+      group: main
+    plate_en:
+      type: raw
+      column:
+        type: plate_no
+      field: plate_en
+      name: plate_en
+      group: main
+    plate_ar:
+      type: raw
+      field: plate_ar
+      name: plate_ar
+      group: main
+    license:
+      type: relation
+      model: files__file
+      field: license
+      name: license
+      group: main
+    loc:
+      type: geo
+      geo: Point
+      field: loc
+      name: loc
+      group: main
+    driver:
+      type: relation
+      model: auth__account
+      field: driver
+      name: driver
+      group: main
+    company:
+      type: string
+      hide: true
+      field: company
+      name: company
+      group: main
+    org:
+      type: string
+      hide: true
+      field: org
+      name: org
+      group: main
+    verified:
+      type: boolean
+      field: verified
+      name: verified
+      group: main
+  geo:
+    - loc
+  mappings:
+    org: org
+    company: company
+  filters:
+    - Company
+    - Org
+  analysis:
+    main: {}
+logistic__address:
+  fields:
+    name:
+      type: string
+      list: true
+      field: name
+      name: name
+      group: main
+    street:
+      type: string
+      field: street
+      name: street
+      group: main
+    verify:
+      type: boolean
+      field: verify
+      name: verify
+      group: main
+    main:
+      type: boolean
+      field: main
+      name: main
+      group: main
+    loc:
+      type: geo
+      geo: Point
+      field: loc
+      name: loc
+      group: main
+    user:
+      type: relation
+      model: auth__account
+      field: user
+      name: user
+      group: main
+  geo:
+    - loc
+  analysis:
+    main: {}
+logistic__favorite_address:
+  fields:
+    name:
+      type: string
+      list: true
+      field: name
+      name: name
+      group: main
+    address:
+      type: string
+      list: true
+      field: address
+      name: address
+      group: main
+    address_line_2:
+      type: string
+      list: true
+      field: address_line_2
+      name: address_line_2
+      group: main
+    verify:
+      type: boolean
+      filter: true
+      list: true
+      field: verify
+      name: verify
+      group: main
+    address_type:
+      type: relation
+      model: common__category
+      params:
+        type: address_type
+      field: address_type
+      name: address_type
+      group: main
+    loc:
+      type: geo
+      geo: Point
+      field: loc
+      name: loc
+      group: main
+    user:
+      type: relation
+      hide: true
+      model: auth__account
+      field: user
+      name: user
+      group: main
+  geo:
+    - loc
+  analysis:
+    main: {}
+logistic__driver:
+  fields:
+    status:
+      type: string
+      hide: true
+      field: status
+      name: status
+      group: main
+    license:
+      type: relation
+      model: files__file
+      field: license
+      name: license
+      group: main
+    verified:
+      type: boolean
+      field: verified
+      name: verified
+      group: main
+    company:
+      type: string
+      hide: true
+      field: company
+      name: company
+      group: main
+    org:
+      type: string
+      hide: true
+      field: org
+      name: org
+      group: main
+    loc:
+      type: geo
+      geo: Point
+      field: loc
+      name: loc
+      group: main
+    user:
+      type: relation
+      model: auth__account
+      details: true
+      list: true
+      show: user.name
+      field: user
+      name: user
+      group: main
+    rate:
+      type: inversedOne
+      model: logistic__rate
+      mapped: driver
+      details: true
+      field: rate
+      name: rate
+      group: main
+  geo:
+    - loc
+  mappings:
+    org: org
+    company: company
+  filters:
+    - Company
+    - Org
+  analysis:
+    main: {}
+logistic__order:
+  fields:
+    name:
+      type: string
+      list: true
+      field: name
+      name: name
+      group: main
+    type:
+      type: string
+      field: type
+      name: type
+      group: main
+    pickup_location:
+      type: geo
+      geo: Point
+      validates:
+        required: true
+      field: pickup_location
+      name: pickup_location
+      group: main
+    pickup_images:
+      type: hasMany
+      model: files__file
+      field: pickup_images
+      name: pickup_images
+      group: main
+    driver_pickup_images:
+      type: hasMany
+      model: files__file
+      hide: true
+      field: driver_pickup_images
+      name: driver_pickup_images
+      group: main
+    drop_images:
+      type: hasMany
+      hide: true
+      model: files__file
+      field: drop_images
+      name: drop_images
+      group: main
+    trip_start:
+      hide: true
+      type: date
+      field: trip_start
+      name: trip_start
+      group: main
+    trip_end:
+      hide: true
+      type: date
+      field: trip_end
+      name: trip_end
+      group: main
+    driver_start:
+      hide: true
+      type: date
+      field: driver_start
+      name: driver_start
+      group: main
+    secure:
+      group: secure
+      type: raw
+      field: secure
+      name: secure
+    notes:
+      type: raw
+      field: notes
+      name: notes
+      group: main
+    signature:
+      type: raw
+      field: signature
+      name: signature
+      group: main
+    truck_type:
+      type: relation
+      list: true
+      model: logistic__vehicle_type
+      field: truck_type
+      name: truck_type
+      group: main
+    truck_size:
+      type: relation
+      list: true
+      model: logistic__vehicle_size
+      field: truck_size
+      name: truck_size
+      group: main
+    approval:
+      hide: true
+      type: string
+      field: approval
+      name: approval
+      group: main
+    truck:
+      type: relation
+      hide: true
+      model: logistic__vehicle
+      field: truck
+      name: truck
+      group: main
+    driver:
+      type: relation
+      hide: true
+      model: auth__account
+      field: driver
+      name: driver
+      group: main
+    shipping_time:
+      type: date
+      list: true
+      field: shipping_time
+      name: shipping_time
+      group: main
+    from_customer:
+      type: relation
+      model: auth__account
+      list: true
+      field: from_customer
+      name: from_customer
+      group: main
+    to_customer:
+      type: string
+      field: to_customer
+      name: to_customer
+      group: main
+    reciver_phone:
+      type: string
+      field: reciver_phone
+      name: reciver_phone
+      group: main
+    secondary_phone:
+      type: string
+      hide: true
+      field: secondary_phone
+      name: secondary_phone
+      group: main
+    estimated_transit:
+      type: int
+      hide: true
+      field: estimated_transit
+      name: estimated_transit
+      group: main
+    additional_services:
+      type: raw
+      hide: true
+      field: additional_services
+      name: additional_services
+      group: main
+    service_fee:
+      type: float
+      hide: true
+      field: service_fee
+      name: service_fee
+      group: main
+    points:
+      type: inversed
+      model: logistic__order_address
+      mapped: order
+      field: points
+      name: points
+      group: main
+    packages:
+      type: inversed
+      model: logistic__order_package
+      mapped: order
+      field: packages
+      name: packages
+      group: main
+    order_requests:
+      type: inversed
+      model: logistic__order_request
+      details: true
+      mapped: order
+      field: order_requests
+      name: order_requests
+      group: main
+    company:
+      type: string
+      hide: true
+      field: company
+      name: company
+      group: main
+    org:
+      type: string
+      hide: true
+      field: org
+      name: org
+      group: main
+    setting:
+      type: raw
+      field: setting
+      name: setting
+      group: main
+    recipient:
+      type: raw
+      field: recipient
+      name: recipient
+      group: main
+    price:
+      hide: true
+      type: float
+      field: price
+      name: price
+      group: main
+    price_details:
+      hide: true
+      type: raw
+      field: price_details
+      name: price_details
+      group: main
+    total_price:
+      hide: true
+      type: float
+      list: true
+      field: total_price
+      name: total_price
+      group: main
+    driver_profit:
+      hide: true
+      type: float
+      list: true
+      field: driver_profit
+      name: driver_profit
+      group: main
+    distance:
+      hide: true
+      type: float
+      field: distance
+      name: distance
+      group: main
+    number:
+      type: int
+      hide: true
+      list: true
+      field: number
+      name: number
+      group: main
+    status:
+      hide: true
+      type: string
+      default: '"start"'
+      field: status
+      name: status
+      group: main
+  geo:
+    - pickup_location
+  search:
+    - name
+    - type
+  select_include:
+    - Apps
+  analysis:
+    main:
+      estimated_transit: estimated_transit
+      service_fee: service_fee
+      price: price
+      total_price: total_price
+      driver_profit: driver_profit
+      distance: distance
+      number: number
+logistic__order_address:
+  fields:
+    index:
+      type: integer
+      hide: true
+      field: index
+      name: index
+      group: main
+    order:
+      type: relation
+      model: logistic__order
+      list: true
+      show: order.name
+      validates:
+        required: true
+      field: order
+      name: order
+      group: main
+    address:
+      type: relation
+      model: logistic__address
+      details: true
+      list: true
+      show: address.name
+      validates:
+        required: true
+      field: address
+      name: address
+      group: main
+    arrived_at:
+      type: date
+      hide: true
+      field: arrived_at
+      name: arrived_at
+      group: main
+    loc:
+      type: geo
+      geo: Point
+      field: loc
+      name: loc
+      group: main
+    status:
+      hide: true
+      type: string
+      field: status
+      name: status
+      group: main
+  geo:
+    - loc
+  analysis:
+    main:
+      index: index
+logistic__order_request:
+  fields:
+    order:
+      type: relation
+      list: true
+      model: logistic__order
+      show: order.name
+      field: order
+      name: order
+      group: main
+    driver:
+      type: relation
+      list: true
+      details: true
+      show: driver.name
+      filter: true
+      model: auth__account
+      field: driver
+      name: driver
+      group: main
+    status:
+      type: string
+      list: true
+      default: '"pending"'
+      field: status
+      name: status
+      group: main
+    offered_price:
+      type: float
+      list: true
+      field: offered_price
+      name: offered_price
+      group: main
+    accepted_at:
+      type: date
+      field: accepted_at
+      name: accepted_at
+      group: main
+    canceled_at:
+      type: date
+      field: canceled_at
+      name: canceled_at
+      group: main
+logistic__package_type:
+  fields:
+    name:
+      type: string
+      list: true
+      field: name
+      name: name
+      group: main
+    category:
+      type: relation
+      list: true
+      show: category.name
+      model: common__category
+      params:
+        type: package_category
+      field: category
+      name: category
+      group: main
+    setting:
+      type: raw
+      field: setting
+      name: setting
+      group: main
+    image:
+      type: relation
+      list: true
+      model: files__file
+      field: image
+      name: image
+      group: main
+logistic__order_package:
+  fields:
+    type:
+      type: relation
+      list: true
+      model: logistic__package_type
+      field: type
+      name: type
+      group: main
+    order:
+      type: relation
+      list: true
+      model: logistic__order
+      show: order.number
+      field: order
+      name: order
+      group: main
+    address:
+      type: relation
+      list: true
+      colName: address.street
+      model: logistic__order_address
+      field: address
+      name: address
+      group: main
+    size:
+      type: string
+      list: true
+      field: size
+      name: size
+      group: main
+    details:
+      type: string
+      list: true
+      field: details
+      name: details
+      group: main
+  search:
+    - name
+    - code
+  analysis:
+    main: {}
+logistic__order_track:
+  fields:
+    order:
+      type: relation
+      model: logistic__order
+      list: true
+      show: order.name
+      field: order
+      name: order
+      group: main
+    driver:
+      type: relation
+      model: logistic__driver
+      colName: user.name
+      field: driver
+      name: driver
+      group: main
+    point:
+      type: geo
+      geo: Point
+      field: point
+      name: point
+      group: main
+  geo:
+    - point
+  analysis:
+    main: {}
+logistic__promotion:
+  fields:
+    type:
+      type: string
+      list: true
+      front:
+        type: Select
+        options:
+          - pid: discount
+            name: Discount
+          - pid: free
+            name: FreeCoupon
+      field: type
+      name: type
+      group: main
+    name:
+      type: string
+      list: true
+      translate:
+        - ar
+      field: name
+      name: name
+      group: main
+    from:
+      type: date
+      list: true
+      field: from
+      name: from
+      group: main
+    to:
+      type: date
+      list: true
+      field: to
+      name: to
+      group: main
+    code:
+      type: string
+      list: true
+      field: code
+      name: code
+      group: main
+  search:
+    - name
+    - code
+  analysis:
+    main: {}
+logistic__order_complain:
+  fields:
+    name:
+      type: string
+      list: true
+      field: name
+      name: name
+      group: main
+    customer:
+      type: relation
+      list: true
+      show: customer.name
+      model: auth__account
+      field: customer
+      name: customer
+      group: main
+    org:
+      type: relation
+      model: org__org
+      field: org
+      name: org
+      group: main
+    category:
+      type: relation
+      list: true
+      show: category.name
+      model: common__category
+      params:
+        type: logistic_complain_cateogry
+      field: category
+      name: category
+      group: main
+    driver:
+      type: relation
+      list: true
+      show: driver.name
+      model: auth__account
+      field: driver
+      name: driver
+      group: main
+    filed_by:
+      type: relation
+      list: true
+      show: filed_by.name
+      model: auth__account
+      field: filed_by
+      name: filed_by
+      group: main
+    type:
+      type: string
+      list: true
+      hide: true
+      field: type
+      name: type
+      group: main
+    order:
+      type: relation
+      model: logistic__order
+      field: order
+      name: order
+      group: main
+    status:
+      type: string
+      list: true
+      field: status
+      name: status
+      group: main
+    active:
+      type: bool
+      list: true
+      field: active
+      name: active
+      group: main
+    description:
+      type: string
+      field: description
+      name: description
+      group: main
+    complain_images:
+      type: hasMany
+      model: files__file
+      field: complain_images
+      name: complain_images
+      group: main
+    number:
+      type: int
+      list: true
+      field: number
+      name: number
+      group: main
+logistic__rate:
+  fields:
+    driver:
+      type: relation
+      model: logistic__driver
+      list: true
+      show: driver.user.name
+      field: driver
+      name: driver
+      group: main
+    total:
+      type: int
+      list: true
+      field: total
+      name: total
+      group: main
+    value:
+      type: float
+      list: true
+      field: value
+      name: value
+      group: main
+logistic__rating:
+  fields:
+    type:
+      type: string
+      front:
+        type: Select
+        options:
+          - pid: one
+            name: Very Unsatisfied
+          - pid: two
+            name: Unsatisfied
+          - pid: three
+            name: Neutral
+          - pid: four
+            name: Satisfied
+          - pid: five
+            name: Very Satisfied
+      field: type
+      name: type
+      group: main
+    from:
+      type: relation
+      model: auth__account
+      list: true
+      show: from.name
+      field: from
+      name: from
+      group: main
+    to:
+      type: relation
+      model: logistic__driver
+      list: true
+      show: to.name
+      field: to
+      name: to
+      group: main
+    rate:
+      type: int
+      list: true
+      field: rate
+      name: rate
+      group: main
+    order:
+      type: relation
+      model: logistic__order
+      list: true
+      field: order
+      name: order
+      group: main
+    reason:
+      type: string
+      list: true
+      field: reason
+      name: reason
+      group: main

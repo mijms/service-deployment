@@ -1,0 +1,2029 @@
+item__type:
+  fields:
+    name:
+      type: string
+      list: true
+      translate:
+        - ar
+      field: name
+      name: name
+      group: main
+    code:
+      type: string
+      list: true
+      index: true
+      field: code
+      name: code
+      group: main
+    type:
+      type: string
+      list: true
+      front:
+        type: Select
+        options:
+          - pid: service
+            name: Service
+          - pid: food
+            name: Food & Beverage
+          - pid: finished_product
+            name: Finished Product
+          - pid: retail
+            name: Retail Product
+          - pid: subscription
+            name: Subscription
+          - pid: handmade
+            name: Handmade Product
+          - pid: digital
+            name: Digital Product
+      field: type
+      name: type
+      group: main
+    requires_shipping:
+      type: boolean
+      list: true
+      field: requires_shipping
+      name: requires_shipping
+      group: main
+    is_physical:
+      type: boolean
+      list: true
+      field: is_physical
+      name: is_physical
+      group: main
+    setting:
+      type: raw
+      field: setting
+      name: setting
+      group: main
+    app:
+      type: string
+      hide: true
+      field: app
+      name: app
+      group: main
+    org:
+      type: string
+      hide: true
+      field: org
+      name: org
+      group: main
+    company:
+      type: string
+      hide: true
+      field: company
+      name: company
+      group: main
+  search:
+    - name
+    - code
+  filters:
+    - MainApp
+    - OrgOrNull
+    - CompanyOrNull
+  mappings:
+    app: app
+    org: org
+    company: company
+  analysis:
+    main: {}
+item__item:
+  fields:
+    name:
+      type: string
+      list: true
+      index: true
+      translate:
+        - ar
+      validates:
+        required: true
+      field: name
+      name: name
+      group: main
+    slug:
+      type: string
+      index: true
+      list: true
+      field: slug
+      name: slug
+      group: main
+    spu:
+      type: inversedOne
+      mapped: item
+      model: scn__spu
+      list: true
+      show: spu.code
+      field: spu
+      name: spu
+      group: main
+    sku:
+      type: string
+      index: true
+      list: true
+      field: sku
+      name: sku
+      group: main
+    sku_ref:
+      type: inversedOne
+      model: scn__sku
+      mapped: item
+      list: true
+      show: sku_ref.code
+      field: sku_ref
+      name: sku_ref
+      group: main
+    barcode:
+      type: string
+      index: true
+      field: barcode
+      name: barcode
+      group: main
+    type:
+      type: string
+      list: true
+      index: true
+      front:
+        type: Select
+        options:
+          - pid: service
+            name: Service
+          - pid: food
+            name: Food & Beverage
+          - pid: finished_product
+            name: Finished Product
+          - pid: retail
+            name: Retail Product
+          - pid: subscription
+            name: Subscription
+          - pid: handmade
+            name: Handmade Product
+          - pid: digital
+            name: Digital Product
+      field: type
+      name: type
+      group: main
+    item_type:
+      type: relation
+      model: item__type
+      list: true
+      field: item_type
+      name: item_type
+      group: main
+    category:
+      type: relation
+      model: common__category
+      params:
+        type: item_category
+      list: true
+      filter: true
+      field: category
+      name: category
+      group: main
+    tags:
+      type: hasMany
+      model: common__tag
+      field: tags
+      name: tags
+      group: main
+    description:
+      type: string
+      translate:
+        - ar
+      field: description
+      name: description
+      group: main
+    short_description:
+      type: string
+      translate:
+        - ar
+      field: short_description
+      name: short_description
+      group: main
+    price:
+      type: float
+      list: true
+      validates:
+        required: true
+      field: price
+      name: price
+      group: main
+    compare_price:
+      type: float
+      field: compare_price
+      name: compare_price
+      group: main
+    cost_price:
+      type: float
+      field: cost_price
+      name: cost_price
+      group: main
+    tax_type:
+      type: string
+      list: true
+      field: tax_type
+      name: tax_type
+      group: main
+    tax_group:
+      type: relation
+      model: pos__tax_group
+      field: tax_group
+      name: tax_group
+      group: main
+    item_tax_val:
+      type: float
+      field: item_tax_val
+      name: item_tax_val
+      group: main
+    currency:
+      type: string
+      default: '"USD"'
+      field: currency
+      name: currency
+      group: main
+    weight:
+      type: float
+      field: weight
+      name: weight
+      group: main
+    weight_unit:
+      type: string
+      front:
+        type: Select
+        options:
+          - pid: kg
+            name: Kilogram
+          - pid: g
+            name: Gram
+          - pid: lb
+            name: Pound
+          - pid: oz
+            name: Ounce
+      field: weight_unit
+      name: weight_unit
+      group: main
+    dimensions:
+      type: raw
+      field: dimensions
+      name: dimensions
+      group: main
+    stock_quantity:
+      type: int
+      list: true
+      default: 0
+      field: stock_quantity
+      name: stock_quantity
+      group: main
+    low_stock_threshold:
+      type: int
+      default: 10
+      field: low_stock_threshold
+      name: low_stock_threshold
+      group: main
+    track_inventory:
+      type: boolean
+      default: true
+      field: track_inventory
+      name: track_inventory
+      group: main
+    allow_backorder:
+      type: boolean
+      default: false
+      field: allow_backorder
+      name: allow_backorder
+      group: main
+    status:
+      type: string
+      list: true
+      index: true
+      column:
+        type: status
+        sortable: false
+      front:
+        type: Select
+        options:
+          - pid: draft
+            name: Draft
+          - pid: active
+            name: Active
+          - pid: inactive
+            name: Inactive
+          - pid: out_of_stock
+            name: Out of Stock
+          - pid: discontinued
+            name: Discontinued
+      field: status
+      name: status
+      group: main
+    featured:
+      type: boolean
+      list: true
+      filter: true
+      field: featured
+      name: featured
+      group: main
+    images:
+      type: hasMany
+      model: files__file
+      field: images
+      name: images
+      group: main
+    video:
+      type: relation
+      model: files__file
+      field: video
+      name: video
+      group: main
+    parent:
+      type: relation
+      model: item__item
+      field: parent
+      name: parent
+      group: main
+    variants:
+      type: inversed
+      model: item__variant
+      mapped: parent_item
+      field: variants
+      name: variants
+      group: main
+    attributes:
+      type: raw
+      field: attributes
+      name: attributes
+      group: main
+    meta_title:
+      type: string
+      field: meta_title
+      name: meta_title
+      group: main
+    meta_description:
+      type: string
+      field: meta_description
+      name: meta_description
+      group: main
+    meta_keywords:
+      type: string
+      field: meta_keywords
+      name: meta_keywords
+      group: main
+    provider:
+      type: relation
+      model: auth__account
+      params:
+        type: provider
+      list: true
+      show: provider.name
+      field: provider
+      name: provider
+      group: main
+    provider_location:
+      type: geo
+      geo: Point
+      field: provider_location
+      name: provider_location
+      group: main
+    service_duration:
+      type: int
+      field: service_duration
+      name: service_duration
+      group: main
+    service_duration_unit:
+      type: string
+      front:
+        type: Select
+        options:
+          - pid: minutes
+            name: Minutes
+          - pid: hours
+            name: Hours
+          - pid: days
+            name: Days
+      field: service_duration_unit
+      name: service_duration_unit
+      group: main
+    subscription_period:
+      type: string
+      front:
+        type: Select
+        options:
+          - pid: daily
+            name: Daily
+          - pid: weekly
+            name: Weekly
+          - pid: monthly
+            name: Monthly
+          - pid: yearly
+            name: Yearly
+      field: subscription_period
+      name: subscription_period
+      group: main
+    subscription_duration:
+      type: int
+      field: subscription_duration
+      name: subscription_duration
+      group: main
+    trial_period_days:
+      type: int
+      field: trial_period_days
+      name: trial_period_days
+      group: main
+    ingredients:
+      type: raw
+      field: ingredients
+      name: ingredients
+      group: main
+    allergens:
+      type: raw
+      field: allergens
+      name: allergens
+      group: main
+    nutritional_info:
+      type: raw
+      field: nutritional_info
+      name: nutritional_info
+      group: main
+    preparation_time:
+      type: int
+      field: preparation_time
+      name: preparation_time
+      group: main
+    download_link:
+      type: string
+      field: download_link
+      name: download_link
+      group: main
+    download_limit:
+      type: int
+      field: download_limit
+      name: download_limit
+      group: main
+    license_key:
+      type: string
+      field: license_key
+      name: license_key
+      group: main
+    app:
+      type: string
+      hide: true
+      field: app
+      name: app
+      group: main
+    org:
+      type: string
+      hide: true
+      field: org
+      name: org
+      group: main
+    company:
+      type: string
+      hide: true
+      field: company
+      name: company
+      group: main
+    dates:
+      type: raw
+      field: dates
+      name: dates
+      group: main
+  search:
+    - name
+    - sku
+    - barcode
+  filters:
+    - MainApp
+    - OrgOrNull
+    - CompanyOrNull
+  mappings:
+    app: app
+    org: org
+    company: company
+  geo:
+    - provider_location
+  analysis:
+    main:
+      price: price
+      compare_price: compare_price
+      cost_price: cost_price
+      item_tax_val: item_tax_val
+      weight: weight
+      stock_quantity: stock_quantity
+      low_stock_threshold: low_stock_threshold
+      service_duration: service_duration
+      subscription_duration: subscription_duration
+      trial_period_days: trial_period_days
+      preparation_time: preparation_time
+      download_limit: download_limit
+item__variant:
+  fields:
+    parent_item:
+      type: relation
+      model: item__item
+      list: true
+      show: parent_item.name
+      validates:
+        required: true
+      field: parent_item
+      name: parent_item
+      group: main
+    name:
+      type: string
+      list: true
+      translate:
+        - ar
+      field: name
+      name: name
+      group: main
+    sku:
+      type: string
+      index: true
+      list: true
+      field: sku
+      name: sku
+      group: main
+    barcode:
+      type: string
+      index: true
+      field: barcode
+      name: barcode
+      group: main
+    price:
+      type: float
+      list: true
+      field: price
+      name: price
+      group: main
+    compare_price:
+      type: float
+      field: compare_price
+      name: compare_price
+      group: main
+    cost_price:
+      type: float
+      field: cost_price
+      name: cost_price
+      group: main
+    stock_quantity:
+      type: int
+      list: true
+      default: 0
+      field: stock_quantity
+      name: stock_quantity
+      group: main
+    weight:
+      type: float
+      field: weight
+      name: weight
+      group: main
+    dimensions:
+      type: raw
+      field: dimensions
+      name: dimensions
+      group: main
+    image:
+      type: relation
+      model: files__file
+      field: image
+      name: image
+      group: main
+    attributes:
+      type: raw
+      field: attributes
+      name: attributes
+      group: main
+    status:
+      type: string
+      list: true
+      column:
+        type: status
+        sortable: false
+      field: status
+      name: status
+      group: main
+    app:
+      type: string
+      hide: true
+      field: app
+      name: app
+      group: main
+    org:
+      type: string
+      hide: true
+      field: org
+      name: org
+      group: main
+    company:
+      type: string
+      hide: true
+      field: company
+      name: company
+      group: main
+  search:
+    - name
+    - sku
+  filters:
+    - MainApp
+    - OrgOrNull
+    - CompanyOrNull
+  mappings:
+    app: app
+    org: org
+    company: company
+  analysis:
+    main:
+      price: price
+      compare_price: compare_price
+      cost_price: cost_price
+      stock_quantity: stock_quantity
+      weight: weight
+item__shipping_region:
+  fields:
+    name:
+      type: string
+      list: true
+      translate:
+        - ar
+      validates:
+        required: true
+      field: name
+      name: name
+      group: main
+    code:
+      type: string
+      index: true
+      list: true
+      field: code
+      name: code
+      group: main
+    type:
+      type: string
+      list: true
+      front:
+        type: Select
+        options:
+          - pid: country
+            name: Country
+          - pid: state
+            name: State/Province
+          - pid: city
+            name: City
+          - pid: zone
+            name: Zone
+          - pid: custom
+            name: Custom Area
+      field: type
+      name: type
+      group: main
+    parent_region:
+      type: relation
+      model: item__shipping_region
+      field: parent_region
+      name: parent_region
+      group: main
+    boundary:
+      type: geo
+      geo: Polygon
+      field: boundary
+      name: boundary
+      group: main
+    provinces:
+      type: hasMany
+      model: geo__province
+      field: provinces
+      name: provinces
+      group: main
+    municipalities:
+      type: hasMany
+      model: geo__municipality
+      field: municipalities
+      name: municipalities
+      group: main
+    postal_codes:
+      type: collection
+      field: postal_codes
+      name: postal_codes
+      group: main
+    status:
+      type: string
+      list: true
+      column:
+        type: status
+        sortable: false
+      field: status
+      name: status
+      group: main
+    app:
+      type: string
+      hide: true
+      field: app
+      name: app
+      group: main
+    org:
+      type: string
+      hide: true
+      field: org
+      name: org
+      group: main
+    company:
+      type: string
+      hide: true
+      field: company
+      name: company
+      group: main
+  search:
+    - name
+    - code
+  filters:
+    - MainApp
+    - OrgOrNull
+    - CompanyOrNull
+  mappings:
+    app: app
+    org: org
+    company: company
+  geo:
+    - boundary
+  analysis:
+    main: {}
+item__regional_price:
+  fields:
+    item:
+      type: relation
+      model: item__item
+      list: true
+      show: item.name
+      validates:
+        required: true
+      field: item
+      name: item
+      group: main
+    region:
+      type: relation
+      model: item__shipping_region
+      list: true
+      show: region.name
+      validates:
+        required: true
+      field: region
+      name: region
+      group: main
+    price:
+      type: float
+      list: true
+      validates:
+        required: true
+      field: price
+      name: price
+      group: main
+    currency:
+      type: string
+      default: '"USD"'
+      field: currency
+      name: currency
+      group: main
+    start_date:
+      type: date
+      list: true
+      field: start_date
+      name: start_date
+      group: main
+    end_date:
+      type: date
+      list: true
+      field: end_date
+      name: end_date
+      group: main
+    status:
+      type: string
+      list: true
+      column:
+        type: status
+        sortable: false
+      field: status
+      name: status
+      group: main
+    app:
+      type: string
+      hide: true
+      field: app
+      name: app
+      group: main
+    org:
+      type: string
+      hide: true
+      field: org
+      name: org
+      group: main
+    company:
+      type: string
+      hide: true
+      field: company
+      name: company
+      group: main
+  search:
+    - item.name
+    - region.name
+  filters:
+    - MainApp
+    - OrgOrNull
+    - CompanyOrNull
+  mappings:
+    app: app
+    org: org
+    company: company
+  analysis:
+    main:
+      price: price
+item__shipping_provider:
+  fields:
+    name:
+      type: string
+      list: true
+      validates:
+        required: true
+      field: name
+      name: name
+      group: main
+    code:
+      type: string
+      index: true
+      list: true
+      field: code
+      name: code
+      group: main
+    type:
+      type: string
+      list: true
+      front:
+        type: Select
+        options:
+          - pid: standard
+            name: Standard Shipping
+          - pid: express
+            name: Express Shipping
+          - pid: overnight
+            name: Overnight
+          - pid: same_day
+            name: Same Day
+          - pid: pickup
+            name: Pickup
+          - pid: custom
+            name: Custom
+      field: type
+      name: type
+      group: main
+    logo:
+      type: relation
+      model: files__file
+      field: logo
+      name: logo
+      group: main
+    contact_name:
+      type: string
+      field: contact_name
+      name: contact_name
+      group: main
+    contact_phone:
+      type: string
+      field: contact_phone
+      name: contact_phone
+      group: main
+    contact_email:
+      type: string
+      field: contact_email
+      name: contact_email
+      group: main
+    api_key:
+      type: string
+      group: secure
+      field: api_key
+      name: api_key
+    api_secret:
+      type: string
+      group: secure
+      field: api_secret
+      name: api_secret
+    api_endpoint:
+      type: string
+      field: api_endpoint
+      name: api_endpoint
+      group: main
+    tracking_url:
+      type: string
+      field: tracking_url
+      name: tracking_url
+      group: main
+    regions:
+      type: inversed
+      model: item__shipping_rate
+      mapped: provider
+      field: regions
+      name: regions
+      group: main
+    status:
+      type: string
+      list: true
+      column:
+        type: status
+        sortable: false
+      field: status
+      name: status
+      group: main
+    setting:
+      type: raw
+      field: setting
+      name: setting
+      group: main
+    app:
+      type: string
+      hide: true
+      field: app
+      name: app
+      group: main
+    org:
+      type: string
+      hide: true
+      field: org
+      name: org
+      group: main
+    company:
+      type: string
+      hide: true
+      field: company
+      name: company
+      group: main
+  search:
+    - name
+    - code
+  filters:
+    - MainApp
+    - OrgOrNull
+    - CompanyOrNull
+  mappings:
+    app: app
+    org: org
+    company: company
+  analysis:
+    main: {}
+item__shipping_rate:
+  fields:
+    provider:
+      type: relation
+      model: item__shipping_provider
+      list: true
+      show: provider.name
+      validates:
+        required: true
+      field: provider
+      name: provider
+      group: main
+    region:
+      type: relation
+      model: item__shipping_region
+      list: true
+      show: region.name
+      validates:
+        required: true
+      field: region
+      name: region
+      group: main
+    base_rate:
+      type: float
+      list: true
+      validates:
+        required: true
+      field: base_rate
+      name: base_rate
+      group: main
+    per_kg_rate:
+      type: float
+      list: true
+      field: per_kg_rate
+      name: per_kg_rate
+      group: main
+    per_km_rate:
+      type: float
+      field: per_km_rate
+      name: per_km_rate
+      group: main
+    min_weight:
+      type: float
+      field: min_weight
+      name: min_weight
+      group: main
+    max_weight:
+      type: float
+      field: max_weight
+      name: max_weight
+      group: main
+    min_order_value:
+      type: float
+      field: min_order_value
+      name: min_order_value
+      group: main
+    free_shipping_threshold:
+      type: float
+      field: free_shipping_threshold
+      name: free_shipping_threshold
+      group: main
+    estimated_days_min:
+      type: int
+      list: true
+      field: estimated_days_min
+      name: estimated_days_min
+      group: main
+    estimated_days_max:
+      type: int
+      list: true
+      field: estimated_days_max
+      name: estimated_days_max
+      group: main
+    currency:
+      type: string
+      default: '"USD"'
+      field: currency
+      name: currency
+      group: main
+    status:
+      type: string
+      list: true
+      column:
+        type: status
+        sortable: false
+      field: status
+      name: status
+      group: main
+    app:
+      type: string
+      hide: true
+      field: app
+      name: app
+      group: main
+    org:
+      type: string
+      hide: true
+      field: org
+      name: org
+      group: main
+    company:
+      type: string
+      hide: true
+      field: company
+      name: company
+      group: main
+  search:
+    - provider.name
+    - region.name
+  filters:
+    - MainApp
+    - OrgOrNull
+    - CompanyOrNull
+  mappings:
+    app: app
+    org: org
+    company: company
+  analysis:
+    main:
+      base_rate: base_rate
+      per_kg_rate: per_kg_rate
+      per_km_rate: per_km_rate
+      min_weight: min_weight
+      max_weight: max_weight
+      min_order_value: min_order_value
+      free_shipping_threshold: free_shipping_threshold
+      estimated_days_min: estimated_days_min
+      estimated_days_max: estimated_days_max
+item__shipment:
+  fields:
+    tracking_number:
+      type: string
+      index: true
+      list: true
+      validates:
+        required: true
+      field: tracking_number
+      name: tracking_number
+      group: main
+    order:
+      type: relation
+      model: order__order
+      list: true
+      show: order.number
+      validates:
+        required: true
+      field: order
+      name: order
+      group: main
+    provider:
+      type: relation
+      model: item__shipping_provider
+      list: true
+      show: provider.name
+      validates:
+        required: true
+      field: provider
+      name: provider
+      group: main
+    driver:
+      type: relation
+      model: auth__account
+      params:
+        type: driver
+      list: true
+      show: driver.name
+      field: driver
+      name: driver
+      group: main
+    vehicle:
+      type: relation
+      model: logistic__vehicle
+      field: vehicle
+      name: vehicle
+      group: main
+    status:
+      type: string
+      list: true
+      index: true
+      column:
+        type: status
+        sortable: false
+      front:
+        type: Select
+        options:
+          - pid: pending
+            name: Pending
+          - pid: picked_up
+            name: Picked Up
+          - pid: in_transit
+            name: In Transit
+          - pid: at_facility
+            name: At Facility
+          - pid: out_for_delivery
+            name: Out for Delivery
+          - pid: delivered
+            name: Delivered
+          - pid: failed_delivery
+            name: Failed Delivery
+          - pid: returned
+            name: Returned
+          - pid: cancelled
+            name: Cancelled
+      field: status
+      name: status
+      group: main
+    origin_address:
+      type: raw
+      field: origin_address
+      name: origin_address
+      group: main
+    destination_address:
+      type: raw
+      field: destination_address
+      name: destination_address
+      group: main
+    current_location:
+      type: geo
+      geo: Point
+      field: current_location
+      name: current_location
+      group: main
+    weight:
+      type: float
+      list: true
+      field: weight
+      name: weight
+      group: main
+    weight_unit:
+      type: string
+      field: weight_unit
+      name: weight_unit
+      group: main
+    dimensions:
+      type: raw
+      field: dimensions
+      name: dimensions
+      group: main
+    package_count:
+      type: int
+      list: true
+      field: package_count
+      name: package_count
+      group: main
+    shipping_cost:
+      type: float
+      list: true
+      field: shipping_cost
+      name: shipping_cost
+      group: main
+    insurance_amount:
+      type: float
+      field: insurance_amount
+      name: insurance_amount
+      group: main
+    signature_required:
+      type: boolean
+      field: signature_required
+      name: signature_required
+      group: main
+    pickup_date:
+      type: date
+      list: true
+      field: pickup_date
+      name: pickup_date
+      group: main
+    shipped_date:
+      type: date
+      list: true
+      field: shipped_date
+      name: shipped_date
+      group: main
+    estimated_delivery:
+      type: date
+      list: true
+      field: estimated_delivery
+      name: estimated_delivery
+      group: main
+    actual_delivery:
+      type: date
+      list: true
+      field: actual_delivery
+      name: actual_delivery
+      group: main
+    delivery_proof:
+      type: relation
+      model: files__file
+      field: delivery_proof
+      name: delivery_proof
+      group: main
+    signature:
+      type: raw
+      field: signature
+      name: signature
+      group: main
+    recipient_name:
+      type: string
+      field: recipient_name
+      name: recipient_name
+      group: main
+    recipient_phone:
+      type: string
+      field: recipient_phone
+      name: recipient_phone
+      group: main
+    notes:
+      type: string
+      field: notes
+      name: notes
+      group: main
+    internal_notes:
+      type: string
+      field: internal_notes
+      name: internal_notes
+      group: main
+    tracking_events:
+      type: inversed
+      model: item__shipment_tracking
+      mapped: shipment
+      details: true
+      field: tracking_events
+      name: tracking_events
+      group: main
+    app:
+      type: string
+      hide: true
+      field: app
+      name: app
+      group: main
+    org:
+      type: string
+      hide: true
+      field: org
+      name: org
+      group: main
+    company:
+      type: string
+      hide: true
+      field: company
+      name: company
+      group: main
+  search:
+    - tracking_number
+    - order.number
+  filters:
+    - MainApp
+    - OrgOrNull
+    - CompanyOrNull
+  mappings:
+    app: app
+    org: org
+    company: company
+  geo:
+    - current_location
+  analysis:
+    main:
+      weight: weight
+      package_count: package_count
+      shipping_cost: shipping_cost
+      insurance_amount: insurance_amount
+item__shipment_tracking:
+  fields:
+    shipment:
+      type: relation
+      model: item__shipment
+      list: true
+      show: shipment.tracking_number
+      validates:
+        required: true
+      field: shipment
+      name: shipment
+      group: main
+    event_type:
+      type: string
+      list: true
+      front:
+        type: Select
+        options:
+          - pid: created
+            name: Created
+          - pid: picked_up
+            name: Picked Up
+          - pid: in_transit
+            name: In Transit
+          - pid: arrived_facility
+            name: Arrived at Facility
+          - pid: departed_facility
+            name: Departed Facility
+          - pid: out_for_delivery
+            name: Out for Delivery
+          - pid: delivery_attempted
+            name: Delivery Attempted
+          - pid: delivered
+            name: Delivered
+          - pid: exception
+            name: Exception
+          - pid: returned
+            name: Returned
+      field: event_type
+      name: event_type
+      group: main
+    status:
+      type: string
+      list: true
+      field: status
+      name: status
+      group: main
+    description:
+      type: string
+      list: true
+      field: description
+      name: description
+      group: main
+    loc:
+      type: geo
+      geo: Point
+      field: loc
+      name: loc
+      group: main
+    facility_name:
+      type: string
+      field: facility_name
+      name: facility_name
+      group: main
+    city:
+      type: string
+      field: city
+      name: city
+      group: main
+    country:
+      type: string
+      field: country
+      name: country
+      group: main
+    event_time:
+      type: date
+      list: true
+      validates:
+        required: true
+      field: event_time
+      name: event_time
+      group: main
+    notes:
+      type: string
+      field: notes
+      name: notes
+      group: main
+    metadata:
+      type: raw
+      field: metadata
+      name: metadata
+      group: main
+    app:
+      type: string
+      hide: true
+      field: app
+      name: app
+      group: main
+    org:
+      type: string
+      hide: true
+      field: org
+      name: org
+      group: main
+    company:
+      type: string
+      hide: true
+      field: company
+      name: company
+      group: main
+  filters:
+    - MainApp
+    - OrgOrNull
+    - CompanyOrNull
+  mappings:
+    app: app
+    org: org
+    company: company
+  geo:
+    - loc
+  order_by:
+    event_time: desc
+  analysis:
+    main: {}
+item__warehouse:
+  fields:
+    name:
+      type: string
+      list: true
+      validates:
+        required: true
+      field: name
+      name: name
+      group: main
+    code:
+      type: string
+      index: true
+      list: true
+      field: code
+      name: code
+      group: main
+    type:
+      type: string
+      list: true
+      front:
+        type: Select
+        options:
+          - pid: main
+            name: Main Warehouse
+          - pid: distribution
+            name: Distribution Center
+          - pid: retail
+            name: Retail Store
+          - pid: fulfillment
+            name: Fulfillment Center
+      field: type
+      name: type
+      group: main
+    address:
+      type: raw
+      field: address
+      name: address
+      group: main
+    location:
+      type: geo
+      geo: Point
+      field: location
+      name: location
+      group: main
+    contact_name:
+      type: string
+      field: contact_name
+      name: contact_name
+      group: main
+    contact_phone:
+      type: string
+      field: contact_phone
+      name: contact_phone
+      group: main
+    contact_email:
+      type: string
+      field: contact_email
+      name: contact_email
+      group: main
+    manager:
+      type: relation
+      model: auth__account
+      field: manager
+      name: manager
+      group: main
+    capacity:
+      type: float
+      field: capacity
+      name: capacity
+      group: main
+    status:
+      type: string
+      list: true
+      column:
+        type: status
+        sortable: false
+      field: status
+      name: status
+      group: main
+    app:
+      type: string
+      hide: true
+      field: app
+      name: app
+      group: main
+    org:
+      type: string
+      hide: true
+      field: org
+      name: org
+      group: main
+    company:
+      type: string
+      hide: true
+      field: company
+      name: company
+      group: main
+  search:
+    - name
+    - code
+  filters:
+    - MainApp
+    - OrgOrNull
+    - CompanyOrNull
+  mappings:
+    app: app
+    org: org
+    company: company
+  geo:
+    - location
+  analysis:
+    main:
+      capacity: capacity
+item__inventory:
+  fields:
+    item:
+      type: relation
+      model: item__item
+      list: true
+      show: item.name
+      index: true
+      validates:
+        required: true
+      field: item
+      name: item
+      group: main
+    variant:
+      type: relation
+      model: item__variant
+      field: variant
+      name: variant
+      group: main
+    warehouse:
+      type: relation
+      model: item__warehouse
+      list: true
+      show: warehouse.name
+      validates:
+        required: true
+      field: warehouse
+      name: warehouse
+      group: main
+    quantity:
+      type: int
+      list: true
+      default: 0
+      field: quantity
+      name: quantity
+      group: main
+    reserved_quantity:
+      type: int
+      list: true
+      default: 0
+      field: reserved_quantity
+      name: reserved_quantity
+      group: main
+    available_quantity:
+      type: int
+      list: true
+      default: 0
+      field: available_quantity
+      name: available_quantity
+      group: main
+    reorder_point:
+      type: int
+      default: 10
+      field: reorder_point
+      name: reorder_point
+      group: main
+    reorder_quantity:
+      type: int
+      default: 50
+      field: reorder_quantity
+      name: reorder_quantity
+      group: main
+    location:
+      type: string
+      list: true
+      field: location
+      name: location
+      group: main
+    bin:
+      type: string
+      field: bin
+      name: bin
+      group: main
+    lot_number:
+      type: string
+      field: lot_number
+      name: lot_number
+      group: main
+    serial_numbers:
+      type: collection
+      field: serial_numbers
+      name: serial_numbers
+      group: main
+    expiry_date:
+      type: date
+      list: true
+      field: expiry_date
+      name: expiry_date
+      group: main
+    last_counted_at:
+      type: date
+      field: last_counted_at
+      name: last_counted_at
+      group: main
+    last_restocked_at:
+      type: date
+      field: last_restocked_at
+      name: last_restocked_at
+      group: main
+    app:
+      type: string
+      hide: true
+      field: app
+      name: app
+      group: main
+    org:
+      type: string
+      hide: true
+      field: org
+      name: org
+      group: main
+    company:
+      type: string
+      hide: true
+      field: company
+      name: company
+      group: main
+  search:
+    - item.name
+    - warehouse.name
+  filters:
+    - MainApp
+    - OrgOrNull
+    - CompanyOrNull
+  mappings:
+    app: app
+    org: org
+    company: company
+  analysis:
+    main:
+      quantity: quantity
+      reserved_quantity: reserved_quantity
+      available_quantity: available_quantity
+      reorder_point: reorder_point
+      reorder_quantity: reorder_quantity
+item__inventory_transaction:
+  fields:
+    item:
+      type: relation
+      model: item__item
+      list: true
+      show: item.name
+      validates:
+        required: true
+      field: item
+      name: item
+      group: main
+    variant:
+      type: relation
+      model: item__variant
+      field: variant
+      name: variant
+      group: main
+    warehouse:
+      type: relation
+      model: item__warehouse
+      list: true
+      show: warehouse.name
+      validates:
+        required: true
+      field: warehouse
+      name: warehouse
+      group: main
+    type:
+      type: string
+      list: true
+      front:
+        type: Select
+        options:
+          - pid: purchase
+            name: Purchase
+          - pid: sale
+            name: Sale
+          - pid: return
+            name: Return
+          - pid: transfer
+            name: Transfer
+          - pid: adjustment
+            name: Adjustment
+          - pid: damage
+            name: Damage
+          - pid: loss
+            name: Loss
+      field: type
+      name: type
+      group: main
+    quantity:
+      type: int
+      list: true
+      validates:
+        required: true
+      field: quantity
+      name: quantity
+      group: main
+    previous_quantity:
+      type: int
+      field: previous_quantity
+      name: previous_quantity
+      group: main
+    new_quantity:
+      type: int
+      field: new_quantity
+      name: new_quantity
+      group: main
+    unit_cost:
+      type: float
+      field: unit_cost
+      name: unit_cost
+      group: main
+    total_cost:
+      type: float
+      field: total_cost
+      name: total_cost
+      group: main
+    reference_type:
+      type: string
+      field: reference_type
+      name: reference_type
+      group: main
+    reference_id:
+      type: string
+      field: reference_id
+      name: reference_id
+      group: main
+    order:
+      type: relation
+      model: order__order
+      field: order
+      name: order
+      group: main
+    transaction_date:
+      type: date
+      list: true
+      validates:
+        required: true
+      field: transaction_date
+      name: transaction_date
+      group: main
+    notes:
+      type: string
+      field: notes
+      name: notes
+      group: main
+    user:
+      type: relation
+      model: auth__account
+      list: true
+      show: user.name
+      field: user
+      name: user
+      group: main
+    app:
+      type: string
+      hide: true
+      field: app
+      name: app
+      group: main
+    org:
+      type: string
+      hide: true
+      field: org
+      name: org
+      group: main
+    company:
+      type: string
+      hide: true
+      field: company
+      name: company
+      group: main
+  search:
+    - item.name
+    - warehouse.name
+  filters:
+    - MainApp
+    - OrgOrNull
+    - CompanyOrNull
+  mappings:
+    app: app
+    org: org
+    company: company
+  order_by:
+    transaction_date: desc
+  analysis:
+    main:
+      quantity: quantity
+      previous_quantity: previous_quantity
+      new_quantity: new_quantity
+      unit_cost: unit_cost
+      total_cost: total_cost
+item__review:
+  fields:
+    item:
+      type: relation
+      model: item__item
+      list: true
+      show: item.name
+      index: true
+      validates:
+        required: true
+      field: item
+      name: item
+      group: main
+    customer:
+      type: relation
+      model: auth__account
+      list: true
+      show: customer.name
+      validates:
+        required: true
+      field: customer
+      name: customer
+      group: main
+    order:
+      type: relation
+      model: order__order
+      field: order
+      name: order
+      group: main
+    rating:
+      type: int
+      list: true
+      validates:
+        required: true
+        min: 1
+        max: 5
+      field: rating
+      name: rating
+      group: main
+    title:
+      type: string
+      list: true
+      field: title
+      name: title
+      group: main
+    review:
+      type: string
+      list: true
+      field: review
+      name: review
+      group: main
+    pros:
+      type: string
+      field: pros
+      name: pros
+      group: main
+    cons:
+      type: string
+      field: cons
+      name: cons
+      group: main
+    images:
+      type: hasMany
+      model: files__file
+      field: images
+      name: images
+      group: main
+    verified_purchase:
+      type: boolean
+      list: true
+      field: verified_purchase
+      name: verified_purchase
+      group: main
+    helpful_count:
+      type: int
+      default: 0
+      field: helpful_count
+      name: helpful_count
+      group: main
+    status:
+      type: string
+      list: true
+      column:
+        type: status
+        sortable: false
+      front:
+        type: Select
+        options:
+          - pid: pending
+            name: Pending
+          - pid: approved
+            name: Approved
+          - pid: rejected
+            name: Rejected
+      field: status
+      name: status
+      group: main
+    response:
+      type: string
+      field: response
+      name: response
+      group: main
+    responded_at:
+      type: date
+      field: responded_at
+      name: responded_at
+      group: main
+    responded_by:
+      type: relation
+      model: auth__account
+      field: responded_by
+      name: responded_by
+      group: main
+    app:
+      type: string
+      hide: true
+      field: app
+      name: app
+      group: main
+    org:
+      type: string
+      hide: true
+      field: org
+      name: org
+      group: main
+    company:
+      type: string
+      hide: true
+      field: company
+      name: company
+      group: main
+  search:
+    - item.name
+    - customer.name
+  filters:
+    - MainApp
+    - OrgOrNull
+    - CompanyOrNull
+  mappings:
+    app: app
+    org: org
+    company: company
+  analysis:
+    main:
+      rating: rating
+      helpful_count: helpful_count
+item__branch_assign:
+  fields:
+    type:
+      type: string
+      field: type
+      name: type
+      group: main
+    category:
+      type: relation
+      model: common__category
+      field: category
+      name: category
+      group: main
+    item:
+      type: relation
+      model: item__item
+      field: item
+      name: item
+      group: main
+    branch:
+      type: relation
+      model: org__branch
+      field: branch
+      name: branch
+      group: main
+    station:
+      type: relation
+      model: org__terminal
+      field: station
+      name: station
+      group: main

@@ -1,0 +1,1488 @@
+project__project:
+  fields:
+    name:
+      type: string
+      list: true
+      field: name
+      name: name
+      group: main
+    status:
+      type: string
+      list: true
+      field: status
+      name: status
+      group: main
+    desc:
+      type: string
+      list: true
+      field: desc
+      name: desc
+      group: main
+    priority:
+      type: string
+      list: true
+      field: priority
+      name: priority
+      group: main
+    start_date:
+      type: date
+      field: start_date
+      name: start_date
+      group: main
+    end_date:
+      type: date
+      field: end_date
+      name: end_date
+      group: main
+    workspace:
+      type: relation
+      model: project__work_space
+      field: workspace
+      name: workspace
+      group: main
+    creator:
+      type: relation
+      model: auth__account
+      field: creator
+      name: creator
+      group: main
+    istrash:
+      type: boolean
+      default: false
+      field: istrash
+      name: istrash
+      group: main
+    code:
+      type: string
+      front:
+        validates: null
+      field: code
+      name: code
+      group: main
+    manager:
+      type: relation
+      model: auth__account
+      list: true
+      field: manager
+      name: manager
+      group: main
+    client:
+      type: relation
+      model: crm__client
+      list: true
+      field: client
+      name: client
+      group: main
+    blocking:
+      type: relation
+      model: project__project
+      list: true
+      field: blocking
+      name: blocking
+      group: main
+    team:
+      type: inversed
+      model: project__team
+      mapped: project
+      field: team
+      name: team
+      group: main
+    start_value:
+      type: float
+      field: start_value
+      name: start_value
+      group: main
+    end_value:
+      type: float
+      field: end_value
+      name: end_value
+      group: main
+    attach:
+      type: hasMany
+      model: files__file
+      field: attach
+      name: attach
+      group: main
+    app:
+      type: relation
+      model: apps__app
+      field: app
+      name: app
+      group: main
+    company:
+      hide: true
+      type: relation
+      model: org__company
+      field: company
+      name: company
+      group: main
+    org:
+      hide: true
+      type: relation
+      model: org__org
+      field: org
+      name: org
+      group: main
+  filters:
+    - Org
+    - Company
+    - MainApp
+  select_include:
+    - Common
+  mappings:
+    app: app
+    org: org
+    company: company
+  analysis:
+    main:
+      start_value: start_value
+      end_value: end_value
+project__project_user:
+  fields:
+    user:
+      type: relation
+      model: auth__account
+      field: user
+      name: user
+      group: main
+    project:
+      type: relation
+      model: project__project
+      field: project
+      name: project
+      group: main
+    role:
+      type: string
+      field: role
+      name: role
+      group: main
+    added_date:
+      type: date
+      field: added_date
+      name: added_date
+      group: main
+    deactivate_date:
+      type: date
+      field: deactivate_date
+      name: deactivate_date
+      group: main
+    app:
+      type: relation
+      model: apps__app
+      field: app
+      name: app
+      group: main
+    company:
+      type: relation
+      model: org__company
+      field: company
+      name: company
+      group: main
+    org:
+      type: relation
+      model: org__org
+      field: org
+      name: org
+      group: main
+  filters:
+    - Org
+    - Company
+    - MainApp
+  mappings:
+    app: app
+    org: org
+    company: company
+  analysis:
+    main: {}
+project__work_space:
+  fields:
+    type:
+      type: string
+      hide: true
+      field: type
+      name: type
+      group: main
+    name:
+      type: string
+      list: true
+      field: name
+      name: name
+      group: main
+    manager:
+      type: relation
+      model: auth__account
+      field: manager
+      name: manager
+      group: main
+    setting:
+      type: raw
+      field: setting
+      name: setting
+      group: main
+    members:
+      type: inversed
+      model: project__membership
+      mapped: workspace
+      list: true
+      details: true
+      pick_fields:
+        - user
+        - scope_type
+        - role
+        - status
+        - added_date
+        - team
+      include: true
+      field: members
+      name: members
+      group: main
+    app:
+      type: relation
+      hide: true
+      model: apps__app
+      field: app
+      name: app
+      group: main
+    company:
+      hide: true
+      type: relation
+      model: org__company
+      field: company
+      name: company
+      group: main
+    org:
+      type: relation
+      hide: true
+      model: org__org
+      field: org
+      name: org
+      group: main
+  filters:
+    - Org
+    - Company
+    - MainApp
+  mappings:
+    app: app
+    org: org
+    company: company
+  analysis:
+    main: {}
+project__team:
+  fields:
+    name:
+      type: string
+      list: true
+      field: name
+      name: name
+      group: main
+    about:
+      type: string
+      list: true
+      field: about
+      name: about
+      group: main
+    type:
+      type: string
+      list: true
+      front:
+        validates: null
+      field: type
+      name: type
+      group: main
+    creator:
+      type: relation
+      model: auth__account
+      field: creator
+      name: creator
+      group: main
+    project:
+      type: relation
+      model: project__project
+      list: true
+      field: project
+      name: project
+      group: main
+    manager:
+      type: relation
+      model: auth__account
+      list: true
+      show: manager.name
+      field: manager
+      name: manager
+      group: main
+    work_space:
+      type: relation
+      model: project__work_space
+      list: true
+      colName: type
+      field: work_space
+      name: work_space
+      group: main
+    users:
+      type: inversed
+      model: project__membership
+      mapped: team
+      list: true
+      details: true
+      pick_fields:
+        - user
+        - scope_type
+        - role
+        - status
+        - added_date
+        - workspace
+      include: true
+      field: users
+      name: users
+      group: main
+    tasks:
+      type: inversed
+      model: project__task
+      mapped: team
+      field: tasks
+      name: tasks
+      group: main
+    department:
+      type: relation
+      model: org__department
+      list: true
+      field: department
+      name: department
+      group: main
+    setting:
+      type: raw
+      field: setting
+      name: setting
+      group: main
+    app:
+      type: relation
+      hide: true
+      model: apps__app
+      field: app
+      name: app
+      group: main
+    company:
+      type: relation
+      hide: true
+      model: org__company
+      field: company
+      name: company
+      group: main
+    org:
+      type: relation
+      hide: true
+      model: org__org
+      field: org
+      name: org
+      group: main
+    cover:
+      type: relation
+      model: files__file
+      field: cover
+      name: cover
+      group: main
+    slack:
+      type: string
+      list: true
+      field: slack
+      name: slack
+      group: main
+    email:
+      type: string
+      list: true
+      validates:
+        email: true
+      field: email
+      name: email
+      group: main
+    resources:
+      type: inversed
+      model: project__document
+      mapped: team
+      details: true
+      field: resources
+      name: resources
+      group: main
+    issues:
+      type: inversed
+      model: project__issue
+      mapped: team
+      details: true
+      field: issues
+      name: issues
+      group: main
+    istrash:
+      type: boolean
+      default: false
+      field: istrash
+      name: istrash
+      group: main
+    Version:
+      type: raw
+      list: true
+      field: Version
+      name: Version
+      group: main
+    is_wiki:
+      type: boolean
+      default: false
+      field: is_wiki
+      name: is_wiki
+      group: main
+    page_visits:
+      type: raw
+      list: true
+      field: page_visits
+      name: page_visits
+      group: main
+    suggested_edits:
+      type: raw
+      list: true
+      field: suggested_edits
+      name: suggested_edits
+      group: main
+  filters:
+    - Org
+    - Company
+    - MainApp
+    - Department
+  mappings:
+    app: app
+    org: org
+    company: company
+  analysis:
+    main: {}
+project__document:
+  fields:
+    type:
+      type: string
+      field: type
+      name: type
+      group: main
+    sub_type:
+      type: string
+      field: sub_type
+      name: sub_type
+      group: main
+    file:
+      type: relation
+      model: files__file
+      field: file
+      name: file
+      group: main
+    project:
+      type: relation
+      model: project__project
+      field: project
+      name: project
+      group: main
+    team:
+      type: relation
+      model: project__team
+      field: team
+      name: team
+      group: main
+    owner:
+      type: relation
+      model: auth__account
+      field: owner
+      name: owner
+      group: main
+    version:
+      type: string
+      field: version
+      name: version
+      group: main
+    department:
+      type: relation
+      model: org__department
+      field: department
+      name: department
+      group: main
+    app:
+      type: relation
+      model: apps__app
+      field: app
+      name: app
+      group: main
+    company:
+      type: relation
+      model: org__company
+      field: company
+      name: company
+      group: main
+    org:
+      type: relation
+      model: org__org
+      field: org
+      name: org
+      group: main
+  filters:
+    - Org
+    - Company
+    - MainApp
+    - Department
+  mappings:
+    app: app
+    org: org
+    company: company
+    department: department
+  analysis:
+    main: {}
+project__document_share:
+  fields:
+    user:
+      type: relation
+      model: auth__account
+      field: user
+      name: user
+      group: main
+    document:
+      type: relation
+      model: project__document
+      field: document
+      name: document
+      group: main
+project__contract:
+  fields:
+    client:
+      type: relation
+      model: crm__client
+      field: client
+      name: client
+      group: main
+    project:
+      type: relation
+      model: project__project
+      field: project
+      name: project
+      group: main
+    main_file:
+      type: relation
+      model: files__file
+      field: main_file
+      name: main_file
+      group: main
+    files:
+      type: hasMany
+      model: files__file
+      field: files
+      name: files
+      group: main
+    app:
+      type: relation
+      model: apps__app
+      field: app
+      name: app
+      group: main
+    company:
+      type: relation
+      model: org__company
+      field: company
+      name: company
+      group: main
+    org:
+      type: relation
+      model: org__org
+      field: org
+      name: org
+      group: main
+  filters:
+    - Org
+    - Company
+    - MainApp
+  mappings:
+    app: app
+    org: org
+    company: company
+  analysis:
+    main: {}
+project__mile_stone:
+  fields:
+    name:
+      type: string
+      list: true
+      field: name
+      name: name
+      group: main
+    start_date:
+      type: date
+      field: start_date
+      name: start_date
+      group: main
+    end_date:
+      type: date
+      field: end_date
+      name: end_date
+      group: main
+    project:
+      type: relation
+      model: project__project
+      list: true
+      field: project
+      name: project
+      group: main
+    progress:
+      type: float
+      list: true
+      field: progress
+      name: progress
+      group: main
+    app:
+      type: string
+      field: app
+      name: app
+      group: main
+    company:
+      type: string
+      field: company
+      name: company
+      group: main
+    org:
+      type: string
+      field: org
+      name: org
+      group: main
+  filters:
+    - Org
+    - Company
+    - MainApp
+  mappings:
+    app: app
+    org: org
+    company: company
+  analysis:
+    main:
+      progress: progress
+project__task:
+  fields:
+    type:
+      type: string
+      field: type
+      name: type
+      group: main
+    status:
+      type: string
+      list: true
+      field: status
+      name: status
+      group: main
+    priority:
+      type: string
+      list: true
+      field: priority
+      name: priority
+      group: main
+    name:
+      type: string
+      field: name
+      name: name
+      group: main
+    desc:
+      type: string
+      field: desc
+      name: desc
+      group: main
+    attach:
+      type: hasMany
+      model: files__file
+      field: attach
+      name: attach
+      group: main
+    creator:
+      type: relation
+      model: auth__account
+      field: creator
+      name: creator
+      group: main
+    progress:
+      type: float
+      list: true
+      field: progress
+      name: progress
+      group: main
+    users:
+      type: inversed
+      model: project__task_assign
+      mapped: task
+      pick_fields:
+        - user
+        - status
+        - start_date
+        - end_date
+      details: true
+      include: true
+      list: true
+      field: users
+      name: users
+      group: main
+    start_date:
+      type: date
+      field: start_date
+      name: start_date
+      group: main
+    end_date:
+      type: date
+      field: end_date
+      name: end_date
+      group: main
+    milestone:
+      type: relation
+      model: project__mile_stone
+      field: milestone
+      name: milestone
+      group: main
+    parent:
+      type: relation
+      model: project__task
+      field: parent
+      name: parent
+      group: main
+    affect_ms:
+      type: boolean
+      field: affect_ms
+      name: affect_ms
+      group: main
+    workspace:
+      type: relation
+      model: project__work_space
+      field: workspace
+      name: workspace
+      group: main
+    project:
+      type: relation
+      model: project__project
+      field: project
+      name: project
+      group: main
+    team:
+      type: relation
+      model: project__team
+      field: team
+      name: team
+      group: main
+    istrash:
+      type: boolean
+      default: false
+      field: istrash
+      name: istrash
+      group: main
+    app:
+      type: string
+      hide: true
+      field: app
+      name: app
+      group: main
+    company:
+      type: string
+      hide: true
+      field: company
+      name: company
+      group: main
+    org:
+      type: string
+      hide: true
+      field: org
+      name: org
+      group: main
+    category:
+      type: string
+      field: category
+      name: category
+      group: main
+    tags:
+      type: collection
+      field: tags
+      name: tags
+      group: main
+    blocking:
+      type: relation
+      model: project__task
+      list: true
+      field: blocking
+      name: blocking
+      group: main
+  filters:
+    - Org
+    - Company
+    - MainApp
+  mappings:
+    app: app
+    org: org
+    company: company
+  analysis:
+    main:
+      progress: progress
+project__favourite_task:
+  fields:
+    user:
+      type: relation
+      model: auth__account
+      details: true
+      list: true
+      field: user
+      name: user
+      group: main
+    workspace:
+      type: relation
+      model: project__work_space
+      field: workspace
+      name: workspace
+      group: main
+    task:
+      type: relation
+      model: project__task
+      list: true
+      field: task
+      name: task
+      group: main
+    team:
+      type: relation
+      model: project__team
+      list: true
+      field: team
+      name: team
+      group: main
+    project:
+      type: relation
+      model: project__project
+      list: true
+      field: project
+      name: project
+      group: main
+    type:
+      type: string
+      default: '"user"'
+      field: type
+      name: type
+      group: main
+project__task_assign:
+  fields:
+    user:
+      type: relation
+      model: auth__account
+      details: true
+      list: true
+      field: user
+      name: user
+      group: main
+    task:
+      type: relation
+      model: project__task
+      list: true
+      field: task
+      name: task
+      group: main
+    status:
+      type: string
+      list: true
+      field: status
+      name: status
+      group: main
+    start_date:
+      type: date
+      field: start_date
+      name: start_date
+      group: main
+    end_date:
+      type: date
+      field: end_date
+      name: end_date
+      group: main
+project__comment:
+  fields:
+    user:
+      type: relation
+      model: auth__account
+      list: true
+      field: user
+      name: user
+      group: main
+    content:
+      type: string
+      list: true
+      field: content
+      name: content
+      group: main
+    task:
+      type: relation
+      model: project__task
+      list: true
+      field: task
+      name: task
+      group: main
+    project:
+      type: relation
+      model: project__project
+      list: true
+      field: project
+      name: project
+      group: main
+project__issue:
+  fields:
+    title:
+      type: string
+      list: true
+      field: title
+      name: title
+      group: main
+    description:
+      type: string
+      list: true
+      field: description
+      name: description
+      group: main
+    creator:
+      type: relation
+      model: auth__account
+      field: creator
+      name: creator
+      group: main
+    status:
+      type: string
+      list: true
+      field: status
+      name: status
+      group: main
+    priority:
+      type: string
+      list: true
+      field: priority
+      name: priority
+      group: main
+    team:
+      type: relation
+      model: project__team
+      field: team
+      name: team
+      group: main
+    app:
+      type: relation
+      hide: true
+      model: apps__app
+      field: app
+      name: app
+      group: main
+    company:
+      type: relation
+      hide: true
+      model: org__company
+      field: company
+      name: company
+      group: main
+    org:
+      type: relation
+      hide: true
+      model: org__org
+      field: org
+      name: org
+      group: main
+project__database_view:
+  fields:
+    name:
+      type: string
+      field: name
+      name: name
+      group: main
+    type:
+      type: string
+      field: type
+      name: type
+      group: main
+    entity:
+      type: string
+      field: entity
+      name: entity
+      group: main
+    layout:
+      type: string
+      field: layout
+      name: layout
+      group: main
+    setting:
+      type: raw
+      field: setting
+      name: setting
+      group: main
+    scope:
+      type: string
+      front:
+        type: select
+        values:
+          - personal
+          - project
+          - team
+      field: scope
+      name: scope
+      group: main
+    owner:
+      type: relation
+      model: auth__account
+      field: owner
+      name: owner
+      group: main
+    team:
+      type: relation
+      model: project__team
+      field: team
+      name: team
+      group: main
+    url:
+      type: string
+      field: url
+      name: url
+      group: main
+    source_id:
+      type: string
+      field: source_id
+      name: source_id
+      group: main
+    pin_order:
+      type: int
+      field: pin_order
+      name: pin_order
+      group: main
+    app:
+      type: relation
+      hide: true
+      model: apps__app
+      field: app
+      name: app
+      group: main
+    company:
+      type: relation
+      hide: true
+      model: org__company
+      field: company
+      name: company
+      group: main
+    org:
+      type: relation
+      hide: true
+      model: org__org
+      field: org
+      name: org
+      group: main
+  filters:
+    - Org
+    - Company
+    - MainApp
+  mappings:
+    app: app
+    org: org
+    company: company
+  analysis:
+    main:
+      pin_order: pin_order
+project__membership:
+  fields:
+    user:
+      type: relation
+      model: auth__account
+      list: true
+      details: true
+      field: user
+      name: user
+      group: main
+    scope_type:
+      type: string
+      field: scope_type
+      name: scope_type
+      group: main
+    role:
+      type: string
+      field: role
+      name: role
+      group: main
+    status:
+      type: string
+      field: status
+      name: status
+      group: main
+    added_date:
+      type: date
+      field: added_date
+      name: added_date
+      group: main
+    workspace:
+      type: relation
+      model: project__work_space
+      field: workspace
+      name: workspace
+      group: main
+    invite:
+      type: relation
+      model: project__workspace_invite
+      field: invite
+      name: invite
+      group: main
+    team:
+      type: relation
+      model: project__team
+      field: team
+      name: team
+      group: main
+    app:
+      type: relation
+      hide: true
+      model: apps__app
+      field: app
+      name: app
+      group: main
+    company:
+      type: relation
+      hide: true
+      model: org__company
+      field: company
+      name: company
+      group: main
+    org:
+      type: relation
+      hide: true
+      model: org__org
+      field: org
+      name: org
+      group: main
+  filters:
+    - Org
+    - Company
+    - MainApp
+  mappings:
+    app: app
+    org: org
+    company: company
+  analysis:
+    main: {}
+project__workspace_invite:
+  fields:
+    app:
+      type: string
+      field: app
+      name: app
+      group: main
+    company:
+      type: string
+      field: company
+      name: company
+      group: main
+    org:
+      type: string
+      field: org
+      name: org
+      group: main
+    workspace:
+      type: relation
+      model: project__work_space
+      list: true
+      field: workspace
+      name: workspace
+      group: main
+    created_by:
+      type: relation
+      model: auth__account
+      list: true
+      field: created_by
+      name: created_by
+      group: main
+    emails:
+      type: collection
+      field: emails
+      name: emails
+      group: main
+    status:
+      type: string
+      field: status
+      name: status
+      group: main
+    message:
+      type: string
+      field: message
+      name: message
+      group: main
+    role:
+      type: string
+      list: true
+      field: role
+      name: role
+      group: main
+    access:
+      type: string
+      list: true
+      field: access
+      name: access
+      group: main
+    team:
+      type: relation
+      model: project__team
+      list: true
+      field: team
+      name: team
+      group: main
+    max_uses:
+      type: int
+      field: max_uses
+      name: max_uses
+      group: main
+    expires_at:
+      type: date
+      field: expires_at
+      name: expires_at
+      group: main
+    revoked:
+      type: boolean
+      default: false
+      field: revoked
+      name: revoked
+      group: main
+    setting:
+      type: raw
+      field: setting
+      name: setting
+      group: main
+    members:
+      type: inversed
+      model: project__membership
+      mapped: invite
+      list: true
+      details: true
+      include: true
+      pick_fields:
+        - user
+        - status
+        - added_date
+        - workspace
+        - team
+      field: members
+      name: members
+      group: main
+  filters:
+    - Org
+    - Company
+    - MainApp
+  mappings:
+    app: app
+    org: org
+    company: company
+  analysis:
+    main:
+      max_uses: max_uses
+project__trash:
+  fields:
+    title:
+      type: string
+      list: true
+      field: title
+      name: title
+      group: main
+    deleted_by:
+      type: relation
+      model: auth__account
+      list: true
+      show: deleted_by.name
+      field: deleted_by
+      name: deleted_by
+      group: main
+    last_edited_by:
+      type: relation
+      model: auth__account
+      list: true
+      show: last_edited_by.name
+      field: last_edited_by
+      name: last_edited_by
+      group: main
+    deleted_at:
+      type: date
+      list: true
+      field: deleted_at
+      name: deleted_at
+      group: main
+    auto_delete_at:
+      type: date
+      hide: true
+      field: auto_delete_at
+      name: auto_delete_at
+      group: main
+    restored_at:
+      type: date
+      hide: true
+      field: restored_at
+      name: restored_at
+      group: main
+    task:
+      type: relation
+      model: project__task
+      field: task
+      name: task
+      group: main
+    project:
+      type: relation
+      model: project__project
+      field: project
+      name: project
+      group: main
+    document:
+      type: relation
+      model: project__document
+      field: document
+      name: document
+      group: main
+    issue:
+      type: relation
+      model: project__issue
+      field: issue
+      name: issue
+      group: main
+    workspace:
+      type: relation
+      model: project__work_space
+      list: true
+      field: workspace
+      name: workspace
+      group: main
+    team:
+      type: relation
+      model: project__team
+      list: true
+      field: team
+      name: team
+      group: main
+    app:
+      type: relation
+      hide: true
+      model: apps__app
+      field: app
+      name: app
+      group: main
+    company:
+      type: relation
+      hide: true
+      model: org__company
+      field: company
+      name: company
+      group: main
+    org:
+      type: relation
+      hide: true
+      model: org__org
+      field: org
+      name: org
+      group: main
+  filters:
+    - Org
+    - Company
+    - MainApp
+  mappings:
+    app: app
+    org: org
+    company: company
+  analysis:
+    main: {}
+project__customization:
+  fields:
+    module:
+      type: string
+      field: module
+      name: module
+      group: main
+    type:
+      type: string
+      field: type
+      name: type
+      group: main
+    name:
+      type: string
+      field: name
+      name: name
+      group: main
+    setting:
+      type: raw
+      field: setting
+      name: setting
+      group: main
+    user:
+      type: relation
+      model: auth__account
+      field: user
+      name: user
+      group: main
+    workspace:
+      type: relation
+      model: project__work_space
+      field: workspace
+      name: workspace
+      group: main
+project__page_view:
+  fields:
+    ref_type:
+      type: string
+      list: true
+      field: ref_type
+      name: ref_type
+      group: main
+    ref_id:
+      type: string
+      list: true
+      field: ref_id
+      name: ref_id
+      group: main
+    workspace:
+      type: relation
+      model: project__work_space
+      field: workspace
+      name: workspace
+      group: main
+    user:
+      type: relation
+      model: auth__account
+      field: user
+      name: user
+      group: main
+    url:
+      type: string
+      list: true
+      field: url
+      name: url
+      group: main
+    title:
+      type: string
+      list: true
+      field: title
+      name: title
+      group: main
+    visited_at:
+      type: date
+      list: true
+      field: visited_at
+      name: visited_at
+      group: main
+    app:
+      type: relation
+      hide: true
+      model: apps__app
+      field: app
+      name: app
+      group: main
+    company:
+      type: relation
+      hide: true
+      model: org__company
+      field: company
+      name: company
+      group: main
+    org:
+      type: relation
+      hide: true
+      model: org__org
+      field: org
+      name: org
+      group: main
+  filters:
+    - Org
+    - Company
+    - MainApp
+  mappings:
+    app: app
+    org: org
+    company: company
+  analysis:
+    main: {}

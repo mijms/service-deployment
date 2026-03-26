@@ -1,0 +1,108 @@
+files__library:
+  fields:
+    name:
+      type: string
+      field: name
+      name: name
+      group: main
+    type:
+      type: string
+      field: type
+      name: type
+      group: main
+    desc:
+      type: string
+      field: desc
+      name: desc
+      group: main
+    file:
+      type: raw
+      field: file
+      name: file
+      group: main
+    parent:
+      type: relation
+      model: files__library
+      field: parent
+      name: parent
+      group: main
+    is_trashed:
+      type: boolean
+      field: is_trashed
+      name: is_trashed
+      group: main
+    app:
+      type: relation
+      model: apps__app
+      field: app
+      name: app
+      group: main
+    user:
+      type: relation
+      model: auth__user
+      field: user
+      name: user
+      group: main
+    org:
+      type: relation
+      model: org__org
+      field: org
+      name: org
+      group: main
+    company:
+      type: relation
+      model: org__org
+      field: company
+      name: company
+      group: main
+files__file:
+  fields:
+    path:
+      type: string
+      field: path
+      name: path
+      group: main
+    name:
+      type: string
+      field: name
+      name: name
+      group: main
+    mime:
+      type: string
+      field: mime
+      name: mime
+      group: main
+    key:
+      type: string
+      default: '''upload'''
+      field: key
+      name: key
+      group: main
+    type:
+      type: string
+      default: '''upload'''
+      field: type
+      name: type
+      group: main
+    app:
+      type: relation
+      model: apps__app
+      field: app
+      name: app
+      group: main
+    user:
+      type: relation
+      model: auth__user
+      field: user
+      name: user
+      group: main
+    perms:
+      type: raw
+      field: perms
+      name: perms
+      group: main
+    bucket:
+      type: string
+      field: bucket
+      name: bucket
+      group: main

@@ -1,0 +1,764 @@
+common__document:
+  fields:
+    type:
+      type: string
+      field: type
+      name: type
+      group: main
+    model:
+      type: string
+      field: model
+      name: model
+      group: main
+    creator:
+      type: relation
+      model: auth__user
+      field: creator
+      name: creator
+      group: main
+    ref:
+      type: string
+      field: ref
+      name: ref
+      group: main
+    history:
+      type: inversed
+      model: common__document_history
+      mapped: document
+      field: history
+      name: history
+      group: main
+common__document_history:
+  fields:
+    type:
+      type: string
+      field: type
+      name: type
+      group: main
+    document:
+      type: relation
+      model: common__document
+      field: document
+      name: document
+      group: main
+    diff:
+      type: raw
+      field: diff
+      name: diff
+      group: main
+    old_data:
+      type: raw
+      field: old_data
+      name: old_data
+      group: main
+    user:
+      type: relation
+      model: auth__user
+      field: user
+      name: user
+      group: main
+common__module:
+  fields:
+    name:
+      type: string
+      list: true
+      field: name
+      name: name
+      group: main
+    path:
+      type: string
+      list: true
+      validates:
+        minLength: 1
+      field: path
+      name: path
+      group: main
+    app:
+      type: relation
+      list: true
+      model: apps__app
+      field: app
+      name: app
+      group: main
+  filters:
+    - CurrentApps
+  search:
+    - name
+    - path
+  generate:
+    - app
+    - path
+  analysis:
+    main: {}
+common__permission:
+  fields:
+    role:
+      type: relation
+      filter: true
+      list: true
+      model: common__role
+      field: role
+      name: role
+      group: main
+    create:
+      list: true
+      type: boolean
+      field: create
+      name: create
+      group: main
+    edit:
+      list: true
+      type: boolean
+      field: edit
+      name: edit
+      group: main
+    delete:
+      list: true
+      type: boolean
+      field: delete
+      name: delete
+      group: main
+    fetch:
+      list: true
+      type: boolean
+      field: fetch
+      name: fetch
+      group: main
+    module:
+      list: true
+      details: true
+      type: relation
+      model: common__module
+      field: module
+      name: module
+      group: main
+    org:
+      type: relation
+      hide: true
+      model: org__org
+      field: org
+      name: org
+      group: main
+  search:
+    - module.name
+    - role.name
+  analysis:
+    main: {}
+common__role:
+  fields:
+    name:
+      type: string
+      list: true
+      field: name
+      name: name
+      group: main
+    permissions:
+      type: inversed
+      model: common__permission
+      mapped: role
+      field: permissions
+      name: permissions
+      group: main
+    app:
+      type: string
+      hide: true
+      field: app
+      name: app
+      group: main
+    org:
+      type: string
+      hide: true
+      field: org
+      name: org
+      group: main
+  search:
+    - name
+  filters:
+    - CurrentApps
+  mappings:
+    app: app
+  analysis:
+    main: {}
+common__lang:
+  fields:
+    name:
+      type: string
+      list: true
+      field: name
+      name: name
+      group: main
+    appr:
+      type: string
+      field: appr
+      name: appr
+      group: main
+    rtl:
+      type: boolean
+      field: rtl
+      name: rtl
+      group: main
+    active:
+      type: boolean
+      list: true
+      field: active
+      name: active
+      group: main
+  generate:
+    - appr
+  filters:
+    AppKey:
+      id: langs
+  search:
+    - name
+  analysis:
+    main: {}
+common__translation:
+  fields:
+    lang:
+      type: relation
+      model: common__lang
+      list: true
+      filter: true
+      field: lang
+      name: lang
+      group: main
+    from:
+      list: true
+      type: string
+      field: from
+      name: from
+      group: main
+    trans:
+      type: string
+      list: true
+      field: trans
+      name: trans
+      group: main
+    app:
+      list: true
+      type: relation
+      model: apps__app
+      field: app
+      name: app
+      group: main
+  generate:
+    - app
+    - lang
+    - from
+  filters:
+    - CurrentApps
+  search:
+    - from
+    - trans
+  inits:
+    app:
+      fun: SelectFromApp
+      key: app.id
+  analysis:
+    main: {}
+common__user_setting:
+  fields:
+    key:
+      type: string
+      field: key
+      name: key
+      group: main
+    app:
+      type: relation
+      filter: true
+      list: true
+      model: apps__app
+      field: app
+      name: app
+      group: main
+    setting:
+      type: raw
+      field: setting
+      name: setting
+      group: main
+    user:
+      type: relation
+      filter: true
+      list: true
+      model: auth__account
+      field: user
+      name: user
+      group: main
+  filters:
+    - CurrentUser
+    - CurrentApp
+  search:
+    - user.name
+  analysis:
+    main: {}
+common__notify_setting:
+  fields:
+    key:
+      type: string
+      field: key
+      name: key
+      group: main
+    app:
+      type: relation
+      filter: true
+      list: true
+      model: apps__app
+      field: app
+      name: app
+      group: main
+    email:
+      type: boolean
+      list: true
+      field: email
+      name: email
+      group: main
+    push:
+      type: boolean
+      list: true
+      field: push
+      name: push
+      group: main
+    sms:
+      type: boolean
+      list: true
+      field: sms
+      name: sms
+      group: main
+    in_app:
+      type: boolean
+      list: true
+      field: in_app
+      name: in_app
+      group: main
+  filters:
+    - CurrentUser
+    - CurrentApp
+  search:
+    - user.name
+  analysis:
+    main: {}
+common__notification:
+  fields:
+    from:
+      type: string
+      field: from
+      name: from
+      group: main
+    title:
+      type: string
+      field: title
+      name: title
+      group: main
+    user:
+      type: relation
+      model: auth__account
+      field: user
+      name: user
+      group: main
+    ref_type:
+      type: string
+      list: true
+      field: ref_type
+      name: ref_type
+      group: main
+    ref_id:
+      type: string
+      list: true
+      field: ref_id
+      name: ref_id
+      group: main
+    action:
+      type: string
+      list: true
+      field: action
+      name: action
+      group: main
+    content:
+      type: string
+      list: true
+      field: content
+      name: content
+      group: main
+    workspace:
+      type: relation
+      model: project__work_space
+      field: workspace
+      name: workspace
+      group: main
+    is_read:
+      type: boolean
+      default: false
+      field: is_read
+      name: is_read
+      group: main
+    url:
+      type: string
+      field: url
+      name: url
+      group: main
+    app:
+      type: string
+      field: app
+      name: app
+      group: main
+    company:
+      type: string
+      field: company
+      name: company
+      group: main
+    org:
+      type: string
+      field: org
+      name: org
+      group: main
+  filters:
+    - Org
+    - Company
+    - MainApp
+  mappings:
+    app: app
+    org: org
+    company: company
+  analysis:
+    main: {}
+common__notification_token:
+  fields:
+    token:
+      type: string
+      field: token
+      name: token
+      group: main
+    user:
+      type: relation
+      model: auth__user
+      field: user
+      name: user
+      group: main
+    app:
+      type: relation
+      model: apps__app
+      field: app
+      name: app
+      group: main
+  filters:
+    - CurrentApp
+  analysis:
+    main: {}
+common__category:
+  fields:
+    name:
+      type: string
+      field: name
+      name: name
+      group: main
+    type:
+      type: string
+      field: type
+      name: type
+      group: main
+    code:
+      type: string
+      field: code
+      name: code
+      group: main
+    parent:
+      type: relation
+      model: common__category
+      details: true
+      field: parent
+      name: parent
+      group: main
+    setting:
+      type: raw
+      field: setting
+      name: setting
+      group: main
+    org:
+      type: relation
+      model: org__org
+      field: org
+      name: org
+      group: main
+    company:
+      type: relation
+      model: org__company
+      field: company
+      name: company
+      group: main
+    app:
+      type: relation
+      model: apps__app
+      field: app
+      name: app
+      group: main
+  filters:
+    - MainApp
+    - OrgOrNull
+    - CompanyOrNull
+  mappings:
+    app: app
+    org: org
+    company: company
+  analysis:
+    main: {}
+common__tag:
+  fields:
+    name:
+      type: string
+      field: name
+      name: name
+      group: main
+    type:
+      type: string
+      field: type
+      name: type
+      group: main
+    code:
+      type: string
+      field: code
+      name: code
+      group: main
+    setting:
+      type: raw
+      field: setting
+      name: setting
+      group: main
+    org:
+      type: string
+      field: org
+      name: org
+      group: main
+    company:
+      type: string
+      field: company
+      name: company
+      group: main
+    app:
+      type: string
+      field: app
+      name: app
+      group: main
+  filters:
+    - MainApp
+    - OrgOrNull
+    - CompanyOrNull
+  mappings:
+    app: app
+    org: org
+    company: company
+  analysis:
+    main: {}
+common__upload_sheet:
+  fields:
+    path:
+      type: string
+      field: path
+      name: path
+      group: main
+    upload_type:
+      type: string
+      index: true
+      list: true
+      field: upload_type
+      name: upload_type
+      group: main
+    invalid:
+      type: int
+      list: true
+      field: invalid
+      name: invalid
+      group: main
+    duplication:
+      type: int
+      list: true
+      field: duplication
+      name: duplication
+      group: main
+    duplication_details:
+      type: int
+      list: true
+      field: duplication_details
+      name: duplication_details
+      group: main
+    no_of_raw:
+      type: int
+      field: no_of_raw
+      name: no_of_raw
+      group: main
+    name:
+      type: string
+      index: true
+      list: true
+      field: name
+      name: name
+      group: main
+    progress:
+      type: float
+      front:
+        min: 0
+        max: 100
+      list: true
+      field: progress
+      name: progress
+      group: main
+    status:
+      type: string
+      list: true
+      column:
+        type: status
+        sortable: false
+      field: status
+      name: status
+      group: main
+    company:
+      type: string
+      field: company
+      name: company
+      group: main
+    time:
+      type: float
+      hide: true
+      field: time
+      name: time
+      group: main
+    details:
+      type: raw
+      field: details
+      name: details
+      group: main
+    res:
+      type: raw
+      field: res
+      name: res
+      group: main
+    date:
+      type: date
+      list: true
+      field: date
+      name: date
+      group: main
+    user:
+      list: true
+      index: true
+      show: user.name
+      type: relation
+      model: auth__account
+      field: user
+      name: user
+      group: main
+    setting:
+      type: raw
+      field: setting
+      name: setting
+      group: main
+    province:
+      type: string
+      field: province
+      name: province
+      group: main
+  filters:
+    - CurrentUser
+    - Province
+  search:
+    - name
+    - upload_type
+    - user.name
+  order_by:
+    created_at: desc
+  analysis:
+    main:
+      invalid: invalid
+      duplication: duplication
+      duplication_details: duplication_details
+      no_of_raw: no_of_raw
+      progress: progress
+      time: time
+common__invalid_import:
+  fields:
+    type:
+      type: string
+      field: type
+      name: type
+      group: main
+    msg:
+      type: string
+      field: msg
+      name: msg
+      group: main
+    case:
+      type: string
+      field: case
+      name: case
+      group: main
+    ref:
+      type: string
+      field: ref
+      name: ref
+      group: main
+    sheet:
+      type: relation
+      model: common__upload_sheet
+      field: sheet
+      name: sheet
+      group: main
+    data:
+      type: raw
+      field: data
+      name: data
+      group: main
+common__export_report:
+  fields:
+    type:
+      type: string
+      field: type
+      name: type
+      group: main
+    fun:
+      type: string
+      field: fun
+      name: fun
+      group: main
+    file:
+      type: relation
+      model: files__file
+      field: file
+      name: file
+      group: main
+    name:
+      type: string
+      index: true
+      list: true
+      field: name
+      name: name
+      group: main
+    filters:
+      type: string
+      field: filters
+      name: filters
+      group: main
+    date:
+      type: date
+      list: true
+      field: date
+      name: date
+      group: main
+    user:
+      list: true
+      index: true
+      show: user.name
+      type: relation
+      model: auth__account
+      field: user
+      name: user
+      group: main
+  filters:
+    - CurrentUser
+    - Province
+  search:
+    - name
+    - upload_type
+    - user.name
+  order_by:
+    created_at: desc
+  analysis:
+    main: {}

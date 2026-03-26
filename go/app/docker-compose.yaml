@@ -25,6 +25,7 @@ services:
       - ../templates:/app/templates
       - ../env.prod:/app/.env
       - ../go.mod:/app/go.mod
+      - ../configs:/app/configs
     command: ./server
     networks:
       - ukkera

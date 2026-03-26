@@ -9,7 +9,7 @@ services:
       - .env.prod
     environment:
       - APP_ROOT=/app
-      - APP_NAME=appdata
+      - APP_NAME=broxy
       - TZ
       - SERVER_PORT
       - MONGODB_URL
@@ -23,8 +23,9 @@ services:
     volumes:
       - ../build/broxy:/app/server
       - ../templates:/app/templates
-      - ../.env.prod:/app/.env
+      - ../env.prod:/app/.env
       - ../go.mod:/app/go.mod
+      - ../configs:/app/configs
     command: ./server
     networks:
       - ukkera

@@ -1,0 +1,346 @@
+auth__account:
+  fields:
+    type:
+      type: string
+      hide: true
+      field: type
+      name: type
+      group: main
+    name:
+      type: string
+      list: true
+      field: name
+      name: name
+      group: main
+    email:
+      type: string
+      list: true
+      validates:
+        email: true
+      field: email
+      name: email
+      group: main
+    password:
+      type: string
+      field_type: password
+      group: secure
+      validates:
+        minLength: 6
+      field: password
+      name: password
+    role:
+      type: inversedPreventOne
+      model: auth__account_role
+      mapped: user
+      field: role
+      name: role
+      group: main
+    rel:
+      type: raw
+      hide: true
+      field: rel
+      name: rel
+      group: main
+    setting:
+      type: raw
+      field: setting
+      name: setting
+      group: main
+    app_data:
+      type: raw
+      field: app_data
+      name: app_data
+      group: main
+    phone:
+      type: string
+      list: true
+      validates:
+        phone: true
+      column:
+        type: phone
+      field: phone
+      name: phone
+      group: main
+    national_id:
+      type: string
+      field: national_id
+      name: national_id
+      group: main
+    user:
+      type: relation
+      hide: true
+      model: auth__user
+      field: user
+      name: user
+      group: main
+    lang:
+      type: relation
+      model: common__lang
+      field: lang
+      name: lang
+      group: main
+    app:
+      type: string
+      request: getSelectAppsAppQuery
+      front:
+        type: Select
+      field: app
+      name: app
+      group: main
+    profile:
+      details: true
+      type: relation
+      model: files__file
+      field: profile
+      name: profile
+      group: main
+    cover:
+      type: relation
+      model: files__file
+      field: cover
+      name: cover
+      group: main
+    role.province:
+      type: front
+      hide: true
+      model: geo__province
+      front:
+        type: relation
+      field: role.province
+      name: role.province
+      group: main
+    role.mun:
+      type: front
+      hide: true
+      model: geo__municipality
+      front:
+        type: relation
+      field: role.mun
+      name: role.mun
+      group: main
+    role.org:
+      type: front
+      hide: true
+      model: org__org
+      front:
+        type: relation
+      field: role.org
+      name: role.org
+      group: main
+    role.company:
+      type: front
+      hide: true
+      model: org__company
+      front:
+        type: relation
+      field: role.company
+      name: role.company
+      group: main
+    role.is_admin:
+      type: front
+      hide: true
+      front:
+        type: boolean
+      field: role.is_admin
+      name: role.is_admin
+      group: main
+    role.type:
+      type: front
+      hide: true
+      front:
+        type: string
+      field: role.type
+      name: role.type
+      group: main
+    role.department:
+      type: front
+      hide: true
+      model: org__department
+      front:
+        type: relation
+      field: role.department
+      name: role.department
+      group: main
+  filters:
+    - MainApp
+    - Province
+    - Mun
+  mappings:
+    province: province
+    mun: mun
+    company: company
+    org: org
+    department: department
+  search:
+    - email
+    - phone
+    - name
+  analysis:
+    main: {}
+auth__account_role:
+  fields:
+    type:
+      type: string
+      field: type
+      name: type
+      group: main
+    app:
+      type: string
+      field: app
+      name: app
+      group: main
+    is_admin:
+      type: boolean
+      hide: true
+      field: is_admin
+      name: is_admin
+      group: main
+    user:
+      type: relation
+      model: auth__account
+      field: user
+      name: user
+      group: main
+    role:
+      type: hasMany
+      model: common__role
+      front:
+        data_selected: true
+      list: true
+      filter: true
+      field: role
+      name: role
+      group: main
+    manager:
+      type: relation
+      model: auth__account
+      params:
+        type: manager
+      field: manager
+      name: manager
+      group: main
+    org:
+      type: relation
+      model: org__org
+      field: org
+      name: org
+      group: main
+    company:
+      type: relation
+      model: org__company
+      field: company
+      name: company
+      group: main
+    department:
+      type: relation
+      model: org__department
+      field: department
+      name: department
+      group: main
+    province:
+      type: relation
+      model: geo__province
+      front:
+        data_selected: true
+      f_perms:
+        not_in_params: account.province
+      field: province
+      name: province
+      group: main
+    mun:
+      type: relation
+      model: geo__municipality
+      front:
+        data_selected: true
+      f_perms:
+        not_in_params: account.mun
+      field: mun
+      name: mun
+      group: main
+    site:
+      type: relation
+      model: sites__site
+      field: site
+      name: site
+      group: main
+  filters:
+    - MainApp
+    - Province
+    - Mun
+    - Company
+    - Org
+    - Department
+    - Site
+  basic_select: true
+  mappings:
+    province: province
+    mun: mun
+    company: company
+    org: org
+    department: department
+  search:
+    - user.name
+    - user.email
+    - user.phone
+  analysis:
+    main: {}
+auth__profile_section:
+  fields:
+    type:
+      type: string
+      field: type
+      name: type
+      group: main
+    title:
+      type: string
+      field: title
+      name: title
+      group: main
+    desc:
+      type: string
+      field: desc
+      name: desc
+      group: main
+    main_image:
+      type: relation
+      model: files__file
+      field: main_image
+      name: main_image
+      group: main
+    images:
+      type: hasMany
+      model: files__file
+      field: images
+      name: images
+      group: main
+    account:
+      type: relation
+      model: auth__account
+      field: account
+      name: account
+      group: main
+auth__user_app:
+  fields:
+    user:
+      type: relation
+      model: auth__user
+      field: user
+      name: user
+      group: main
+    app:
+      type: relation
+      model: apps__app
+      field: app
+      name: app
+      group: main
+    date:
+      type: date
+      field: date
+      name: date
+      group: main
+    active:
+      type: boolean
+      default: true
+      field: active
+      name: active
+      group: main

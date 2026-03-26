@@ -1,0 +1,691 @@
+reels__category:
+  fields:
+    type:
+      type: string
+      field: type
+      name: type
+      group: main
+    hide:
+      type: bool
+      field: hide
+      name: hide
+      group: main
+    name:
+      type: string
+      field: name
+      name: name
+      group: main
+    desc:
+      type: string
+      field: desc
+      name: desc
+      group: main
+    settings:
+      type: raw
+      field: settings
+      name: settings
+      group: main
+    user:
+      type: relation
+      model: reels__account
+      field: user
+      name: user
+      group: main
+    videos:
+      type: inversed
+      model: reels__video
+      mapped: categoies
+      field: videos
+      name: videos
+      group: main
+    video_reports:
+      type: inversed
+      model: reels__report
+      mapped: category
+      criteria: '{"video": {"exists": true}}'
+      field: video_reports
+      name: video_reports
+      group: main
+    profile_reports:
+      type: inversed
+      model: reels__report
+      mapped: category
+      criteria: '{"profile": {"exists": true}}'
+      field: profile_reports
+      name: profile_reports
+      group: main
+    region:
+      type: relation
+      model: reels__region
+      field: region
+      name: region
+      group: main
+  search:
+    - name
+    - parent.name
+    - desc
+  analysis:
+    main: {}
+reels__region:
+  fields:
+    name:
+      type: string
+      field: name
+      name: name
+      group: main
+    active:
+      type: bool
+      field: active
+      name: active
+      group: main
+    code:
+      type: string
+      field: code
+      name: code
+      group: main
+    accounts:
+      type: inversed
+      model: reels__account
+      mapped: region
+      field: accounts
+      name: accounts
+      group: main
+    videos:
+      type: inversed
+      model: reels__video
+      mapped: region
+      field: videos
+      name: videos
+      group: main
+    categories:
+      type: inversed
+      model: reels__video
+      mapped: category
+      field: categories
+      name: categories
+      group: main
+    settings:
+      type: raw
+      field: settings
+      name: settings
+      group: main
+    about:
+      type: raw
+      field: about
+      name: about
+      group: main
+    terms:
+      type: raw
+      field: terms
+      name: terms
+      group: main
+  search:
+    - name
+  analysis:
+    main: {}
+reels__account:
+  fields:
+    name:
+      type: string
+      field: name
+      name: name
+      group: main
+    mention:
+      type: string
+      slug:
+        fields:
+          - name
+        updatable: false
+        separator: '-'
+      field: mention
+      name: mention
+      group: main
+    email:
+      type: string
+      field: email
+      name: email
+      group: main
+    address:
+      type: string
+      field: address
+      name: address
+      group: main
+    phone:
+      type: string
+      field: phone
+      name: phone
+      group: main
+    user:
+      type: relation
+      model: auth__user
+      field: user
+      name: user
+      group: main
+    region:
+      type: relation
+      model: reels__region
+      field: region
+      name: region
+      group: main
+    settings:
+      type: raw
+      field: settings
+      name: settings
+      group: main
+    profile:
+      type: relation
+      model: files__file
+      field: profile
+      name: profile
+      group: main
+    cover:
+      type: relation
+      model: files__file
+      field: cover
+      name: cover
+      group: main
+    v_code:
+      type: string
+      field: v_code
+      name: v_code
+      group: main
+    refers:
+      type: inversed
+      model: reels__refer
+      mapped: referd_by
+      field: refers
+      name: refers
+      group: main
+    followers:
+      type: inversed
+      model: reels__relation
+      mapped: target
+      criteria: '{"relation": "follow"}'
+      field: followers
+      name: followers
+      group: main
+    follows:
+      type: inversed
+      model: reels__relation
+      mapped: user
+      criteria: '{"relation": "follow"}'
+      field: follows
+      name: follows
+      group: main
+    blockers:
+      type: inversed
+      model: reels__relation
+      mapped: target
+      criteria: '{"relation": "block"}'
+      field: blockers
+      name: blockers
+      group: main
+    blocks:
+      type: inversed
+      model: reels__relation
+      mapped: user
+      criteria: '{"relation": "block"}'
+      field: blocks
+      name: blocks
+      group: main
+    likes:
+      type: inversed
+      model: reels__video_like
+      mapped: user
+      field: likes
+      name: likes
+      group: main
+    reports:
+      type: inversed
+      model: reels__report
+      mapped: profile
+      field: reports
+      name: reports
+      group: main
+    complains:
+      type: inversed
+      model: reels__report
+      mapped: user
+      field: complains
+      name: complains
+      group: main
+  skip: true
+  search:
+    - name
+    - email
+    - phone
+  pagination: cursor
+  analysis:
+    main: {}
+reels__refer:
+  fields:
+    user:
+      type: relation
+      model: reels__account
+      field: user
+      name: user
+      group: main
+    referd_by:
+      type: relation
+      model: reels__account
+      field: referd_by
+      name: referd_by
+      group: main
+reels__relation:
+  fields:
+    user:
+      type: relation
+      model: reels__account
+      field: user
+      name: user
+      group: main
+    target:
+      type: relation
+      model: reels__account
+      field: target
+      name: target
+      group: main
+    relation:
+      type: string
+      field: relation
+      name: relation
+      group: main
+  pagination: cursor
+  analysis:
+    main: {}
+reels__video:
+  fields:
+    categories:
+      type: hasMany
+      model: reels__category
+      field: categories
+      name: categories
+      group: main
+    title:
+      type: string
+      field: title
+      name: title
+      group: main
+    description:
+      type: string
+      field: description
+      name: description
+      group: main
+    like:
+      type: int
+      field: like
+      name: like
+      group: main
+    user:
+      type: relation
+      model: reels__account
+      field: user
+      name: user
+      group: main
+    publish_at:
+      type: date
+      field: publish_at
+      name: publish_at
+      group: main
+    duration:
+      type: string
+      field: duration
+      name: duration
+      group: main
+    region:
+      type: relation
+      model: reels__region
+      field: region
+      name: region
+      group: main
+    date:
+      type: date
+      field: date
+      name: date
+      group: main
+    reacts:
+      type: raw
+      field: reacts
+      name: reacts
+      group: main
+    comments:
+      type: inversed
+      model: reels__comment
+      mapped: video
+      field: comments
+      name: comments
+      group: main
+    likes:
+      type: inversed
+      model: reels__video_like
+      mapped: video
+      field: likes
+      name: likes
+      group: main
+    trends:
+      type: inversedOne
+      model: reels__daily_likes
+      mapped: video
+      field: trends
+      name: trends
+      group: main
+    file:
+      type: relation
+      model: files__file
+      field: file
+      name: file
+      group: main
+  pagination: cursor
+  search:
+    - title
+    - desc
+    - keywords
+  analysis:
+    main:
+      like: like
+reels__video_like:
+  fields:
+    video:
+      type: relation
+      model: reels__video
+      field: video
+      name: video
+      group: main
+    user:
+      type: relation
+      model: reels__account
+      field: user
+      name: user
+      group: main
+reels__video_reaction:
+  fields:
+    video:
+      type: relation
+      model: reels__video
+      field: video
+      name: video
+      group: main
+    user:
+      type: relation
+      model: reels__account
+      field: user
+      name: user
+      group: main
+    react:
+      type: string
+      field: react
+      name: react
+      group: main
+reels__comment:
+  fields:
+    video:
+      type: relation
+      model: reels__video
+      field: video
+      name: video
+      group: main
+    user:
+      type: relation
+      model: reels__account
+      field: user
+      name: user
+      group: main
+    comment:
+      type: string
+      field: comment
+      name: comment
+      group: main
+    parent:
+      type: relation
+      model: reels__comment
+      field: parent
+      name: parent
+      group: main
+    replies:
+      type: inversed
+      model: reels__comment
+      mapped: parent
+      field: replies
+      name: replies
+      group: main
+reels__like:
+  fields:
+    comment:
+      type: relation
+      model: reels__comment
+      field: comment
+      name: comment
+      group: main
+    user:
+      type: relation
+      model: reels__account
+      field: user
+      name: user
+      group: main
+reels__daily_likes:
+  fields:
+    video:
+      type: relation
+      model: reels__video
+      field: video
+      name: video
+      group: main
+    user:
+      type: relation
+      model: reels__account
+      field: user
+      name: user
+      group: main
+    likes:
+      type: int
+      field: likes
+      name: likes
+      group: main
+    region:
+      type: relation
+      model: reels__region
+      field: region
+      name: region
+      group: main
+    day:
+      type: date
+      field: day
+      name: day
+      group: main
+  pagination: cursor
+  search:
+    - video.title
+    - video.description
+  analysis:
+    main:
+      likes: likes
+reels__top_daily:
+  fields:
+    video:
+      type: relation
+      model: reels__video
+      field: video
+      name: video
+      group: main
+    likes:
+      type: int
+      field: likes
+      name: likes
+      group: main
+    region:
+      type: relation
+      model: reels__region
+      field: region
+      name: region
+      group: main
+  pagination: cursor
+  search:
+    - video.title
+    - video.description
+  analysis:
+    main:
+      likes: likes
+reels__chat:
+  fields:
+    users:
+      type: hasMany
+      model: reels__account
+      field: users
+      name: users
+      group: main
+    unreads:
+      type: inversed
+      model: reels__chat_message
+      mapped: chat
+      criteria: '{"read": {"exists": false}}'
+      field: unreads
+      name: unreads
+      group: main
+    last_message:
+      type: inversedOne
+      model: reels__chat_message
+      mapped: chat
+      field: last_message
+      name: last_message
+      group: main
+  pagination: cursor
+  search:
+    - name
+    - content
+  analysis:
+    main: {}
+reels__chat_message:
+  fields:
+    chat:
+      type: relation
+      model: reels__chat
+      field: chat
+      name: chat
+      group: main
+    user:
+      type: relation
+      model: reels__account
+      field: user
+      name: user
+      group: main
+    content:
+      type: string
+      field: content
+      name: content
+      group: main
+    type:
+      type: string
+      field: type
+      name: type
+      group: main
+    video:
+      type: relation
+      model: reels__video
+      field: video
+      name: video
+      group: main
+    read:
+      type: boolean
+      field: read
+      name: read
+      group: main
+    actions:
+      type: raw
+      field: actions
+      name: actions
+      group: main
+    deleted_date:
+      type: date
+      field: deleted_date
+      name: deleted_date
+      group: main
+  pagination: cursor
+  search:
+    - content
+  analysis:
+    main: {}
+reels__report:
+  fields:
+    user:
+      type: relation
+      model: reels__account
+      field: user
+      name: user
+      group: main
+    video:
+      type: relation
+      model: reels__video
+      field: video
+      name: video
+      group: main
+    category:
+      type: relation
+      model: reels__category
+      field: category
+      name: category
+      group: main
+    content:
+      type: string
+      field: content
+      name: content
+      group: main
+    level:
+      type: int
+      field: level
+      name: level
+      group: main
+    profile:
+      type: relation
+      model: reels__account
+      field: profile
+      name: profile
+      group: main
+  pagination: cursor
+  analysis:
+    main:
+      level: level
+reels__notification:
+  fields:
+    from:
+      type: relation
+      model: reels__account
+      field: from
+      name: from
+      group: main
+    to:
+      type: relation
+      model: reels__account
+      field: to
+      name: to
+      group: main
+    title:
+      type: string
+      field: title
+      name: title
+      group: main
+    desc:
+      type: string
+      field: desc
+      name: desc
+      group: main
+    params:
+      type: raw
+      field: params
+      name: params
+      group: main
+  pagination: cursor
+  analysis:
+    main: {}
+reels__notification_token:
+  fields:
+    token:
+      type: string
+      field: token
+      name: token
+      group: main
+    user:
+      type: relation
+      model: reels__account
+      field: user
+      name: user
+      group: main

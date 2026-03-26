@@ -1,0 +1,87 @@
+server__service:
+  fields:
+    type:
+      type: string
+      field: type
+      name: type
+      group: main
+    name:
+      type: string
+      field: name
+      name: name
+      group: main
+    proxy_url:
+      type: string
+      field: proxy_url
+      name: proxy_url
+      group: main
+    prefix:
+      type: string
+      field: prefix
+      name: prefix
+      group: main
+    setting:
+      type: raw
+      field: setting
+      name: setting
+      group: main
+server__logs:
+  fields:
+    url:
+      type: string
+      field: url
+      name: url
+      group: main
+    request:
+      type: string
+      field: request
+      name: request
+      group: main
+    status:
+      type: integer
+      field: status
+      name: status
+      group: main
+    time:
+      type: integer
+      field: time
+      name: time
+      group: main
+    msg:
+      type: raw
+      group: secure
+      field: msg
+      name: msg
+server__end_point:
+  fields:
+    url:
+      type: string
+      field: url
+      name: url
+      group: main
+    method:
+      type: string
+      field: method
+      name: method
+      group: main
+    name:
+      type: string
+      field: name
+      name: name
+      group: main
+    proxy:
+      type: string
+      field: proxy
+      name: proxy
+      group: main
+    service:
+      type: relation
+      model: server__service
+      field: service
+      name: service
+      group: main
+    middle_ware:
+      type: raw
+      field: middle_ware
+      name: middle_ware
+      group: main

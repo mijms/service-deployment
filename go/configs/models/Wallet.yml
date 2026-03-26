@@ -1,0 +1,207 @@
+wallet__wallet:
+  fields:
+    type:
+      type: string
+      list: true
+      field: type
+      name: type
+      group: main
+    number:
+      type: int
+      list: true
+      field: number
+      name: number
+      group: main
+    balance:
+      type: float
+      list: true
+      field: balance
+      name: balance
+      group: main
+    user:
+      type: relation
+      model: auth__account
+      field: user
+      name: user
+      group: main
+  filters:
+    - Owner
+  analysis:
+    main:
+      number: number
+      balance: balance
+wallet__card:
+  fields:
+    type:
+      type: string
+      list: true
+      field: type
+      name: type
+      group: main
+    name:
+      type: string
+      field: name
+      name: name
+      group: main
+    number:
+      type: int
+      list: true
+      field: number
+      name: number
+      group: main
+    exp_date:
+      type: date
+      list: true
+      field: exp_date
+      name: exp_date
+      group: main
+    cvv:
+      type: int
+      field: cvv
+      name: cvv
+      group: main
+    user:
+      type: relation
+      model: auth__account
+      field: user
+      name: user
+      group: main
+  filters:
+    - Owner
+  analysis:
+    main:
+      number: number
+      cvv: cvv
+wallet__transaction:
+  fields:
+    date:
+      type: date
+      list: true
+      field: date
+      name: date
+      group: main
+    type:
+      type: string
+      field: type
+      name: type
+      group: main
+    amount:
+      type: float
+      list: true
+      field: amount
+      name: amount
+      group: main
+    currency:
+      type: float
+      list: true
+      field: currency
+      name: currency
+      group: main
+    from:
+      type: relation
+      model: auth__account
+      field: from
+      name: from
+      group: main
+    to:
+      type: relation
+      model: auth__account
+      field: to
+      name: to
+      group: main
+    session:
+      type: raw
+      field: session
+      name: session
+      group: main
+    request:
+      type: raw
+      field: request
+      name: request
+      group: main
+    res:
+      type: raw
+      field: res
+      name: res
+      group: main
+    wallet:
+      type: relation
+      model: wallet__wallet
+      field: wallet
+      name: wallet
+      group: main
+  filters:
+    - Owner
+  analysis:
+    main:
+      amount: amount
+      currency: currency
+wallet__payment_request:
+  fields:
+    trans:
+      type: relation
+      model: wallet__transaction
+      field: trans
+      name: trans
+      group: main
+    session:
+      type: raw
+      field: session
+      name: session
+      group: main
+    setting:
+      type: raw
+      group: server
+      field: setting
+      name: setting
+    req:
+      type: raw
+      field: req
+      name: req
+      group: main
+    res:
+      type: raw
+      field: res
+      name: res
+      group: main
+    refund:
+      type: raw
+      field: refund
+      name: refund
+      group: main
+    integrate:
+      type: raw
+      field: integrate
+      name: integrate
+      group: main
+    r_integrate:
+      type: raw
+      field: r_integrate
+      name: r_integrate
+      group: main
+    data:
+      type: raw
+      field: data
+      name: data
+      group: main
+    amount:
+      type: float
+      field: amount
+      name: amount
+      group: main
+    currency:
+      type: string
+      field: currency
+      name: currency
+      group: main
+    app:
+      type: relation
+      model: apps__app
+      field: app
+      name: app
+      group: main
+  filters:
+    - Owner
+  analysis:
+    main:
+      amount: amount

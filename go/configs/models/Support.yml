@@ -1,0 +1,303 @@
+support__document:
+  fields:
+    title:
+      type: string
+      list: true
+      validates:
+        minLength: 1
+      field: title
+      name: title
+      group: main
+    file:
+      type: relation
+      model: files__file
+      list: true
+      show: file.name
+      column:
+        type: string
+      front:
+        accept: application/pdf
+        maxSize: 10
+      field: file
+      name: file
+      group: main
+    category:
+      type: relation
+      model: common__category
+      hide: true
+      field: category
+      name: category
+      group: main
+    tags:
+      type: relation
+      model: common__category
+      hide: true
+      field: tags
+      name: tags
+      group: main
+    path:
+      type: string
+      hide: true
+      field: path
+      name: path
+      group: main
+    app:
+      type: string
+      hide: true
+      field: app
+      name: app
+      group: main
+    lang:
+      type: string
+      front:
+        type: Select
+        options:
+          - pid: en
+            name: English
+          - pid: ar
+            name: Arabic
+          - pid: both
+            name: English + Arabic
+      field: lang
+      name: lang
+      group: main
+    company:
+      type: string
+      hide: true
+      field: company
+      name: company
+      group: main
+    org:
+      type: string
+      hide: true
+      field: org
+      name: org
+      group: main
+    status:
+      type: string
+      hide: true
+      list: true
+      column:
+        type: status
+      field: status
+      name: status
+      group: main
+    syncd:
+      type: boolean
+      hide: true
+      list: true
+      default: true
+      field: syncd
+      name: syncd
+      group: main
+  search:
+    - title
+  filters:
+    - CurrentApps
+    - Company
+  mappings:
+    company: company
+    org: org
+  analysis:
+    main: {}
+support__sentence:
+  fields:
+    ocr_method:
+      type: string
+      field: ocr_method
+      name: ocr_method
+      group: main
+    content:
+      type: string
+      list: true
+      validates:
+        maxLength: 1000
+      column:
+        type: TextArea
+      front:
+        type: textarea
+      field: content
+      name: content
+      group: main
+    document:
+      type: relation
+      model: support__document
+      hide: true
+      list: true
+      show: document.title
+      field: document
+      name: document
+      group: main
+    file:
+      type: string
+      hide: true
+      field: file
+      name: file
+      group: main
+    input:
+      type: string
+      hide: true
+      field: input
+      name: input
+      group: main
+    app:
+      type: string
+      hide: true
+      field: app
+      name: app
+      group: main
+    lang:
+      type: string
+      list: true
+      field: lang
+      name: lang
+      group: main
+    org:
+      type: string
+      hide: true
+      field: org
+      name: org
+      group: main
+  text_search_index: 'keys: [''content''=>''text'']'
+  hooks:
+    pre_save:
+      update_support_document:
+        module: support__document
+        action: updateOne
+        fun: property_updated
+        filter:
+          id: value.document.id
+        update:
+          $set:
+            main_data:
+              fun: val_set
+              params:
+                syncd: false
+        property:
+          - content
+  analysis:
+    main: {}
+support__chat:
+  fields:
+    title:
+      type: string
+      field: title
+      name: title
+      group: main
+    user:
+      type: relation
+      model: auth__account
+      field: user
+      name: user
+      group: main
+    company:
+      type: string
+      field: company
+      name: company
+      group: main
+    app:
+      type: string
+      field: app
+      name: app
+      group: main
+    org:
+      type: string
+      field: org
+      name: org
+      group: main
+  search:
+    - title
+  filters:
+    - CurrentApps
+    - Company
+    - Org
+  analysis:
+    main: {}
+support__chat_history:
+  fields:
+    chat:
+      type: relation
+      model: support__chat
+      field: chat
+      name: chat
+      group: main
+    message:
+      type: string
+      field: message
+      name: message
+      group: main
+    answer:
+      type: string
+      field: answer
+      name: answer
+      group: main
+    user:
+      type: relation
+      model: auth__account
+      field: user
+      name: user
+      group: main
+    company:
+      type: string
+      field: company
+      name: company
+      group: main
+    app:
+      type: string
+      field: app
+      name: app
+      group: main
+    org:
+      type: string
+      field: org
+      name: org
+      group: main
+  search:
+    - message
+  filters:
+    - CurrentApps
+    - Company
+    - Org
+  analysis:
+    main: {}
+support__ocr_status:
+  fields:
+    task_id:
+      type: string
+      field: task_id
+      name: task_id
+      group: main
+    document:
+      type: relation
+      model: support__document
+      field: document
+      name: document
+      group: main
+    file:
+      type: relation
+      model: files__file
+      field: file
+      name: file
+      group: main
+    ref:
+      type: string
+      field: ref
+      name: ref
+      group: main
+    status:
+      type: string
+      field: status
+      name: status
+      group: main
+    company:
+      type: string
+      field: company
+      name: company
+      group: main
+  search:
+    - file_name
+    - company
+  filters:
+    - Company
+  analysis:
+    main: {}

@@ -1,0 +1,296 @@
+org__org:
+  fields:
+    name:
+      type: string
+      list: true
+      field: name
+      name: name
+      group: main
+    logo:
+      type: string
+      list: true
+      sortable: false
+      front:
+        type: FileUploader
+      field: logo
+      name: logo
+      group: main
+    app:
+      type: relation
+      model: apps__app
+      field: app
+      name: app
+      group: main
+    setting:
+      type: raw
+      field: setting
+      name: setting
+      group: main
+    companies:
+      type: inversed
+      model: org__company
+      mapped: org
+      field: companies
+      name: companies
+      group: main
+    branches:
+      type: inversed
+      model: org__branch
+      mapped: org
+      field: branches
+      name: branches
+      group: main
+    owner:
+      type: string
+      request: getSelectAuthAccountQuery
+      front:
+        type: Select
+      field: owner
+      name: owner
+      group: main
+    info:
+      type: raw
+      field: info
+      name: info
+      group: main
+  filters:
+    - MainApp
+  mappings:
+    app: app
+  analysis:
+    main: {}
+org__company_user:
+  fields:
+    user:
+      type: relation
+      model: auth__account
+      field: user
+      name: user
+      group: main
+    role:
+      type: string
+      field: role
+      name: role
+      group: main
+    org:
+      type: string
+      field: org
+      name: org
+      group: main
+    company:
+      type: string
+      field: company
+      name: company
+      group: main
+    department:
+      type: string
+      field: department
+      name: department
+      group: main
+    branch:
+      type: string
+      field: branch
+      name: branch
+      group: main
+  filters:
+    - OrgOrNull
+    - CompanyOrNull
+  analysis:
+    main: {}
+org__company:
+  fields:
+    name:
+      type: string
+      list: true
+      field: name
+      name: name
+      group: main
+    register:
+      type: string
+      field: register
+      name: register
+      group: main
+    logo:
+      type: string
+      sortable: false
+      front:
+        type: FileUploader
+        validates: null
+      field: logo
+      name: logo
+      group: main
+    app:
+      type: string
+      field: app
+      name: app
+      group: main
+    setting:
+      type: raw
+      field: setting
+      name: setting
+      group: main
+    admin:
+      type: string
+      field: admin
+      name: admin
+      group: main
+    org:
+      type: string
+      field: org
+      name: org
+      group: main
+    info:
+      type: raw
+      field: info
+      name: info
+      group: main
+  generate:
+    - app
+    - register
+  filters:
+    - MainApp
+    - Org
+  mappings:
+    org: org
+    app: app
+  analysis:
+    main: {}
+org__branch:
+  fields:
+    name:
+      type: string
+      list: true
+      field: name
+      name: name
+      group: main
+    app:
+      type: string
+      field: app
+      name: app
+      group: main
+    setting:
+      type: raw
+      field: setting
+      name: setting
+      group: main
+    admin:
+      type: relation
+      model: auth__user
+      field: admin
+      name: admin
+      group: main
+    org:
+      type: string
+      field: org
+      name: org
+      group: main
+    company:
+      type: string
+      field: company
+      name: company
+      group: main
+    info:
+      type: raw
+      field: info
+      name: info
+      group: main
+  filters:
+    - MainApp
+    - Org
+    - Company
+  mappings:
+    org: org
+    app: app
+    company: company
+  analysis:
+    main: {}
+org__terminal:
+  fields:
+    name:
+      type: string
+      list: true
+      field: name
+      name: name
+      group: main
+    branch:
+      type: string
+      field: branch
+      name: branch
+      group: main
+    org:
+      type: string
+      field: org
+      name: org
+      group: main
+    company:
+      type: string
+      field: company
+      name: company
+      group: main
+    app:
+      type: string
+      field: app
+      name: app
+      group: main
+    info:
+      type: raw
+      field: info
+      name: info
+      group: main
+  filters:
+    - MainApp
+    - Org
+    - Company
+  mappings:
+    org: org
+    app: app
+    company: company
+  analysis:
+    main: {}
+org__department:
+  fields:
+    name:
+      type: string
+      list: true
+      field: name
+      name: name
+      group: main
+    code:
+      type: string
+      front:
+        validates: null
+      field: code
+      name: code
+      group: main
+    org:
+      list: true
+      type: relation
+      model: org__org
+      field: org
+      name: org
+      group: main
+    company:
+      list: true
+      type: relation
+      model: org__company
+      field: company
+      name: company
+      group: main
+    app:
+      hide: true
+      type: string
+      field: app
+      name: app
+      group: main
+  filters:
+    - MainApp
+    - Org
+  mappings:
+    app: app
+    org: org
+    company: company
+  generate:
+    - company
+    - code
+  analysis:
+    main: {}

@@ -1,0 +1,486 @@
+clinical__reservation:
+  fields:
+    Code:
+      field: code
+      name: Code
+      group: main
+    Client:
+      field: client
+      name: Client
+      group: main
+    Service:
+      field: service
+      name: Service
+      group: main
+    Provider:
+      field: provider
+      name: Provider
+      group: main
+    Slot:
+      field: slot
+      name: Slot
+      group: main
+    Date:
+      field: date
+      name: Date
+      group: main
+    Duration:
+      field: duration
+      name: Duration
+      group: main
+    Type:
+      field: type
+      name: Type
+      group: main
+    Status:
+      field: status
+      name: Status
+      group: main
+    Insurance:
+      field: insurance
+      name: Insurance
+      group: main
+    MarketingCampaign:
+      field: marketing_campaign
+      name: MarketingCampaign
+      group: main
+    Promotion:
+      field: promotion
+      name: Promotion
+      group: main
+    Price:
+      field: price
+      name: Price
+      group: main
+    Discount:
+      field: discount
+      name: Discount
+      group: main
+    Tax:
+      field: tax
+      name: Tax
+      group: main
+    Total:
+      field: total
+      name: Total
+      group: main
+    PaidAmount:
+      field: paid_amount
+      name: PaidAmount
+      group: main
+    PaymentStatus:
+      field: payment_status
+      name: PaymentStatus
+      group: main
+    Notes:
+      field: notes
+      name: Notes
+      group: main
+    App:
+      field: app
+      name: App
+      group: main
+    Org:
+      field: org
+      name: Org
+      group: main
+    Company:
+      field: company
+      name: Company
+      group: main
+    Branch:
+      field: branch
+      name: Branch
+      group: main
+  filters:
+    - MainApp
+    - Org
+    - Company
+    - Branch
+  mappings:
+    app: app
+    org: org
+    company: company
+    branch: branch
+  search:
+    - code
+    - client.name
+    - provider.name
+clinical__clinical_slot:
+  fields:
+    Provider:
+      field: provider
+      name: Provider
+      group: main
+    StartTime:
+      field: start_time
+      name: StartTime
+      group: main
+    EndTime:
+      field: end_time
+      name: EndTime
+      group: main
+    Status:
+      field: status
+      name: Status
+      group: main
+    Location:
+      field: location
+      name: Location
+      group: main
+    Reservation:
+      field: reservation
+      name: Reservation
+      group: main
+    App:
+      field: app
+      name: App
+      group: main
+    Org:
+      field: org
+      name: Org
+      group: main
+    Company:
+      field: company
+      name: Company
+      group: main
+    Branch:
+      field: branch
+      name: Branch
+      group: main
+  filters:
+    - MainApp
+    - Org
+    - Company
+    - Branch
+  mappings:
+    app: app
+    org: org
+    company: company
+    branch: branch
+clinical__patient_history:
+  fields:
+    Client:
+      field: client
+      name: Client
+      group: main
+    Reservation:
+      field: reservation
+      name: Reservation
+      group: main
+    Date:
+      field: date
+      name: Date
+      group: main
+    Diagnosis:
+      field: diagnosis
+      name: Diagnosis
+      group: main
+    Treatment:
+      field: treatment
+      name: Treatment
+      group: main
+    Prescription:
+      field: prescription
+      name: Prescription
+      group: main
+    Notes:
+      field: notes
+      name: Notes
+      group: main
+    Attachments:
+      field: attachments
+      name: Attachments
+      group: main
+    Provider:
+      field: provider
+      name: Provider
+      group: main
+    App:
+      field: app
+      name: App
+      group: main
+    Org:
+      field: org
+      name: Org
+      group: main
+    Company:
+      field: company
+      name: Company
+      group: main
+    Branch:
+      field: branch
+      name: Branch
+      group: main
+  filters:
+    - MainApp
+    - Org
+    - Company
+    - Branch
+  mappings:
+    app: app
+    org: org
+    company: company
+    branch: branch
+  search:
+    - client.name
+    - reservation.code
+clinical__insurance_contract:
+  fields:
+    Name:
+      field: name
+      name: Name
+      group: main
+    Client:
+      field: client
+      name: Client
+      group: main
+    InsuranceCompany:
+      field: insurance_company
+      name: InsuranceCompany
+      group: main
+    PolicyNumber:
+      field: policy_number
+      name: PolicyNumber
+      group: main
+    StartDate:
+      field: start_date
+      name: StartDate
+      group: main
+    EndDate:
+      field: end_date
+      name: EndDate
+      group: main
+    CoverageDetails:
+      field: coverage_details
+      name: CoverageDetails
+      group: main
+    Status:
+      field: status
+      name: Status
+      group: main
+    App:
+      field: app
+      name: App
+      group: main
+    Org:
+      field: org
+      name: Org
+      group: main
+    Company:
+      field: company
+      name: Company
+      group: main
+    Branch:
+      field: branch
+      name: Branch
+      group: main
+  filters:
+    - MainApp
+    - Org
+    - Company
+    - Branch
+  mappings:
+    app: app
+    org: org
+    company: company
+    branch: branch
+  search:
+    - name
+    - policy_number
+    - client.name
+clinical__reservation_type:
+  fields:
+    Name:
+      field: name
+      name: Name
+      group: main
+    Code:
+      field: code
+      name: Code
+      group: main
+    Color:
+      field: color
+      name: Color
+      group: main
+    Setting:
+      field: setting
+      name: Setting
+      group: main
+    App:
+      field: app
+      name: App
+      group: main
+    Org:
+      field: org
+      name: Org
+      group: main
+    Company:
+      field: company
+      name: Company
+      group: main
+  filters:
+    - MainApp
+    - Org
+    - Company
+  mappings:
+    app: app
+    org: org
+    company: company
+clinical__service_price:
+  fields:
+    Name:
+      field: name
+      name: Name
+      group: main
+    Service:
+      field: service
+      name: Service
+      group: main
+    InsuranceContract:
+      field: insurance_contract
+      name: InsuranceContract
+      group: main
+    ClientType:
+      field: client_type
+      name: ClientType
+      group: main
+    Price:
+      field: price
+      name: Price
+      group: main
+    Currency:
+      field: currency
+      name: Currency
+      group: main
+    App:
+      field: app
+      name: App
+      group: main
+    Org:
+      field: org
+      name: Org
+      group: main
+    Company:
+      field: company
+      name: Company
+      group: main
+    Branch:
+      field: branch
+      name: Branch
+      group: main
+  filters:
+    - MainApp
+    - Org
+    - Company
+    - Branch
+  mappings:
+    app: app
+    org: org
+    company: company
+    branch: branch
+clinical__booking_portal:
+  fields:
+    Name:
+      field: name
+      name: Name
+      group: main
+    Site:
+      field: site
+      name: Site
+      group: main
+    Enabled:
+      field: enabled
+      name: Enabled
+      group: main
+    Setting:
+      field: setting
+      name: Setting
+      group: main
+    App:
+      field: app
+      name: App
+      group: main
+    Org:
+      field: org
+      name: Org
+      group: main
+    Company:
+      field: company
+      name: Company
+      group: main
+  filters:
+    - MainApp
+    - Org
+    - Company
+  mappings:
+    app: app
+    org: org
+    company: company
+clinical__clinical_promotion:
+  fields:
+    Name:
+      field: name
+      name: Name
+      group: main
+    Code:
+      field: code
+      name: Code
+      group: main
+    DiscountType:
+      field: discount_type
+      name: DiscountType
+      group: main
+    DiscountValue:
+      field: discount_value
+      name: DiscountValue
+      group: main
+    StartDate:
+      field: start_date
+      name: StartDate
+      group: main
+    EndDate:
+      field: end_date
+      name: EndDate
+      group: main
+    UsageLimit:
+      field: usage_limit
+      name: UsageLimit
+      group: main
+    UsedCount:
+      field: used_count
+      name: UsedCount
+      group: main
+    Status:
+      field: status
+      name: Status
+      group: main
+    App:
+      field: app
+      name: App
+      group: main
+    Org:
+      field: org
+      name: Org
+      group: main
+    Company:
+      field: company
+      name: Company
+      group: main
+    Branch:
+      field: branch
+      name: Branch
+      group: main
+  filters:
+    - MainApp
+    - Org
+    - Company
+    - Branch
+  mappings:
+    app: app
+    org: org
+    company: company
+    branch: branch
+  search:
+    - name
+    - code

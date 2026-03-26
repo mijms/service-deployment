@@ -1,0 +1,322 @@
+sites__site:
+  fields:
+    url:
+      type: string
+      list: true
+      field: url
+      name: url
+      group: main
+    langs:
+      type: collection
+      front:
+        type: MultiSelect
+        request: getSelectCommonLangQuery
+      field: langs
+      name: langs
+      group: main
+    app:
+      type: string
+      hide: true
+      field: app
+      name: app
+      group: main
+    setting:
+      type: raw
+      field: setting
+      name: setting
+      group: main
+    theme:
+      type: raw
+      front:
+        hideFilter: true
+        type: ColorPickerField
+        var:
+          bg:
+            type: color
+          primary:
+            type: color
+          secondary:
+            type: color
+          headertext:
+            type: textstyle
+          maintext:
+            type: textstyle
+          subtext:
+            type: textstyle
+      field: theme
+      name: theme
+      group: main
+    secure:
+      type: string
+      group: secure
+      field: secure
+      name: secure
+    image:
+      type: relation
+      model: files__file
+      field: image
+      name: image
+      group: main
+    org:
+      type: string
+      field: org
+      name: org
+      group: main
+    company:
+      type: string
+      field: company
+      name: company
+      group: main
+  generate:
+    - url
+  search:
+    - url
+  select_include:
+    - Auth
+    - Apps
+    - Common
+  filters:
+    - OrgOrNull
+    - MainApp
+  mappings:
+    org: org
+    app: app
+    company: company
+  analysis:
+    main: {}
+sites__template:
+  fields:
+    title:
+      type: string
+      list: true
+      validates:
+        noSpecialChar: true
+      field: title
+      name: title
+      group: main
+    code:
+      type: raw
+      front:
+        hideFilter: true
+        type: WebSiteTemplate
+      field: code
+      name: code
+      group: main
+    site:
+      type: string
+      list: true
+      hide: true
+      field: site
+      name: site
+      group: main
+    theme:
+      type: raw
+      front:
+        hideFilter: true
+        type: ColorPickerField
+        var:
+          bg:
+            type: color
+          primary:
+            type: color
+          secondary:
+            type: color
+          headertext:
+            type: textstyle
+          maintext:
+            type: textstyle
+          subtext:
+            type: textstyle
+      field: theme
+      name: theme
+      group: main
+    lang:
+      type: relation
+      model: common__lang
+      field: lang
+      name: lang
+      group: main
+    setting:
+      type: raw
+      field: setting
+      name: setting
+      group: main
+    app:
+      type: string
+      hide: true
+      field: app
+      name: app
+      group: main
+    org:
+      type: string
+      hide: true
+      field: org
+      name: org
+      group: main
+    company:
+      type: string
+      hide: true
+      field: company
+      name: company
+      group: main
+  filters:
+    - OrgOrNull
+    - CompanyOrNull
+    - MainApp
+    - Site
+  mappings:
+    org: org
+    app: app
+    company: company
+    site: site
+  analysis:
+    main: {}
+sites__page:
+  fields:
+    image:
+      type: relation
+      model: files__file
+      front:
+        type: media
+      hide: true
+      field: image
+      name: image
+      group: main
+    owner:
+      type: string
+      hide: true
+      field: owner
+      name: owner
+      group: main
+    main:
+      type: boolean
+      hide: true
+      field: main
+      name: main
+      group: main
+    html:
+      type: string
+      details: false
+      hide: true
+      field: html
+      name: html
+      group: main
+    title:
+      type: string
+      list: true
+      validates:
+        noSpecialChar: true
+      field: title
+      name: title
+      group: main
+    url:
+      type: string
+      list: true
+      validates:
+        noSpecialChar: true
+      front:
+        info: This should match the url of your site
+      field: url
+      name: url
+      group: main
+    desc:
+      type: string
+      front:
+        info: This is the description of your page
+      field: desc
+      name: desc
+      group: main
+    lang:
+      type: relation
+      model: common__lang
+      validates:
+        required: true
+      field: lang
+      name: lang
+      group: main
+    template:
+      type: relation
+      model: sites__template
+      colName: title
+      field: template
+      name: template
+      group: main
+    app:
+      type: string
+      hide: true
+      field: app
+      name: app
+      group: main
+    org:
+      type: string
+      hide: true
+      field: org
+      name: org
+      group: main
+    company:
+      type: string
+      hide: true
+      field: company
+      name: company
+      group: main
+    setting:
+      type: raw
+      field: setting
+      name: setting
+      group: main
+    code:
+      type: raw
+      details: false
+      front:
+        hideFilter: true
+        type: CreateContent
+      field: code
+      name: code
+      group: main
+    type:
+      type: string
+      hide: true
+      field: type
+      name: type
+      group: main
+    theme:
+      type: raw
+      front:
+        hideFilter: true
+        type: ColorPickerField
+        var:
+          bg:
+            type: color
+          primary:
+            type: color
+          secondary:
+            type: color
+          headertext:
+            type: textstyle
+          maintext:
+            type: textstyle
+          subtext:
+            type: textstyle
+      field: theme
+      name: theme
+      group: main
+    site:
+      hide: true
+      type: string
+      front:
+        info: This should be the id of your site
+      field: site
+      name: site
+      group: main
+  filters:
+    - OrgOrNull
+    - CompanyOrNull
+    - MainApp
+    - Site
+  mappings:
+    org: org
+    app: app
+    company: company
+    site: site
+  analysis:
+    main: {}

@@ -1,0 +1,387 @@
+order__order:
+  fields:
+    Number:
+      field: number
+      name: Number
+      group: main
+    Customer:
+      field: customer
+      name: Customer
+      group: main
+    Email:
+      field: email
+      name: Email
+      group: main
+    Phone:
+      field: phone
+      name: Phone
+      group: main
+    Type:
+      field: type
+      name: Type
+      group: main
+    Status:
+      field: status
+      name: Status
+      group: main
+    PaymentStatus:
+      field: payment_status
+      name: PaymentStatus
+      group: main
+    FulfillmentStatus:
+      field: fulfillment_status
+      name: FulfillmentStatus
+      group: main
+    Items:
+      field: items
+      name: Items
+      group: main
+    ItemsCount:
+      field: items_count
+      name: ItemsCount
+      group: main
+    Subtotal:
+      field: subtotal
+      name: Subtotal
+      group: main
+    TaxAmount:
+      field: tax_amount
+      name: TaxAmount
+      group: main
+    ShippingAmount:
+      field: shipping_amount
+      name: ShippingAmount
+      group: main
+    DiscountAmount:
+      field: discount_amount
+      name: DiscountAmount
+      group: main
+    TotalAmount:
+      field: total_amount
+      name: TotalAmount
+      group: main
+    Currency:
+      field: currency
+      name: Currency
+      group: main
+    ShippingProvider:
+      field: shipping_provider
+      name: ShippingProvider
+      group: main
+    ShippingRegion:
+      field: shipping_region
+      name: ShippingRegion
+      group: main
+    ShippingAddress:
+      field: shipping_address
+      name: ShippingAddress
+      group: main
+    Loc:
+      field: loc
+      name: Loc
+      group: main
+    BillingAddress:
+      field: billing_address
+      name: BillingAddress
+      group: main
+    TrackingNumber:
+      field: tracking_number
+      name: TrackingNumber
+      group: main
+    TrackingUrl:
+      field: tracking_url
+      name: TrackingUrl
+      group: main
+    EstimatedDeliveryDate:
+      field: estimated_delivery_date
+      name: EstimatedDeliveryDate
+      group: main
+    ActualDeliveryDate:
+      field: actual_delivery_date
+      name: ActualDeliveryDate
+      group: main
+    Date:
+      field: date
+      name: Date
+      group: main
+    ConfirmedAt:
+      field: confirmed_at
+      name: ConfirmedAt
+      group: main
+    ShippedAt:
+      field: shipped_at
+      name: ShippedAt
+      group: main
+    DeliveredAt:
+      field: delivered_at
+      name: DeliveredAt
+      group: main
+    CancelledAt:
+      field: cancelled_at
+      name: CancelledAt
+      group: main
+    Notes:
+      field: notes
+      name: Notes
+      group: main
+    CustomerNotes:
+      field: customer_notes
+      name: CustomerNotes
+      group: main
+    InternalNotes:
+      field: internal_notes
+      name: InternalNotes
+      group: main
+    Tags:
+      field: tags
+      name: Tags
+      group: main
+    Source:
+      field: source
+      name: Source
+      group: main
+    IpAddress:
+      field: ip_address
+      name: IpAddress
+      group: main
+    UserAgent:
+      field: user_agent
+      name: UserAgent
+      group: main
+    PaymentMethod:
+      field: payment_method
+      name: PaymentMethod
+      group: main
+    PaymentTransaction:
+      field: payment_transaction
+      name: PaymentTransaction
+      group: main
+    CouponCode:
+      field: coupon_code
+      name: CouponCode
+      group: main
+    DiscountCodes:
+      field: discount_codes
+      name: DiscountCodes
+      group: main
+    GiftMessage:
+      field: gift_message
+      name: GiftMessage
+      group: main
+    IsGift:
+      field: is_gift
+      name: IsGift
+      group: main
+    RequiresSignature:
+      field: requires_signature
+      name: RequiresSignature
+      group: main
+    InsuranceAmount:
+      field: insurance_amount
+      name: InsuranceAmount
+      group: main
+    History:
+      field: history
+      name: History
+      group: main
+    App:
+      field: app
+      name: App
+      group: main
+    Org:
+      field: org
+      name: Org
+      group: main
+    Company:
+      field: company
+      name: Company
+      group: main
+  search:
+    - number
+    - customer.name
+    - customer.email
+  filters:
+    - MainApp
+    - OrgOrNull
+    - CompanyOrNull
+  mappings:
+    app: app
+    org: org
+    company: company
+  geo:
+    - loc
+  analysis:
+    main:
+      total_amount:
+        field: $total_amount
+        fun: sum
+      items_count:
+        field: $items_count
+        fun: sum
+order__order_item:
+  fields:
+    Order:
+      field: order
+      name: Order
+      group: main
+    Item:
+      field: item
+      name: Item
+      group: main
+    Variant:
+      field: variant
+      name: Variant
+      group: main
+    Type:
+      field: type
+      name: Type
+      group: main
+    Name:
+      field: name
+      name: Name
+      group: main
+    Sku:
+      field: sku
+      name: Sku
+      group: main
+    Quantity:
+      field: quantity
+      name: Quantity
+      group: main
+    UnitPrice:
+      field: unit_price
+      name: UnitPrice
+      group: main
+    TaxAmount:
+      field: tax_amount
+      name: TaxAmount
+      group: main
+    DiscountAmount:
+      field: discount_amount
+      name: DiscountAmount
+      group: main
+    TotalPrice:
+      field: total_price
+      name: TotalPrice
+      group: main
+    Status:
+      field: status
+      name: Status
+      group: main
+    ServiceDate:
+      field: service_date
+      name: ServiceDate
+      group: main
+    ServiceTime:
+      field: service_time
+      name: ServiceTime
+      group: main
+    ServiceProvider:
+      field: service_provider
+      name: ServiceProvider
+      group: main
+    FulfilledQuantity:
+      field: fulfilled_quantity
+      name: FulfilledQuantity
+      group: main
+    FulfillmentStatus:
+      field: fulfillment_status
+      name: FulfillmentStatus
+      group: main
+    Notes:
+      field: notes
+      name: Notes
+      group: main
+    Customization:
+      field: customization
+      name: Customization
+      group: main
+    App:
+      field: app
+      name: App
+      group: main
+    Org:
+      field: org
+      name: Org
+      group: main
+    Company:
+      field: company
+      name: Company
+      group: main
+  search:
+    - order.number
+    - item.name
+  filters:
+    - MainApp
+    - OrgOrNull
+    - CompanyOrNull
+  mappings:
+    app: app
+    org: org
+    company: company
+order__order_history:
+  fields:
+    Order:
+      field: order
+      name: Order
+      group: main
+    Status:
+      field: status
+      name: Status
+      group: main
+    PreviousStatus:
+      field: previous_status
+      name: PreviousStatus
+      group: main
+    EventType:
+      field: event_type
+      name: EventType
+      group: main
+    Description:
+      field: description
+      name: Description
+      group: main
+    Notes:
+      field: notes
+      name: Notes
+      group: main
+    Metadata:
+      field: metadata
+      name: Metadata
+      group: main
+    User:
+      field: user
+      name: User
+      group: main
+    Loc:
+      field: loc
+      name: Loc
+      group: main
+    IpAddress:
+      field: ip_address
+      name: IpAddress
+      group: main
+    App:
+      field: app
+      name: App
+      group: main
+    Org:
+      field: org
+      name: Org
+      group: main
+    Company:
+      field: company
+      name: Company
+      group: main
+  geo:
+    - loc
+  filters:
+    - MainApp
+    - OrgOrNull
+    - CompanyOrNull
+  mappings:
+    app: app
+    org: org
+    company: company
+  order_by:
+    created_at: desc

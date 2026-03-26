@@ -1,0 +1,161 @@
+hot_update__app:
+  fields:
+    name:
+      type: string
+      field: name
+      name: name
+      group: main
+    setting:
+      type: raw
+      group: server
+      field: setting
+      name: setting
+    secure:
+      type: raw
+      group: secure
+      field: secure
+      name: secure
+    owner:
+      type: relation
+      model: auth__account
+      field: owner
+      name: owner
+      group: main
+    org:
+      type: string
+      hide: true
+      field: org
+      name: org
+      group: main
+    app:
+      type: string
+      hide: true
+      field: app
+      name: app
+      group: main
+  filters:
+    Org: {}
+  mappings:
+    entity: org
+    owner: id
+    app: app
+  analysis:
+    main: {}
+hot_update__bundle:
+  fields:
+    secret:
+      type: string
+      hide: true
+      field: secret
+      name: secret
+      group: main
+    org:
+      type: string
+      hide: true
+      field: org
+      name: org
+      group: main
+    app:
+      type: string
+      hide: true
+      field: app
+      name: app
+      group: main
+  filters:
+    Org: {}
+    HotUpdateApp:
+      key: app
+  mappings:
+    org: org
+    app: hot_update_app
+  inits:
+    secret: GenerateHash
+  analysis:
+    main: {}
+hot_update__update:
+  fields:
+    app:
+      type: string
+      hide: true
+      field: app
+      name: app
+      group: main
+    bundle:
+      type: string
+      hide: true
+      field: bundle
+      name: bundle
+      group: main
+    org:
+      type: string
+      hide: true
+      field: org
+      name: org
+      group: main
+    version:
+      type: string
+      field: version
+      name: version
+      group: main
+    target:
+      type: string
+      field: target
+      name: target
+      group: main
+    publish:
+      type: date
+      field: publish
+      name: publish
+      group: main
+  filters:
+    Bundle: {}
+    Org: {}
+    HotUpdateApp: {}
+  mappings:
+    org: org
+    bundle: bundle
+    app: hot_update_app
+  inits:
+    publish: TodayDate
+  analysis:
+    main: {}
+hot_update__device_update:
+  fields:
+    app:
+      type: string
+      hide: true
+      field: app
+      name: app
+      group: main
+    bundle:
+      type: string
+      hide: true
+      field: bundle
+      name: bundle
+      group: main
+    org:
+      type: string
+      hide: true
+      field: org
+      name: org
+      group: main
+    device:
+      type: string
+      field: device
+      name: device
+      group: main
+    update:
+      type: relation
+      model: hot_update__update
+      field: update
+      name: update
+      group: main
+  filters:
+    Org: {}
+    HotUpdateApp: {}
+  mappings:
+    org: org
+    app: hot_update_app
+    bundle: bundle
+  analysis:
+    main: {}

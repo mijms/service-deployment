@@ -1,0 +1,2748 @@
+collect__vacation:
+  fields:
+    request_type:
+      type: string
+      list: true
+      field: request_type
+      name: request_type
+      group: main
+    vacation_type:
+      type: string
+      list: true
+      field: vacation_type
+      name: vacation_type
+      group: main
+    user:
+      type: relation
+      model: auth__account
+      field: user
+      name: user
+      group: main
+    reviewer:
+      type: relation
+      model: auth__account
+      field: reviewer
+      name: reviewer
+      group: main
+    status:
+      type: string
+      list: true
+      column:
+        type: status
+        sortable: false
+      field: status
+      name: status
+      group: main
+    start_date:
+      type: date
+      list: true
+      validates:
+        required: true
+      field: start_date
+      name: start_date
+      group: main
+    end_date:
+      type: date
+      list: true
+      validates:
+        required: true
+      field: end_date
+      name: end_date
+      group: main
+    reason:
+      type: string
+      list: true
+      field: reason
+      name: reason
+      group: main
+    note:
+      type: string
+      list: true
+      field: note
+      name: note
+      group: main
+    province:
+      type: relation
+      model: geo__province
+      field: province
+      name: province
+      group: main
+    mun:
+      type: relation
+      model: geo__municipality
+      field: mun
+      name: mun
+      group: main
+  filters:
+    - Province
+    - Mun
+  select_include:
+    - Auth
+  analysis:
+    main: {}
+collect__department:
+  fields:
+    name:
+      type: string
+      field: name
+      name: name
+      group: main
+    province:
+      type: relation
+      model: geo__province
+      field: province
+      name: province
+      group: main
+  filters:
+    - Province
+    - Mun
+  search:
+    - module
+  analysis:
+    main: {}
+collect__org:
+  fields:
+    name:
+      type: string
+      list: true
+      field: name
+      name: name
+      group: main
+  search:
+    - module
+  analysis:
+    main: {}
+collect__client:
+  fields:
+    type:
+      type: string
+      field: type
+      name: type
+      group: main
+    name:
+      type: string
+      index: true
+      list: true
+      field: name
+      name: name
+      group: main
+    phone:
+      type: string
+      index: true
+      field: phone
+      name: phone
+      group: main
+    email:
+      type: string
+      index: true
+      field: email
+      name: email
+      group: main
+    p_invoices:
+      type: inversedPrevent
+      model: collect__invoice
+      mapped: client
+      field: p_invoices
+      name: p_invoices
+      group: main
+    national_id:
+      type: string
+      field: national_id
+      name: national_id
+      group: main
+    org:
+      type: relation
+      hide: true
+      model: collect__org
+      field: org
+      name: org
+      group: main
+    province:
+      type: relation
+      model: geo__province
+      field: province
+      name: province
+      group: main
+    mun:
+      type: relation
+      model: geo__municipality
+      field: mun
+      name: mun
+      group: main
+  filters:
+    - Province
+    - Mun
+  select_include:
+    - Org
+  search:
+    - name
+    - phone
+    - email
+  analysis:
+    main: {}
+collect__contract:
+  fields:
+    name:
+      type: string
+      index: true
+      list: true
+      field: name
+      name: name
+      group: main
+    client:
+      type: relation
+      model: collect__client
+      field: client
+      name: client
+      group: main
+    user:
+      type: relation
+      model: auth__account
+      field: user
+      name: user
+      group: main
+    amount:
+      type: float
+      field: amount
+      name: amount
+      group: main
+    date:
+      type: date
+      field: date
+      name: date
+      group: main
+    start_date:
+      type: date
+      field: start_date
+      name: start_date
+      group: main
+    end_date:
+      type: date
+      field: end_date
+      name: end_date
+      group: main
+    org:
+      type: relation
+      hide: true
+      model: collect__org
+      field: org
+      name: org
+      group: main
+    province:
+      type: relation
+      model: geo__province
+      field: province
+      name: province
+      group: main
+    mun:
+      type: relation
+      model: geo__municipality
+      field: mun
+      name: mun
+      group: main
+  filters:
+    - Province
+    - Mun
+  search:
+    - name
+  analysis:
+    main:
+      amount: amount
+collect__invoice:
+  fields:
+    case:
+      type: string
+      field: case
+      name: case
+      group: main
+    category:
+      type: relation
+      model: common__category
+      hide: true
+      field: category
+      name: category
+      group: main
+    tabgh:
+      type: raw
+      field: tabgh
+      name: tabgh
+      group: main
+    efaa:
+      type: raw
+      field: efaa
+      name: efaa
+      group: main
+    eywa:
+      type: raw
+      field: eywa
+      name: eywa
+      group: main
+    payment_date:
+      index: true
+      type: date
+      field: payment_date
+      name: payment_date
+      group: main
+    action:
+      type: string
+      field: action
+      name: action
+      group: main
+    sadad_date:
+      index: true
+      type: date
+      field: sadad_date
+      name: sadad_date
+      group: main
+    status:
+      index: true
+      type: string
+      list: true
+      column:
+        type: status
+        sortable: false
+      field: status
+      name: status
+      group: main
+    search:
+      type: string
+      field: search
+      name: search
+      group: main
+    payment_status:
+      type: string
+      field: payment_status
+      name: payment_status
+      group: main
+    vals:
+      type: collection
+      field: vals
+      name: vals
+      group: main
+    naba:
+      type: raw
+      field: naba
+      name: naba
+      group: main
+    classification:
+      type: raw
+      field: classification
+      name: classification
+      group: main
+    letter:
+      type: raw
+      field: letter
+      name: letter
+      group: main
+    payment_notice:
+      type: raw
+      field: payment_notice
+      name: payment_notice
+      group: main
+    current_status:
+      index: true
+      type: string
+      field: current_status
+      name: current_status
+      group: main
+    system_status:
+      type: string
+      field: system_status
+      name: system_status
+      group: main
+    required_action:
+      type: string
+      field: required_action
+      name: required_action
+      group: main
+    warning:
+      type: raw
+      field: warning
+      name: warning
+      group: main
+    coord:
+      type: raw
+      field: coord
+      name: coord
+      group: main
+    payment_period:
+      type: string
+      field: payment_period
+      name: payment_period
+      group: main
+    invoice_age:
+      type: string
+      field: invoice_age
+      name: invoice_age
+      group: main
+    contract_number:
+      type: string
+      field: contract_number
+      name: contract_number
+      group: main
+    ref:
+      type: string
+      field: ref
+      name: ref
+      group: main
+    type:
+      index: true
+      type: string
+      field: type
+      name: type
+      group: main
+    revenue_type:
+      type: string
+      field: revenue_type
+      name: revenue_type
+      group: main
+    extra:
+      type: raw
+      field: extra
+      name: extra
+      group: main
+    force_reason:
+      type: string
+      field: force_reason
+      name: force_reason
+      group: main
+    name:
+      index: true
+      type: string
+      list: true
+      label: Invoice Number
+      field: name
+      name: name
+      group: main
+    number:
+      type: string
+      index: true
+      field: number
+      name: number
+      group: main
+    client:
+      type: relation
+      model: collect__client
+      index: true
+      list: true
+      hide: true
+      field: client
+      name: client
+      group: main
+    tax_date:
+      type: raw
+      field: tax_date
+      name: tax_date
+      group: main
+    tax:
+      type: float
+      list: true
+      no_report: true
+      field: tax
+      name: tax
+      group: main
+    elm:
+      type: float
+      list: true
+      no_report: true
+      field: elm
+      name: elm
+      group: main
+    diwan:
+      type: float
+      list: true
+      no_report: true
+      field: diwan
+      name: diwan
+      group: main
+    stamp:
+      type: float
+      list: true
+      no_report: true
+      field: stamp
+      name: stamp
+      group: main
+    rev_amount:
+      type: float
+      list: true
+      label: Items
+      no_report: true
+      field: rev_amount
+      name: rev_amount
+      group: main
+    total:
+      type: float
+      list: true
+      field: total
+      name: total
+      group: main
+    extra_tax:
+      type: float
+      no_report: true
+      field: extra_tax
+      name: extra_tax
+      group: main
+    eskan:
+      type: float
+      list: true
+      no_report: true
+      field: eskan
+      name: eskan
+      group: main
+    ewya:
+      type: raw
+      field: ewya
+      name: ewya
+      group: main
+    building:
+      type: raw
+      field: building
+      name: building
+      group: main
+    drilling:
+      type: raw
+      field: drilling
+      name: drilling
+      group: main
+    invest:
+      type: raw
+      field: invest
+      name: invest
+      group: main
+    amount:
+      type: float
+      list: true
+      field: amount
+      name: amount
+      group: main
+    net_value:
+      type: float
+      list: true
+      field: net_value
+      name: net_value
+      group: main
+    date:
+      index: true
+      type: date
+      list: true
+      field: date
+      name: date
+      group: main
+    contract:
+      type: relation
+      model: collect__contract
+      hide: true
+      field: contract
+      name: contract
+      group: main
+    sheet:
+      type: string
+      field: sheet
+      name: sheet
+      group: main
+    license:
+      type: relation
+      model: collect__license
+      hide: true
+      field: license
+      name: license
+      group: main
+    visit:
+      type: raw
+      field: visit
+      name: visit
+      group: main
+    call:
+      type: raw
+      field: call
+      name: call
+      group: main
+    system_type:
+      type: string
+      field: system_type
+      name: system_type
+      group: main
+    province:
+      index: true
+      type: relation
+      model: geo__province
+      field: province
+      name: province
+      group: main
+    mun:
+      index: true
+      list: true
+      show: mun.name
+      type: relation
+      model: geo__municipality
+      field: mun
+      name: mun
+      group: main
+    loc:
+      type: geo
+      geo: Point
+      field: loc
+      name: loc
+      group: main
+  text_search_index: search
+  aggregation:
+    exports:
+      client:
+        agg: lookup
+        field: client
+      license:
+        agg: lookup
+        field: license
+      mun:
+        agg: lookup
+        field: mun
+  filters:
+    - Province
+    - Mun
+  search:
+    - number
+    - name
+    - client.name
+  geo:
+    - loc
+  analysis:
+    main:
+      total: total
+      amount: amount
+      net_value: net_value
+collect__invoice_detail:
+  fields:
+    payment_date:
+      type: date
+      index: true
+      field: payment_date
+      name: payment_date
+      group: main
+    force_reason:
+      type: string
+      field: force_reason
+      name: force_reason
+      group: main
+    dup:
+      type: collection
+      field: dup
+      name: dup
+      group: main
+    action:
+      type: string
+      field: action
+      name: action
+      group: main
+    sadad_date:
+      type: date
+      index: true
+      field: sadad_date
+      name: sadad_date
+      group: main
+    category:
+      type: relation
+      model: common__category
+      hide: true
+      field: category
+      name: category
+      group: main
+    extra:
+      type: raw
+      field: extra
+      name: extra
+      group: main
+    status:
+      index: true
+      type: string
+      list: true
+      column:
+        type: status
+        sortable: false
+      field: status
+      name: status
+      group: main
+    code_type:
+      type: string
+      field: code_type
+      name: code_type
+      group: main
+    note:
+      type: string
+      field: note
+      name: note
+      group: main
+    ref:
+      type: string
+      field: ref
+      name: ref
+      group: main
+    sheet:
+      type: string
+      field: sheet
+      name: sheet
+      group: main
+    type:
+      index: true
+      type: string
+      field: type
+      name: type
+      group: main
+    sub_type:
+      index: true
+      type: string
+      field: sub_type
+      name: sub_type
+      group: main
+    invoice:
+      type: relation
+      model: collect__invoice
+      field: invoice
+      name: invoice
+      group: main
+    name:
+      type: string
+      index: true
+      list: true
+      label: Invoice Number
+      field: name
+      name: name
+      group: main
+    number:
+      type: string
+      index: true
+      field: number
+      name: number
+      group: main
+    client:
+      type: relation
+      model: collect__client
+      index: true
+      list: true
+      field: client
+      name: client
+      group: main
+    revenue_type:
+      type: string
+      index: true
+      field: revenue_type
+      name: revenue_type
+      group: main
+    revenue:
+      index: true
+      type: relation
+      model: collect__revenue
+      field: revenue
+      name: revenue
+      group: main
+    amount:
+      type: float
+      list: true
+      field: amount
+      name: amount
+      group: main
+    date:
+      type: date
+      index: true
+      list: true
+      field: date
+      name: date
+      group: main
+    org:
+      type: relation
+      hide: true
+      model: collect__org
+      field: org
+      name: org
+      group: main
+    license:
+      type: relation
+      model: collect__license
+      field: license
+      name: license
+      group: main
+    province:
+      type: relation
+      index: true
+      model: geo__province
+      field: province
+      name: province
+      group: main
+    mun:
+      index: true
+      list: true
+      show: mun.name
+      type: relation
+      model: geo__municipality
+      field: mun
+      name: mun
+      group: main
+    loc:
+      type: geo
+      geo: Point
+      field: loc
+      name: loc
+      group: main
+  aggregation:
+    exports:
+      revenue:
+        agg: lookup
+        field: revenue
+      client:
+        agg: lookup
+        field: client
+      license:
+        agg: lookup
+        field: license
+      invoice:
+        agg: lookup
+        field: license
+      mun:
+        agg: lookup
+        field: mun
+  filters:
+    - Province
+    - Mun
+  search:
+    - number
+    - name
+    - client.name
+  geo:
+    - loc
+  analysis:
+    main:
+      amount: amount
+collect__violation:
+  fields:
+    sheet:
+      type: string
+      field: sheet
+      name: sheet
+      group: main
+    type:
+      type: string
+      field: type
+      name: type
+      group: main
+    control_type:
+      type: string
+      field: control_type
+      name: control_type
+      group: main
+    number:
+      list: true
+      type: string
+      field: number
+      name: number
+      group: main
+    identifier:
+      list: true
+      type: string
+      field: identifier
+      name: identifier
+      group: main
+    invoice:
+      type: relation
+      model: collect__invoice
+      show: invoice.name
+      list: true
+      field: invoice
+      name: invoice
+      group: main
+    license:
+      type: relation
+      model: collect__license
+      list: true
+      show: license.name
+      field: license
+      name: license
+      group: main
+    amount:
+      type: float
+      list: true
+      field: amount
+      name: amount
+      group: main
+    start_date:
+      type: date
+      field: start_date
+      name: start_date
+      group: main
+    end_date:
+      type: date
+      field: end_date
+      name: end_date
+      group: main
+    desc:
+      type: string
+      field: desc
+      name: desc
+      group: main
+    ref:
+      type: string
+      field: ref
+      name: ref
+      group: main
+    efaa:
+      type: string
+      list: true
+      field: efaa
+      name: efaa
+      group: main
+    data:
+      type: raw
+      field: data
+      name: data
+      group: main
+    extra:
+      type: raw
+      field: extra
+      name: extra
+      group: main
+  filters:
+    - Province
+    - Mun
+  search:
+    - name
+    - client.name
+    - invoice.name
+  analysis:
+    main:
+      amount: amount
+collect__watch:
+  fields:
+    name:
+      type: string
+      field: name
+      name: name
+      group: main
+    type:
+      type: string
+      field: type
+      name: type
+      group: main
+    ref:
+      type: string
+      field: ref
+      name: ref
+      group: main
+    status:
+      type: string
+      field: status
+      name: status
+      group: main
+    invoice:
+      type: relation
+      model: collect__invoice
+      field: invoice
+      name: invoice
+      group: main
+collect__objection:
+  fields:
+    number:
+      type: string
+      list: true
+      field: number
+      name: number
+      group: main
+    ref:
+      type: string
+      field: ref
+      name: ref
+      group: main
+    status:
+      type: string
+      list: true
+      field: status
+      name: status
+      group: main
+    license:
+      type: relation
+      model: collect__license
+      list: true
+      field: license
+      name: license
+      group: main
+    client:
+      type: relation
+      model: collect__client
+      list: true
+      field: client
+      name: client
+      group: main
+    invoice:
+      type: relation
+      model: collect__invoice
+      list: true
+      field: invoice
+      name: invoice
+      group: main
+    violation:
+      type: relation
+      model: collect__violation
+      list: true
+      show: violation.number
+      field: violation
+      name: violation
+      group: main
+    province:
+      type: relation
+      model: geo__province
+      field: province
+      name: province
+      group: main
+    mun:
+      type: relation
+      model: geo__municipality
+      field: mun
+      name: mun
+      group: main
+  filters:
+    - Province
+    - Mun
+  search:
+    - name
+    - client.name
+    - invoice.name
+  analysis:
+    main: {}
+collect__invalid_invoice:
+  fields:
+    sheet:
+      type: relation
+      model: collect__upload_sheet
+      field: sheet
+      name: sheet
+      group: main
+    type:
+      type: string
+      field: type
+      name: type
+      group: main
+    case:
+      type: string
+      field: case
+      name: case
+      group: main
+    ref:
+      type: string
+      field: ref
+      name: ref
+      group: main
+    msg:
+      type: string
+      field: msg
+      name: msg
+      group: main
+    data:
+      type: raw
+      field: data
+      name: data
+      group: main
+collect__license_activity:
+  fields:
+    name:
+      type: string
+      index: true
+      list: true
+      field: name
+      name: name
+      group: main
+    code:
+      type: string
+      list: true
+      field: code
+      name: code
+      group: main
+  search:
+    - name
+  analysis:
+    main: {}
+collect__license:
+  fields:
+    status:
+      type: string
+      list: true
+      column:
+        type: status
+        sortable: false
+      field: status
+      name: status
+      group: main
+    activity:
+      type: relation
+      model: collect__license_activity
+      field: activity
+      name: activity
+      group: main
+    type:
+      type: string
+      field: type
+      name: type
+      group: main
+    number:
+      type: string
+      index: true
+      list: true
+      label: License Number
+      field: number
+      name: number
+      group: main
+    name:
+      type: string
+      index: true
+      list: true
+      field: name
+      name: name
+      group: main
+    register:
+      type: string
+      list: true
+      field: register
+      name: register
+      group: main
+    certificate:
+      type: string
+      list: true
+      field: certificate
+      name: certificate
+      group: main
+    client:
+      type: relation
+      model: collect__client
+      index: true
+      field: client
+      name: client
+      group: main
+    user:
+      type: relation
+      model: auth__account
+      field: user
+      name: user
+      group: main
+    start_date:
+      type: date
+      field: start_date
+      name: start_date
+      group: main
+    end_date:
+      type: date
+      field: end_date
+      name: end_date
+      group: main
+    contract:
+      type: relation
+      model: collect__contract
+      field: contract
+      name: contract
+      group: main
+    sheet:
+      type: string
+      field: sheet
+      name: sheet
+      group: main
+    extra:
+      type: raw
+      field: extra
+      name: extra
+      group: main
+    org:
+      type: relation
+      hide: true
+      model: collect__org
+      field: org
+      name: org
+      group: main
+    province:
+      type: relation
+      model: geo__province
+      field: province
+      name: province
+      group: main
+    mun:
+      type: relation
+      model: geo__municipality
+      field: mun
+      name: mun
+      group: main
+    street:
+      type: relation
+      model: geo__street
+      field: street
+      name: street
+      group: main
+    district:
+      type: relation
+      model: geo__district
+      field: district
+      name: district
+      group: main
+    loc:
+      type: geo
+      geo: Point
+      field: loc
+      name: loc
+      group: main
+  geo:
+    - loc
+  filters:
+    - Province
+    - Mun
+  search:
+    - name
+    - number
+    - client.name
+  analysis:
+    main: {}
+collect__certificate:
+  fields:
+    license:
+      type: relation
+      model: collect__license
+      list: true
+      show: license.name
+      field: license
+      name: license
+      group: main
+    client:
+      type: relation
+      model: collect__client
+      list: true
+      show: client.name
+      field: client
+      name: client
+      group: main
+    name:
+      type: string
+      list: true
+      column:
+        header: Certificate Number
+      field: name
+      name: name
+      group: main
+    type:
+      type: string
+      field: type
+      name: type
+      group: main
+    sub_type:
+      type: string
+      field: sub_type
+      name: sub_type
+      group: main
+    province:
+      type: relation
+      model: geo__province
+      field: province
+      name: province
+      group: main
+    mun:
+      type: relation
+      model: geo__municipality
+      field: mun
+      name: mun
+      group: main
+    extra:
+      type: raw
+      field: extra
+      name: extra
+      group: main
+  geo:
+    - loc
+  filters:
+    - Province
+    - Mun
+  search:
+    - name
+    - licnese.number
+    - client.name
+  analysis:
+    main: {}
+collect__payment:
+  fields:
+    type:
+      type: string
+      field: type
+      name: type
+      group: main
+    sub_type:
+      type: string
+      field: sub_type
+      name: sub_type
+      group: main
+    note:
+      type: string
+      field: note
+      name: note
+      group: main
+    status:
+      type: string
+      list: true
+      column:
+        type: status
+        sortable: false
+      field: status
+      name: status
+      group: main
+    name:
+      type: string
+      index: true
+      list: true
+      label: Invoice Number
+      field: name
+      name: name
+      group: main
+    client:
+      type: relation
+      model: collect__client
+      field: client
+      name: client
+      group: main
+    user:
+      type: relation
+      model: auth__account
+      field: user
+      name: user
+      group: main
+    amount:
+      type: float
+      list: true
+      field: amount
+      name: amount
+      group: main
+    date:
+      type: date
+      filter: true
+      list: true
+      field: date
+      name: date
+      group: main
+    payment_date:
+      type: date
+      field: payment_date
+      name: payment_date
+      group: main
+    sadad_date:
+      type: date
+      field: sadad_date
+      name: sadad_date
+      group: main
+    contract:
+      type: relation
+      model: collect__contract
+      field: contract
+      name: contract
+      group: main
+    revenue:
+      type: relation
+      model: collect__revenue
+      field: revenue
+      name: revenue
+      group: main
+    invoice:
+      type: relation
+      list: true
+      show: invoice.name
+      model: collect__invoice
+      field: invoice
+      name: invoice
+      group: main
+    license:
+      type: relation
+      model: collect__license
+      field: license
+      name: license
+      group: main
+    org:
+      type: relation
+      hide: true
+      model: collect__org
+      field: org
+      name: org
+      group: main
+    province:
+      type: relation
+      model: geo__province
+      field: province
+      name: province
+      group: main
+    mun:
+      type: relation
+      list: true
+      filter: true
+      model: geo__municipality
+      field: mun
+      name: mun
+      group: main
+  filters:
+    - Province
+    - Mun
+  search:
+    - name
+  analysis:
+    main:
+      amount: amount
+collect__task_assign:
+  fields:
+    sheet:
+      type: string
+      field: sheet
+      name: sheet
+      group: main
+    category:
+      type: relation
+      model: common__category
+      params:
+        type: collect_category
+      field: category
+      name: category
+      group: main
+    res_status:
+      type: relation
+      model: common__category
+      params:
+        type: collect_res_status
+      field: res_status
+      name: res_status
+      group: main
+    user:
+      type: relation
+      model: auth__account
+      field: user
+      name: user
+      group: main
+    sub_type:
+      type: string
+      field: sub_type
+      name: sub_type
+      group: main
+    status:
+      type: string
+      list: true
+      column:
+        type: status
+        sortable: false
+      field: status
+      name: status
+      group: main
+    action_date:
+      type: date
+      field: action_date
+      name: action_date
+      group: main
+    note:
+      type: string
+      field: note
+      name: note
+      group: main
+    images:
+      type: hasMany
+      model: files__file
+      field: images
+      name: images
+      group: main
+    certificate:
+      type: relation
+      model: collect__certificate
+      list: true
+      show: certificate.name
+      field: certificate
+      name: certificate
+      group: main
+    extra:
+      type: raw
+      field: extra
+      name: extra
+      group: main
+    date:
+      type: date
+      field: date
+      name: date
+      group: main
+    district:
+      type: relation
+      model: geo__district
+      field: district
+      name: district
+      group: main
+    street:
+      type: relation
+      model: geo__street
+      field: street
+      name: street
+      group: main
+    phone:
+      type: string
+      field: phone
+      name: phone
+      group: main
+    reviewer_note:
+      type: string
+      field: reviewer_note
+      name: reviewer_note
+      group: main
+    reviewer:
+      type: relation
+      model: auth__account
+      field: reviewer
+      name: reviewer
+      group: main
+    creator:
+      type: relation
+      model: auth__account
+      field: creator
+      name: creator
+      group: main
+    task:
+      type: relation
+      model: collect__task
+      field: task
+      name: task
+      group: main
+    type:
+      type: string
+      field: type
+      name: type
+      group: main
+    task_sub_type:
+      type: string
+      field: task_sub_type
+      name: task_sub_type
+      group: main
+    invoice:
+      type: relation
+      front:
+        data_selected: true
+      model: collect__invoice
+      index: true
+      field: invoice
+      name: invoice
+      group: main
+    client:
+      type: relation
+      front:
+        data_selected: true
+      model: collect__client
+      index: true
+      field: client
+      name: client
+      group: main
+    mun:
+      type: relation
+      model: geo__municipality
+      field: mun
+      name: mun
+      group: main
+    license:
+      type: relation
+      list: true
+      model: collect__license
+      index: true
+      field: license
+      name: license
+      group: main
+    province:
+      type: relation
+      model: geo__province
+      field: province
+      name: province
+      group: main
+    loc:
+      type: geo
+      geo: Point
+      field: loc
+      name: loc
+      group: main
+    info:
+      type: raw
+      field: info
+      name: info
+      group: main
+  geo:
+    - loc
+  filters:
+    - Province
+    - Mun
+    - AssignNotManager
+  search:
+    - invoice.name
+    - client.name
+    - client.phone
+    - license.number
+  analysis:
+    main:
+      amount:
+        field: $invoice.amount
+        fun: sum
+  aggregation:
+    exports:
+      user:
+        agg: lookup
+        field: user
+      reviewer:
+        agg: lookup
+        field: reviewer
+      invoice:
+        agg: lookup
+        field: invoice
+      res_status:
+        agg: lookup
+        field: res_status
+      client:
+        agg: lookup
+        field: client
+      license:
+        agg: lookup
+        field: license
+      certificate:
+        agg: lookup
+        field: certificate
+      mun:
+        agg: lookup
+        field: mun
+    analysis:
+      invoice:
+        agg: lookup
+        field: invoice
+collect__task:
+  fields:
+    type:
+      type: string
+      index: true
+      field: type
+      name: type
+      group: main
+    sub_type:
+      index: true
+      type: string
+      field: sub_type
+      name: sub_type
+      group: main
+    status:
+      index: true
+      type: string
+      list: true
+      column:
+        type: status
+        sortable: false
+      field: status
+      name: status
+      group: main
+    sheet:
+      type: string
+      field: sheet
+      name: sheet
+      group: main
+    date:
+      type: date
+      index: true
+      list: true
+      field: date
+      name: date
+      group: main
+    client:
+      type: relation
+      model: collect__client
+      field: client
+      name: client
+      group: main
+    desc:
+      type: string
+      field: desc
+      name: desc
+      group: main
+    target_date:
+      type: date
+      field: target_date
+      name: target_date
+      group: main
+    certificate:
+      type: relation
+      model: collect__certificate
+      field: certificate
+      name: certificate
+      group: main
+    invoice:
+      type: relation
+      list: true
+      model: collect__invoice
+      index: true
+      field: invoice
+      name: invoice
+      group: main
+    district:
+      type: relation
+      model: geo__district
+      field: district
+      name: district
+      group: main
+    street:
+      type: relation
+      model: geo__street
+      field: street
+      name: street
+      group: main
+    phone:
+      type: string
+      field: phone
+      name: phone
+      group: main
+    contract:
+      type: relation
+      model: collect__contract
+      index: true
+      field: contract
+      name: contract
+      group: main
+    note:
+      type: string
+      field: note
+      name: note
+      group: main
+    last_note:
+      type: string
+      field: last_note
+      name: last_note
+      group: main
+    last_action:
+      type: date
+      field: last_action
+      name: last_action
+      group: main
+    end_date:
+      type: date
+      index: true
+      field: end_date
+      name: end_date
+      group: main
+    mun:
+      index: true
+      type: relation
+      model: geo__municipality
+      field: mun
+      name: mun
+      group: main
+    license:
+      type: relation
+      list: true
+      model: collect__license
+      index: true
+      field: license
+      name: license
+      group: main
+    province:
+      index: true
+      type: relation
+      model: geo__province
+      field: province
+      name: province
+      group: main
+  filters:
+    - Province
+    - Mun
+  search:
+    - invoice.name
+    - license.number
+    - contract.name
+  analysis:
+    main: {}
+collect__task_action:
+  fields:
+    task:
+      type: relation
+      model: collect__task
+      colName: type
+      field: task
+      name: task
+      group: main
+    date:
+      type: date
+      field: date
+      name: date
+      group: main
+    user:
+      type: relation
+      model: auth__account
+      field: user
+      name: user
+      group: main
+    changes:
+      type: raw
+      field: changes
+      name: changes
+      group: main
+collect__visit:
+  fields:
+    type:
+      type: string
+      field: type
+      name: type
+      group: main
+    status:
+      type: string
+      list: true
+      column:
+        type: status
+        sortable: false
+      field: status
+      name: status
+      group: main
+    date:
+      type: date
+      list: true
+      field: date
+      name: date
+      group: main
+    client:
+      type: relation
+      model: collect__client
+      list: true
+      field: client
+      name: client
+      group: main
+    task:
+      type: relation
+      model: collect__task
+      colName: type
+      field: task
+      name: task
+      group: main
+    note:
+      type: string
+      field: note
+      name: note
+      group: main
+    user:
+      type: relation
+      model: auth__account
+      list: true
+      field: user
+      name: user
+      group: main
+    start_date:
+      type: date
+      field: start_date
+      name: start_date
+      group: main
+    end_date:
+      type: date
+      field: end_date
+      name: end_date
+      group: main
+    approval_date:
+      type: date
+      field: approval_date
+      name: approval_date
+      group: main
+    ref:
+      type: string
+      field: ref
+      name: ref
+      group: main
+    approval_ref:
+      type: string
+      field: approval_ref
+      name: approval_ref
+      group: main
+    invoice:
+      type: relation
+      model: collect__invoice
+      list: true
+      index: true
+      field: invoice
+      name: invoice
+      group: main
+    contract:
+      type: relation
+      model: collect__contract
+      index: true
+      field: contract
+      name: contract
+      group: main
+    license:
+      type: relation
+      model: collect__license
+      list: true
+      index: true
+      field: license
+      name: license
+      group: main
+    province:
+      type: relation
+      model: geo__province
+      field: province
+      name: province
+      group: main
+    mun:
+      type: relation
+      model: geo__municipality
+      field: mun
+      name: mun
+      group: main
+  filters:
+    - Province
+    - Mun
+  search:
+    - invoice.name
+    - license.number
+    - contract.name
+  analysis:
+    main: {}
+collect__survey:
+  fields:
+    type:
+      type: string
+      field: type
+      name: type
+      group: main
+    status:
+      type: string
+      list: true
+      column:
+        type: status
+        sortable: false
+      field: status
+      name: status
+      group: main
+    date:
+      type: date
+      list: true
+      field: date
+      name: date
+      group: main
+    client:
+      type: relation
+      model: collect__client
+      field: client
+      name: client
+      group: main
+    images:
+      type: hasMany
+      model: files__file
+      list: true
+      field: images
+      name: images
+      group: main
+    task:
+      type: relation
+      model: collect__task
+      colName: type
+      field: task
+      name: task
+      group: main
+    note:
+      type: string
+      field: note
+      name: note
+      group: main
+    user:
+      type: relation
+      model: auth__account
+      list: true
+      field: user
+      name: user
+      group: main
+    invoice:
+      type: relation
+      model: collect__invoice
+      index: true
+      field: invoice
+      name: invoice
+      group: main
+    contract:
+      type: relation
+      model: collect__contract
+      index: true
+      field: contract
+      name: contract
+      group: main
+    license:
+      type: relation
+      model: collect__license
+      list: true
+      index: true
+      field: license
+      name: license
+      group: main
+    province:
+      type: relation
+      model: geo__province
+      field: province
+      name: province
+      group: main
+    mun:
+      type: relation
+      model: geo__municipality
+      field: mun
+      name: mun
+      group: main
+  filters:
+    - Province
+    - Mun
+  search:
+    - invoice.name
+    - license.number
+    - contract.name
+  analysis:
+    main: {}
+collect__call:
+  fields:
+    type:
+      type: string
+      field: type
+      name: type
+      group: main
+    status:
+      type: string
+      list: true
+      column:
+        type: status
+        sortable: false
+      field: status
+      name: status
+      group: main
+    date:
+      type: date
+      field: date
+      name: date
+      group: main
+    client:
+      type: relation
+      model: collect__client
+      field: client
+      name: client
+      group: main
+    user:
+      type: relation
+      model: auth__account
+      field: user
+      name: user
+      group: main
+    invoice:
+      type: relation
+      model: collect__invoice
+      field: invoice
+      name: invoice
+      group: main
+    contract:
+      type: relation
+      model: collect__contract
+      field: contract
+      name: contract
+      group: main
+    license:
+      type: relation
+      model: collect__license
+      field: license
+      name: license
+      group: main
+    province:
+      type: relation
+      model: geo__province
+      field: province
+      name: province
+      group: main
+    mun:
+      type: relation
+      model: geo__municipality
+      field: mun
+      name: mun
+      group: main
+  filters:
+    - Province
+    - Mun
+  analysis:
+    main: {}
+collect__revenue_type:
+  fields:
+    type:
+      list: true
+      type: string
+      field: type
+      name: type
+      group: main
+    name:
+      list: true
+      index: true
+      type: string
+      field: name
+      name: name
+      group: main
+    targets:
+      type: inversedPrevent
+      model: collect__target
+      mapped: type
+      field: targets
+      name: targets
+      group: main
+  search:
+    - name
+  analysis:
+    main: {}
+collect__revenue_sub_type:
+  fields:
+    main:
+      list: true
+      type: string
+      field: main
+      name: main
+      group: main
+    name:
+      list: true
+      index: true
+      type: string
+      field: name
+      name: name
+      group: main
+    mun:
+      type: relation
+      model: geo__municipality
+      field: mun
+      name: mun
+      group: main
+    province:
+      type: relation
+      model: geo__province
+      field: province
+      name: province
+      group: main
+  filters:
+    - Province
+  search:
+    - name
+  analysis:
+    main: {}
+collect__revenue:
+  fields:
+    type:
+      type: string
+      field: type
+      name: type
+      group: main
+    code_type:
+      type: string
+      field: code_type
+      name: code_type
+      group: main
+    revenue_type:
+      type: relation
+      filter: true
+      list: true
+      model: collect__revenue_type
+      field: revenue_type
+      name: revenue_type
+      group: main
+    code:
+      type: string
+      list: true
+      field: code
+      name: code
+      group: main
+    name:
+      list: true
+      index: true
+      type: string
+      field: name
+      name: name
+      group: main
+    main_type:
+      type: string
+      front:
+        type: Select
+        model: RevenueSubType
+        request: getSelectCollectRevenueSubTypeQuery
+      field: main_type
+      name: main_type
+      group: main
+    main_name:
+      type: string
+      field: main_name
+      name: main_name
+      group: main
+    sub_name:
+      type: string
+      field: sub_name
+      name: sub_name
+      group: main
+    classification:
+      type: relation
+      model: collect__classification
+      field: classification
+      name: classification
+      group: main
+    revenue_classification:
+      type: relation
+      filter: true
+      list: true
+      model: collect__classification
+      field: revenue_classification
+      name: revenue_classification
+      group: main
+    sub_revenue_classification:
+      type: relation
+      filter: true
+      list: true
+      model: collect__classification
+      field: sub_revenue_classification
+      name: sub_revenue_classification
+      group: main
+    targets:
+      type: inversedPrevent
+      model: collect__target
+      mapped: revenue
+      field: targets
+      name: targets
+      group: main
+    province:
+      type: relation
+      model: geo__province
+      field: province
+      name: province
+      group: main
+  filters:
+    - Province
+  search:
+    - name
+    - code
+  analysis:
+    main: {}
+collect__financial_year:
+  fields:
+    name:
+      type: string
+      field: name
+      name: name
+      group: main
+collect__classification:
+  fields:
+    type:
+      list: true
+      type: string
+      field: type
+      name: type
+      group: main
+    name:
+      list: true
+      index: true
+      type: string
+      field: name
+      name: name
+      group: main
+    targets:
+      type: inversedPrevent
+      model: collect__target
+      mapped: classification
+      field: targets
+      name: targets
+      group: main
+    revenues:
+      type: inversedPrevent
+      model: collect__revenue
+      mapped: revenue_classification
+      field: revenues
+      name: revenues
+      group: main
+  search:
+    - name
+  analysis:
+    main: {}
+collect__target:
+  fields:
+    sheet:
+      type: string
+      field: sheet
+      name: sheet
+      group: main
+    year:
+      list: true
+      type: string
+      validates:
+        year: true
+      field: year
+      name: year
+      group: main
+    type:
+      type: string
+      index: true
+      field: type
+      name: type
+      group: main
+    sub_type:
+      type: string
+      index: true
+      field: sub_type
+      name: sub_type
+      group: main
+    r_type:
+      type: string
+      field: r_type
+      name: r_type
+      group: main
+    revenue_type:
+      type: relation
+      filter: true
+      index: true
+      list: true
+      model: collect__revenue_type
+      front:
+        data_selected: true
+      field: revenue_type
+      name: revenue_type
+      group: main
+    mun:
+      type: relation
+      model: geo__municipality
+      index: true
+      front:
+        data_selected: true
+      field: mun
+      name: mun
+      group: main
+    province:
+      type: relation
+      index: true
+      model: geo__province
+      field: province
+      name: province
+      group: main
+    revenue:
+      type: relation
+      filter: true
+      list: true
+      front:
+        data_selected: true
+      model: collect__revenue
+      index: true
+      field: revenue
+      name: revenue
+      group: main
+    classification:
+      type: relation
+      filter: true
+      list: true
+      model: collect__classification
+      field: classification
+      name: classification
+      group: main
+    revenue_classification:
+      type: relation
+      filter: true
+      list: true
+      model: collect__classification
+      field: revenue_classification
+      name: revenue_classification
+      group: main
+    sub_revenue_classification:
+      type: relation
+      filter: true
+      list: true
+      model: collect__classification
+      field: sub_revenue_classification
+      name: sub_revenue_classification
+      group: main
+    name:
+      type: string
+      field: name
+      name: name
+      group: main
+    value:
+      list: true
+      type: float
+      field: value
+      name: value
+      group: main
+  filters:
+    - Province
+    - Mun
+  search:
+    - revenue.name
+  analysis:
+    main:
+      value: value
+collect__monthly_target:
+  fields:
+    sheet:
+      type: string
+      field: sheet
+      name: sheet
+      group: main
+    province:
+      index: true
+      type: relation
+      model: geo__province
+      field: province
+      name: province
+      group: main
+    year:
+      list: true
+      type: string
+      validates:
+        year: true
+      field: year
+      name: year
+      group: main
+    type:
+      type: string
+      index: true
+      field: type
+      name: type
+      group: main
+    sub_type:
+      type: string
+      index: true
+      field: sub_type
+      name: sub_type
+      group: main
+    mun:
+      type: relation
+      index: true
+      model: geo__municipality
+      field: mun
+      name: mun
+      group: main
+    r_type:
+      type: string
+      field: r_type
+      name: r_type
+      group: main
+    revenue_type:
+      type: relation
+      index: true
+      filter: true
+      list: true
+      model: collect__revenue_type
+      field: revenue_type
+      name: revenue_type
+      group: main
+    revenue:
+      type: relation
+      filter: true
+      index: true
+      list: true
+      model: collect__revenue
+      field: revenue
+      name: revenue
+      group: main
+    classification:
+      type: relation
+      filter: true
+      list: true
+      model: collect__classification
+      field: classification
+      name: classification
+      group: main
+    revenue_classification:
+      type: relation
+      filter: true
+      list: true
+      model: collect__classification
+      field: revenue_classification
+      name: revenue_classification
+      group: main
+    sub_revenue_classification:
+      type: relation
+      filter: true
+      list: true
+      model: collect__classification
+      field: sub_revenue_classification
+      name: sub_revenue_classification
+      group: main
+    name:
+      type: string
+      field: name
+      name: name
+      group: main
+    from_date:
+      index: true
+      type: date
+      field: from_date
+      name: from_date
+      group: main
+    to_date:
+      type: date
+      index: true
+      field: to_date
+      name: to_date
+      group: main
+    value:
+      list: true
+      type: float
+      field: value
+      name: value
+      group: main
+  filters:
+    - Province
+    - Mun
+  search:
+    - revenue.name
+  analysis:
+    main:
+      value: value
+collect__tahsil:
+  fields:
+    type:
+      index: true
+      type: string
+      field: type
+      name: type
+      group: main
+    sub_type:
+      index: true
+      type: string
+      field: sub_type
+      name: sub_type
+      group: main
+    from_date:
+      index: true
+      type: date
+      list: true
+      field: from_date
+      name: from_date
+      group: main
+    to_date:
+      type: date
+      index: true
+      list: true
+      field: to_date
+      name: to_date
+      group: main
+    revenue:
+      type: relation
+      index: true
+      model: collect__revenue
+      list: true
+      field: revenue
+      name: revenue
+      group: main
+    revenue_type:
+      index: true
+      type: relation
+      model: collect__revenue_type
+      list: true
+      field: revenue_type
+      name: revenue_type
+      group: main
+    mun:
+      index: true
+      type: relation
+      model: geo__municipality
+      field: mun
+      name: mun
+      group: main
+    province:
+      index: true
+      type: relation
+      model: geo__province
+      field: province
+      name: province
+      group: main
+    value:
+      type: float
+      list: true
+      field: value
+      name: value
+      group: main
+  filters:
+    - Province
+    - Mun
+  analysis:
+    main:
+      value: value
+collect__setting:
+  fields:
+    name:
+      type: string
+      field: name
+      name: name
+      group: main
+    setting:
+      type: raw
+      field: setting
+      name: setting
+      group: main
+    key:
+      type: string
+      field: key
+      name: key
+      group: main
+collect__upload_sheet:
+  fields:
+    path:
+      type: string
+      field: path
+      name: path
+      group: main
+    upload_type:
+      type: string
+      index: true
+      list: true
+      field: upload_type
+      name: upload_type
+      group: main
+    invalid:
+      type: int
+      list: true
+      field: invalid
+      name: invalid
+      group: main
+    invalid_mun:
+      type: int
+      list: true
+      field: invalid_mun
+      name: invalid_mun
+      group: main
+    duplication:
+      type: int
+      list: true
+      field: duplication
+      name: duplication
+      group: main
+    duplication_details:
+      type: int
+      list: true
+      field: duplication_details
+      name: duplication_details
+      group: main
+    no_of_raw:
+      type: int
+      no_report: true
+      field: no_of_raw
+      name: no_of_raw
+      group: main
+    name:
+      type: string
+      index: true
+      list: true
+      field: name
+      name: name
+      group: main
+    progress:
+      type: float
+      front:
+        min: 0
+        max: 100
+      list: true
+      field: progress
+      name: progress
+      group: main
+    status:
+      type: string
+      list: true
+      column:
+        type: status
+        sortable: false
+      field: status
+      name: status
+      group: main
+    time:
+      type: float
+      no_report: true
+      hide: true
+      field: time
+      name: time
+      group: main
+    details:
+      type: raw
+      field: details
+      name: details
+      group: main
+    res:
+      type: raw
+      field: res
+      name: res
+      group: main
+    date:
+      type: date
+      list: true
+      field: date
+      name: date
+      group: main
+    user:
+      list: true
+      index: true
+      show: user.name
+      type: relation
+      model: auth__account
+      field: user
+      name: user
+      group: main
+    setting:
+      type: raw
+      field: setting
+      name: setting
+      group: main
+    province:
+      type: relation
+      model: geo__province
+      field: province
+      name: province
+      group: main
+  filters:
+    - CurrentUser
+    - Province
+  search:
+    - name
+    - upload_type
+    - user.name
+  order_by:
+    date: desc
+  analysis:
+    main:
+      invalid: invalid
+      invalid_mun: invalid_mun
+      duplication: duplication
+      duplication_details: duplication_details
+      progress: progress
+collect__support:
+  fields:
+    province:
+      type: relation
+      model: geo__province
+      field: province
+      name: province
+      group: main
+    mun:
+      type: relation
+      model: geo__municipality
+      field: mun
+      name: mun
+      group: main
+    email:
+      type: string
+      list: true
+      field: email
+      name: email
+      group: main
+    phone:
+      list: true
+      type: float
+      validates:
+        phone: true
+      field: phone
+      name: phone
+      group: main
+    details:
+      list: true
+      type: string
+      field: details
+      name: details
+      group: main
+    app:
+      type: relation
+      filter: true
+      list: true
+      show: app.name
+      model: apps__app
+      options:
+        - pid: logistic_app
+          name: Logistic App
+        - pid: logistic_driver
+          name: Logistic Driver
+      field: app
+      name: app
+      group: main
+  filters:
+    - Province
+    - Mun
+  analysis:
+    main:
+      phone: phone

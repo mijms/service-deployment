@@ -1,15 +1,15 @@
 version: '3.8'
 services:
-  go-app:
+  go-staging:
     image: alpine:3.20
-    container_name: go-app
+    container_name: go-staging
     working_dir: /app
     restart: ${RESTART_POLICY}
     env_file:
       - .env.prod
     environment:
       - APP_ROOT=/app
-      - APP_NAME=analysis
+      - APP_NAME=staging
       - TZ
       - SERVER_PORT
       - MONGODB_URL
@@ -21,9 +21,9 @@ services:
     ports:
       - ${SERVER_PORT}:${SERVER_PORT}
     volumes:
-      - ../build/analysis:/app/server
+      - ../build/staging:/app/server
       - ../templates:/app/templates
-      - ../.env.prod:/app/.env
+      - ../env.prod:/app/.env
       - ../go.mod:/app/go.mod
       - ../configs:/app/configs
     command: ./server

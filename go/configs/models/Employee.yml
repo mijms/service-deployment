@@ -1,0 +1,1100 @@
+employee__profile:
+  fields:
+    type:
+      type: string
+      field: type
+      name: type
+      group: main
+    code:
+      type: string
+      field: code
+      name: code
+      group: main
+    entrance_date:
+      type: date
+      field: entrance_date
+      name: entrance_date
+      group: main
+    user:
+      type: relation
+      model: auth__account
+      show: user.name
+      list: true
+      field: user
+      name: user
+      group: main
+    position:
+      type: relation
+      model: employee__position
+      list: true
+      field: position
+      name: position
+      group: main
+    level:
+      type: relation
+      model: employee__level
+      list: true
+      front:
+        show:
+          - name
+          - code
+      field: level
+      name: level
+      group: main
+    level_promotion:
+      type: inversedOne
+      model: employee__level_track
+      mapped: level
+      field: level_promotion
+      name: level_promotion
+      group: main
+    department:
+      type: relation
+      model: org__department
+      show: department.name
+      list: true
+      field: department
+      name: department
+      group: main
+    company:
+      hide: true
+      type: relation
+      model: org__company
+      field: company
+      name: company
+      group: main
+    org:
+      hide: true
+      type: relation
+      model: org__org
+      field: org
+      name: org
+      group: main
+  filters:
+    - Company
+    - Org
+    - CurrentUser
+  select_include:
+    - Crm
+    - Apps
+  search:
+    - user.name
+    - code
+    - level.name
+  mappings:
+    org: org
+    company: company
+  analysis:
+    main: {}
+employee__attend:
+  fields:
+    status:
+      type: string
+      field: status
+      name: status
+      group: main
+    date:
+      type: date
+      list: true
+      field: date
+      name: date
+      group: main
+    check_in:
+      type: float
+      list: true
+      field: check_in
+      name: check_in
+      group: main
+    check_out:
+      type: float
+      list: true
+      field: check_out
+      name: check_out
+      group: main
+    user:
+      type: relation
+      model: auth__account
+      list: true
+      show: user.name
+      field: user
+      name: user
+      group: main
+    reviewer:
+      type: relation
+      model: auth__account
+      field: reviewer
+      name: reviewer
+      group: main
+    org:
+      hide: true
+      type: string
+      field: org
+      name: org
+      group: main
+    company:
+      hide: true
+      type: string
+      field: company
+      name: company
+      group: main
+    department:
+      type: string
+      field: department
+      name: department
+      group: main
+  filters:
+    Company: {}
+    CurrentUserOrManager:
+      fields:
+        - manager
+        - reviewer
+      filters:
+        type: manager
+  mappings:
+    org: org
+    company: company
+    department: department
+    user: id
+  analysis:
+    main:
+      check_in: check_in
+      check_out: check_out
+employee__level:
+  fields:
+    name:
+      type: string
+      list: true
+      field: name
+      name: name
+      group: main
+    code:
+      type: string
+      list: true
+      validates:
+        minLength: 1
+      field: code
+      name: code
+      group: main
+    skills:
+      type: inversed
+      model: employee__skill
+      mapped: level
+      field: skills
+      name: skills
+      group: main
+    positions:
+      type: inversed
+      model: employee__position
+      mapped: level
+      field: positions
+      name: positions
+      group: main
+    prev_level:
+      type: relation
+      model: employee__level
+      details: true
+      info_details: false
+      field: prev_level
+      name: prev_level
+      group: main
+    next_level:
+      type: inversedOne
+      model: employee__level
+      details: true
+      mapped: prev_level
+      info_details: false
+      field: next_level
+      name: next_level
+      group: main
+    setting:
+      type: raw
+      field: setting
+      name: setting
+      group: main
+    department:
+      type: relation
+      model: org__department
+      show: department.name
+      field: department
+      name: department
+      group: main
+    company:
+      list: true
+      type: relation
+      model: org__company
+      hide: true
+      field: company
+      name: company
+      group: main
+    org:
+      hide: true
+      type: relation
+      model: org__org
+      field: org
+      name: org
+      group: main
+  filters:
+    - Company
+    - Department
+    - Org
+  search:
+    - name
+    - code
+  mappings:
+    company: company
+    org: org
+  generate:
+    - company
+    - department
+    - code
+  analysis:
+    main: {}
+employee__position:
+  fields:
+    name:
+      type: string
+      list: true
+      validates:
+        minLength: 2
+      field: name
+      name: name
+      group: main
+    level:
+      list: true
+      type: relation
+      model: employee__level
+      details: true
+      front:
+        show:
+          - name
+          - code
+      field: level
+      name: level
+      group: main
+    target_task_level:
+      type: relation
+      model: employee__level
+      details: true
+      front:
+        show:
+          - name
+          - code
+      field: target_task_level
+      name: target_task_level
+      group: main
+    prev_position:
+      type: relation
+      model: employee__position
+      details: true
+      info_details: false
+      field: prev_position
+      name: prev_position
+      group: main
+    next_position:
+      type: inversedOne
+      model: employee__position
+      mapped: prev_position
+      details: true
+      info_details: false
+      field: next_position
+      name: next_position
+      group: main
+    task_completion:
+      type: float
+      front:
+        type: Number
+        prefix: '%'
+      field: task_completion
+      name: task_completion
+      group: main
+    months_of_service:
+      type: string
+      front:
+        type: period
+        options:
+          - pid: hours
+            name: Hours
+          - pid: days
+            name: days
+          - pid: months
+            name: Months
+          - pid: years
+            name: Years
+        validates: {}
+      field: months_of_service
+      name: months_of_service
+      group: main
+    org:
+      type: string
+      hide: true
+      field: org
+      name: org
+      group: main
+    company:
+      type: string
+      hide: true
+      field: company
+      name: company
+      group: main
+    department:
+      type: relation
+      model: org__department
+      show: department.name
+      field: department
+      name: department
+      group: main
+    conditions:
+      type: raw
+      field: conditions
+      name: conditions
+      group: main
+  filters:
+    - Company
+    - Org
+  search:
+    - name
+    - level.name
+  mappings:
+    company: company
+    org: org
+  analysis:
+    main:
+      task_completion: task_completion
+employee__skill:
+  fields:
+    name:
+      type: string
+      list: true
+      field: name
+      name: name
+      group: main
+    type:
+      type: string
+      list: true
+      front:
+        type: Select
+        options:
+          - pid: measurable_skills
+            name: Measurable Skills
+          - pid: non_measurable_skills
+            name: Non Measurable Skills
+          - pid: condition_skills
+            name: Condition Skills
+      field: type
+      name: type
+      group: main
+    target_value:
+      type: float
+      list: true
+      field: target_value
+      name: target_value
+      group: main
+    level:
+      list: true
+      type: relation
+      model: employee__level
+      front:
+        show:
+          - name
+          - code
+      field: level
+      name: level
+      group: main
+    competency:
+      type: relation
+      model: common__category
+      params:
+        type: competency
+      field: competency
+      name: competency
+      group: main
+    category:
+      type: relation
+      model: common__category
+      params:
+        type: skill
+      field: category
+      name: category
+      group: main
+    department:
+      type: relation
+      model: org__department
+      show: department.name
+      list: true
+      field: department
+      name: department
+      group: main
+    company:
+      hide: true
+      type: relation
+      model: org__company
+      field: company
+      name: company
+      group: main
+    org:
+      hide: true
+      type: relation
+      model: org__org
+      field: org
+      name: org
+      group: main
+    setting:
+      type: raw
+      field: setting
+      name: setting
+      group: main
+  filters:
+    - Org
+    - Company
+  generate:
+    - level
+    - name
+  search:
+    - name
+    - type
+    - level.name
+    - level.code
+  imports:
+    keys:
+      - company
+      - title
+      - required
+    inserts:
+      - common__category
+      - employee__level
+      - org__department
+    fetching:
+      common__category:
+        filters:
+          type:
+            $in:
+              - skill
+              - competency
+      employee__level:
+        keys:
+          - company
+          - name
+      org__department: {}
+    fixed:
+      target_value: 3
+      type: non_measurable_skills
+    mappings:
+      name: required
+      department:
+        module: org__department
+        keys:
+          - company
+          - name
+        create_maps:
+          company: company
+          name: department
+          org: org
+          app: app
+      level:
+        module: employee__level
+        keys:
+          - company
+          - name
+        create_maps:
+          company: company
+          name: title
+          code: zone
+          department: department
+          org: org
+      competency:
+        module: common__category
+        keys:
+          - company
+          - name
+        fixed:
+          type: competency
+          app: hr_manager
+        create_maps:
+          company: company
+          name: competency
+      category:
+        module: common__category
+        keys:
+          - company
+          - name
+        fixed:
+          type: skill
+          app: hr_manager
+        create_maps:
+          company: company
+          name: skill set
+  mappings:
+    org: org
+    company: company
+  analysis:
+    main:
+      target_value: target_value
+employee__skill_approval:
+  fields:
+    user:
+      list: true
+      type: relation
+      model: auth__account
+      show: user.name
+      field: user
+      name: user
+      group: main
+    skill:
+      list: true
+      type: relation
+      model: employee__skill
+      field: skill
+      name: skill
+      group: main
+    date:
+      type: date
+      field: date
+      name: date
+      group: main
+    amount:
+      type: integer
+      default: 1
+      list: true
+      field: amount
+      name: amount
+      group: main
+    description:
+      type: string
+      list: true
+      field: description
+      name: description
+      group: main
+    status:
+      type: string
+      list: true
+      front:
+        type: Select
+        options:
+          - pid: in review
+            name: In review
+          - pid: done
+            name: Done
+          - pid: rejected
+            name: Rejected
+      column:
+        type: status
+        sortable: false
+      field: status
+      name: status
+      group: main
+    reviewer:
+      type: relation
+      model: auth__account
+      front:
+        ps:
+          type: manager
+      field: reviewer
+      name: reviewer
+      group: main
+    workspace:
+      type: relation
+      model: project__work_space
+      list: true
+      show: workspace.type
+      colName: type
+      field: workspace
+      name: workspace
+      group: main
+    project:
+      type: relation
+      model: project__project
+      field: project
+      name: project
+      group: main
+    company:
+      hide: true
+      type: relation
+      model: org__company
+      field: company
+      name: company
+      group: main
+    org:
+      hide: true
+      type: relation
+      model: org__org
+      field: org
+      name: org
+      group: main
+  hooks:
+    pre_save:
+      update_skill_track:
+        module: employee__skill_track
+        action: updateOne
+        filter:
+          org: value.org.id
+          user: value.user.id
+          level: value.skill.level.id
+          company: value.company.id
+          skill: value.skill.id
+        update:
+          $inc:
+            current_value: value.amount
+          $set:
+            updated_at: TodayMongoDate
+            end_date: TodayMongoDate
+          $setOnInsert:
+            _id: GenerateId
+            created_at: TodayMongoDate
+            start_date: TodayMongoDate
+        fun: state_change
+        from:
+          status: in review
+        to:
+          status: done
+  mappings:
+    org: org
+    company: company
+  filters:
+    CurrentUserOrManager:
+      fields:
+        - reviewer
+    Org: {}
+    Company: {}
+  search:
+    - user.name
+    - skill.name
+  analysis:
+    main:
+      amount: amount
+employee__skill_track:
+  fields:
+    status:
+      type: string
+      list: true
+      front:
+        type: Select
+        options:
+          - pid: in progress
+            name: In progress
+          - pid: done
+            name: Done
+      column:
+        type: status
+        sortable: false
+      field: status
+      name: status
+      group: main
+    progress:
+      type: integer
+      list: true
+      front:
+        type: Slider
+        min: 0
+        max: 100
+      column:
+        type: progress
+        sortable: false
+      field: progress
+      name: progress
+      group: main
+    skill:
+      type: relation
+      model: employee__skill
+      list: true
+      field: skill
+      name: skill
+      group: main
+    current_value:
+      type: float
+      field: current_value
+      name: current_value
+      group: main
+    target_value:
+      type: float
+      field: target_value
+      name: target_value
+      group: main
+    user:
+      type: relation
+      model: auth__account
+      list: true
+      show: user.name
+      field: user
+      name: user
+      group: main
+    start_date:
+      type: date
+      field: start_date
+      name: start_date
+      group: main
+    end_date:
+      type: date
+      field: end_date
+      name: end_date
+      group: main
+    completed:
+      type: boolean
+      field: completed
+      name: completed
+      group: main
+    level:
+      hide: true
+      type: string
+      field: level
+      name: level
+      group: main
+    org:
+      hide: true
+      type: string
+      field: org
+      name: org
+      group: main
+    company:
+      hide: true
+      type: string
+      field: company
+      name: company
+      group: main
+  filters:
+    - Org
+    - Company
+  search:
+    - user.name
+    - skill.name
+    - level.name
+  analysis:
+    main:
+      progress: progress
+      current_value: current_value
+      target_value: target_value
+employee__level_track:
+  fields:
+    name:
+      type: string
+      list: true
+      field: name
+      name: name
+      group: main
+    status:
+      type: string
+      list: true
+      front:
+        type: Select
+        options:
+          - pid: in progress
+            name: In progress
+          - pid: done
+            name: Done
+      column:
+        type: status
+        sortable: false
+      field: status
+      name: status
+      group: main
+    progress:
+      type: float
+      list: true
+      front:
+        type: Slider
+        min: 0
+        max: 100
+      column:
+        type: progress
+        sortable: false
+      field: progress
+      name: progress
+      group: main
+    start_date:
+      type: date
+      field: start_date
+      name: start_date
+      group: main
+    end_date:
+      type: date
+      field: end_date
+      name: end_date
+      group: main
+    user:
+      list: true
+      type: relation
+      model: auth__account
+      show: user.name
+      field: user
+      name: user
+      group: main
+    approved:
+      type: relation
+      model: auth__account
+      field: approved
+      name: approved
+      group: main
+    level:
+      list: true
+      type: relation
+      model: employee__level
+      field: level
+      name: level
+      group: main
+    setting:
+      type: raw
+      field: setting
+      name: setting
+      group: main
+    completed:
+      type: boolean
+      field: completed
+      name: completed
+      group: main
+  filters:
+    - CurrentUser
+  search:
+    - name
+    - level.name
+    - user.name
+  analysis:
+    main:
+      progress: progress
+employee__request:
+  fields:
+    name:
+      type: string
+      field: name
+      name: name
+      group: main
+    type:
+      type: relation
+      model: common__category
+      params:
+        type: request_category
+      list: true
+      field: type
+      name: type
+      group: main
+    status:
+      type: string
+      list: true
+      field: status
+      name: status
+      group: main
+    date:
+      type: date
+      field: date
+      name: date
+      group: main
+    user:
+      type: relation
+      model: auth__account
+      field: user
+      name: user
+      group: main
+    reviewer:
+      type: relation
+      model: auth__account
+      field: reviewer
+      name: reviewer
+      group: main
+    description:
+      type: string
+      field: description
+      name: description
+      group: main
+    note:
+      type: string
+      field: note
+      name: note
+      group: main
+    company:
+      hide: true
+      type: string
+      field: company
+      name: company
+      group: main
+  filters:
+    - Company
+    - CurrentUser
+  search:
+    - name
+    - type
+  analysis:
+    main: {}
+employee__info:
+  fields:
+    amount:
+      type: float
+      field: amount
+      name: amount
+      group: main
+    daily_deduction:
+      type: float
+      field: daily_deduction
+      name: daily_deduction
+      group: main
+    daily_bons:
+      type: float
+      field: daily_bons
+      name: daily_bons
+      group: main
+    v_balance:
+      label: Vacation Balance
+      type: float
+      field: v_balance
+      name: v_balance
+      group: main
+    user:
+      type: relation
+      model: auth__account
+      list: true
+      show: user.name
+      field: user
+      name: user
+      group: main
+    company:
+      hide: true
+      type: string
+      field: company
+      name: company
+      group: main
+    org:
+      hide: true
+      type: string
+      field: org
+      name: org
+      group: main
+employee__rules:
+  fields:
+    name:
+      type: string
+      list: true
+      field: name
+      name: name
+      group: main
+    type:
+      type: string
+      list: true
+      front:
+        type: Select
+        options:
+          - pid: earning
+            name: Earning
+          - pid: deduction
+            name: Deduction
+      field: type
+      name: type
+      group: main
+    calculation_type:
+      type: string
+      list: true
+      front:
+        type: Select
+        options:
+          - pid: fixed
+            name: Fixed
+          - pid: percentage
+            name: Percentage
+      field: calculation_type
+      name: calculation_type
+      group: main
+    value:
+      type: float
+      field: value
+      name: value
+      group: main
+    company:
+      hide: true
+      type: string
+      field: company
+      name: company
+      group: main
+    request_type:
+      type: string
+      field: request_type
+      name: request_type
+      group: main
+    org:
+      hide: true
+      type: string
+      field: org
+      name: org
+      group: main
+  filters:
+    - Org
+    - Company
+  mappings:
+    org: org
+    company: company
+  analysis:
+    main:
+      value: value
+employee__pay_slip:
+  fields:
+    month:
+      type: date
+      field: month
+      name: month
+      group: main
+    status:
+      type: string
+      field: status
+      name: status
+      group: main
+    basic_salary:
+      type: float
+      field: basic_salary
+      name: basic_salary
+      group: main
+    total_earnings:
+      type: float
+      field: total_earnings
+      name: total_earnings
+      group: main
+    total_deductions:
+      type: float
+      field: total_deductions
+      name: total_deductions
+      group: main
+    net_salary:
+      type: float
+      field: net_salary
+      name: net_salary
+      group: main
+    details:
+      type: raw
+      field: details
+      name: details
+      group: main
+    user:
+      type: relation
+      model: auth__account
+      list: true
+      show: user.name
+      field: user
+      name: user
+      group: main
+    reviewer:
+      type: relation
+      model: auth__account
+      field: reviewer
+      name: reviewer
+      group: main
+    company:
+      hide: true
+      type: string
+      field: company
+      name: company
+      group: main
+    org:
+      hide: true
+      type: string
+      field: org
+      name: org
+      group: main
+  mappings:
+    org: org
+    company: company
+  filters:
+    CurrentUserOrManager:
+      fields:
+        - reviewer
+    Org: {}
+    Company: {}
+  analysis:
+    main:
+      basic_salary: basic_salary
+      total_earnings: total_earnings
+      total_deductions: total_deductions
+      net_salary: net_salary

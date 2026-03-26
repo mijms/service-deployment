@@ -1,0 +1,149 @@
+event__event:
+  fields:
+    org:
+      type: string
+      hide: true
+      included: false
+      field: org
+      name: org
+      group: main
+    company:
+      type: string
+      hide: true
+      included: false
+      field: company
+      name: company
+      group: main
+    user:
+      type: relation
+      model: auth__account
+      hide: true
+      included: false
+      field: user
+      name: user
+      group: main
+    app:
+      type: string
+      hide: true
+      included: false
+      field: app
+      name: app
+      group: main
+    manager:
+      type: string
+      hide: true
+      included: false
+      field: manager
+      name: manager
+      group: main
+    status:
+      type: string
+      field: status
+      name: status
+      group: main
+    title:
+      type: string
+      field: title
+      name: title
+      group: main
+    desc:
+      type: string
+      field: desc
+      name: desc
+      group: main
+    from_date:
+      type: date
+      field: from_date
+      name: from_date
+      group: main
+    to_date:
+      type: date
+      field: to_date
+      name: to_date
+      group: main
+    module:
+      type: string
+      hide: true
+      included: false
+      field: module
+      name: module
+      group: main
+    ref:
+      hide: true
+      included: false
+      type: string
+      field: ref
+      name: ref
+      group: main
+    repeat:
+      type: inversedOne
+      model: event__repeat
+      mapped: event
+      field: repeat
+      name: repeat
+      group: main
+  search:
+    - title
+    - description
+  filters:
+    OrgOrNull: {}
+    CompanyOrNull: {}
+    CurrentUserOrManager:
+      fields:
+        - manager
+    MainApp: {}
+  mappings:
+    org: org
+    company: company
+    app: app
+    user: id
+  analysis:
+    main: {}
+event__repeat:
+  fields:
+    org:
+      type: string
+      field: org
+      name: org
+      group: main
+    company:
+      type: string
+      field: company
+      name: company
+      group: main
+    type:
+      type: string
+      options:
+        - pid: daily
+          name: Daily
+        - pid: weekly
+          name: Weekly
+        - pid: monthly
+          name: Monthly
+        - pid: yearly
+          name: Yearly
+      field: type
+      name: type
+      group: main
+    event:
+      type: relation
+      included: false
+      model: event__event
+      field: event
+      name: event
+      group: main
+    from_date:
+      type: date
+      field: from_date
+      name: from_date
+      group: main
+    to_date:
+      type: date
+      field: to_date
+      name: to_date
+      group: main
+  mappings:
+    org: org
+    company: company
+  analysis:
+    main: {}

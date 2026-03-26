@@ -1,0 +1,735 @@
+pos__tax_group:
+  fields:
+    company:
+      type: string
+      field: company
+      name: company
+      group: main
+    org:
+      type: string
+      field: org
+      name: org
+      group: main
+    type:
+      type: string
+      field: type
+      name: type
+      group: main
+    name:
+      type: string
+      field: name
+      name: name
+      group: main
+    description:
+      type: string
+      field: description
+      name: description
+      group: main
+    taxes:
+      type: inversed
+      model: pos__tax
+      mapped: tax_group
+      field: taxes
+      name: taxes
+      group: main
+  mappings:
+    org: org
+    company: company
+  analysis:
+    main: {}
+pos__tax:
+  fields:
+    company:
+      type: string
+      field: company
+      name: company
+      group: main
+    org:
+      type: string
+      field: org
+      name: org
+      group: main
+    name:
+      type: string
+      field: name
+      name: name
+      group: main
+    value:
+      type: float
+      field: value
+      name: value
+      group: main
+    tax_group:
+      type: relation
+      model: pos__tax_group
+      field: tax_group
+      name: tax_group
+      group: main
+  mappings:
+    org: org
+    company: company
+  analysis:
+    main:
+      value: value
+pos__item:
+  fields:
+    spu:
+      type: string
+      field: spu
+      name: spu
+      group: main
+    sku:
+      type: string
+      field: sku
+      name: sku
+      group: main
+    company:
+      type: string
+      field: company
+      name: company
+      group: main
+    org:
+      type: string
+      field: org
+      name: org
+      group: main
+    name:
+      type: string
+      field: name
+      name: name
+      group: main
+    type:
+      type: string
+      field: type
+      name: type
+      group: main
+    price:
+      type: float
+      field: price
+      name: price
+      group: main
+    description:
+      type: string
+      field: description
+      name: description
+      group: main
+    image:
+      type: relation
+      model: files__file
+      field: image
+      name: image
+      group: main
+    category:
+      type: relation
+      model: common__category
+      params:
+        type: pos_item
+      field: category
+      name: category
+      group: main
+    tax_group:
+      type: relation
+      model: pos__tax_group
+      field: tax_group
+      name: tax_group
+      group: main
+    units:
+      type: raw
+      field: units
+      name: units
+      group: main
+    parent:
+      type: relation
+      model: pos__item
+      field: parent
+      name: parent
+      group: main
+  mappings:
+    org: org
+    company: company
+  analysis:
+    main:
+      price: price
+pos__item_branch:
+  fields:
+    company:
+      type: string
+      field: company
+      name: company
+      group: main
+    org:
+      type: string
+      field: org
+      name: org
+      group: main
+    price:
+      type: float
+      field: price
+      name: price
+      group: main
+    tax_group:
+      type: relation
+      model: pos__tax_group
+      field: tax_group
+      name: tax_group
+      group: main
+    item:
+      type: relation
+      model: pos__item
+      field: item
+      name: item
+      group: main
+    branch:
+      type: relation
+      model: org__branch
+      field: branch
+      name: branch
+      group: main
+  mappings:
+    org: org
+    company: company
+  analysis:
+    main:
+      price: price
+pos__terminal:
+  fields:
+    company:
+      type: string
+      field: company
+      name: company
+      group: main
+    org:
+      type: string
+      field: org
+      name: org
+      group: main
+    branch:
+      type: relation
+      model: org__branch
+      field: branch
+      name: branch
+      group: main
+    name:
+      type: string
+      field: name
+      name: name
+      group: main
+    serial:
+      type: string
+      field: serial
+      name: serial
+      group: main
+  mappings:
+    org: org
+    company: company
+  analysis:
+    main: {}
+pos__order:
+  fields:
+    company:
+      type: string
+      field: company
+      name: company
+      group: main
+    org:
+      type: string
+      field: org
+      name: org
+      group: main
+    branch:
+      type: relation
+      model: org__branch
+      field: branch
+      name: branch
+      group: main
+    type:
+      type: string
+      field: type
+      name: type
+      group: main
+    status:
+      type: string
+      field: status
+      name: status
+      group: main
+    terminal:
+      type: relation
+      model: pos__terminal
+      field: terminal
+      name: terminal
+      group: main
+    items:
+      type: inversed
+      model: pos__order_item
+      mapped: order
+      field: items
+      name: items
+      group: main
+    client:
+      type: relation
+      model: crm__client
+      field: client
+      name: client
+      group: main
+  mappings:
+    org: org
+    company: company
+  analysis:
+    main: {}
+pos__order_item:
+  fields:
+    company:
+      type: string
+      field: company
+      name: company
+      group: main
+    org:
+      type: string
+      field: org
+      name: org
+      group: main
+    order:
+      type: relation
+      model: pos__order
+      field: order
+      name: order
+      group: main
+    item:
+      type: relation
+      model: pos__item
+      field: item
+      name: item
+      group: main
+    tax_amount:
+      type: float
+      field: tax_amount
+      name: tax_amount
+      group: main
+    price:
+      type: float
+      field: price
+      name: price
+      group: main
+    total:
+      type: float
+      field: total
+      name: total
+      group: main
+    status:
+      type: string
+      field: status
+      name: status
+      group: main
+    ordered:
+      type: date
+      field: ordered
+      name: ordered
+      group: main
+    serve:
+      type: date
+      field: serve
+      name: serve
+      group: main
+    user:
+      type: relation
+      model: auth__account
+      field: user
+      name: user
+      group: main
+  mappings:
+    org: org
+    company: company
+  analysis:
+    main:
+      tax_amount: tax_amount
+      price: price
+      total: total
+pos__receipt:
+  fields:
+    company:
+      type: string
+      field: company
+      name: company
+      group: main
+    org:
+      type: string
+      field: org
+      name: org
+      group: main
+    branch:
+      type: relation
+      model: org__branch
+      field: branch
+      name: branch
+      group: main
+    terminal:
+      type: relation
+      model: pos__terminal
+      field: terminal
+      name: terminal
+      group: main
+    order:
+      type: relation
+      model: pos__order
+      field: order
+      name: order
+      group: main
+    invoice:
+      type: string
+      field: invoice
+      name: invoice
+      group: main
+    sub_total:
+      type: float
+      field: sub_total
+      name: sub_total
+      group: main
+    tax_amount:
+      type: float
+      field: tax_amount
+      name: tax_amount
+      group: main
+    charges:
+      type: raw
+      field: charges
+      name: charges
+      group: main
+    total:
+      type: float
+      field: total
+      name: total
+      group: main
+    status:
+      type: string
+      field: status
+      name: status
+      group: main
+    items:
+      type: raw
+      field: items
+      name: items
+      group: main
+    payments:
+      type: raw
+      field: payments
+      name: payments
+      group: main
+    client:
+      type: relation
+      model: crm__client
+      field: client
+      name: client
+      group: main
+    user:
+      type: relation
+      model: auth__account
+      field: user
+      name: user
+      group: main
+  mappings:
+    org: org
+    company: company
+  analysis:
+    main:
+      sub_total: sub_total
+      tax_amount: tax_amount
+      total: total
+pos__stock:
+  fields:
+    company:
+      type: string
+      field: company
+      name: company
+      group: main
+    org:
+      type: string
+      field: org
+      name: org
+      group: main
+    branch:
+      type: relation
+      model: org__branch
+      field: branch
+      name: branch
+      group: main
+    name:
+      type: string
+      field: name
+      name: name
+      group: main
+    type:
+      type: string
+      field: type
+      name: type
+      group: main
+  mappings:
+    org: org
+    company: company
+  analysis:
+    main: {}
+pos__stock_balance:
+  fields:
+    company:
+      type: string
+      field: company
+      name: company
+      group: main
+    org:
+      type: string
+      field: org
+      name: org
+      group: main
+    stock:
+      type: relation
+      model: pos__stock
+      field: stock
+      name: stock
+      group: main
+    item:
+      type: relation
+      model: pos__item
+      params:
+        type: stock_item
+      field: item
+      name: item
+      group: main
+    balance:
+      type: float
+      field: balance
+      name: balance
+      group: main
+  mappings:
+    org: org
+    company: company
+  analysis:
+    main:
+      balance: balance
+pos__stock_transaction:
+  fields:
+    type:
+      type: string
+      field: type
+      name: type
+      group: main
+    affect:
+      type: string
+      field: affect
+      name: affect
+      group: main
+    company:
+      type: string
+      field: company
+      name: company
+      group: main
+    org:
+      type: string
+      field: org
+      name: org
+      group: main
+    stock:
+      type: relation
+      model: pos__stock
+      field: stock
+      name: stock
+      group: main
+    item:
+      type: relation
+      model: pos__item
+      params:
+        type: stock_item
+      field: item
+      name: item
+      group: main
+    balance:
+      type: float
+      field: balance
+      name: balance
+      group: main
+    date:
+      type: date
+      field: date
+      name: date
+      group: main
+    user:
+      type: relation
+      model: auth__account
+      field: user
+      name: user
+      group: main
+    main:
+      type: raw
+      field: main
+      name: main
+      group: main
+    ref:
+      type: string
+      field: ref
+      name: ref
+      group: main
+  mappings:
+    org: Org
+    company: company
+  analysis:
+    main:
+      balance: balance
+pos__stock_request:
+  fields:
+    company:
+      type: string
+      field: company
+      name: company
+      group: main
+    org:
+      type: string
+      field: org
+      name: org
+      group: main
+    branch:
+      type: relation
+      model: org__branch
+      field: branch
+      name: branch
+      group: main
+    status:
+      type: string
+      field: status
+      name: status
+      group: main
+    items:
+      type: inversed
+      model: pos__stock_request_item
+      field: items
+      name: items
+      group: main
+    parent:
+      type: relation
+      model: pos__stock_request
+      field: parent
+      name: parent
+      group: main
+    affected_stock:
+      type: relation
+      model: pos__stock
+      field: affected_stock
+      name: affected_stock
+      group: main
+    from:
+      type: relation
+      model: pos__stock
+      field: from
+      name: from
+      group: main
+    to:
+      type: relation
+      model: pos__stock
+      field: to
+      name: to
+      group: main
+    user:
+      type: relation
+      model: auth__account
+      field: user
+      name: user
+      group: main
+  mappings:
+    org: org
+    company: company
+  analysis:
+    main: {}
+pos__stock_request_item:
+  fields:
+    company:
+      type: string
+      field: company
+      name: company
+      group: main
+    org:
+      type: string
+      field: org
+      name: org
+      group: main
+    stock_request:
+      type: relation
+      model: pos__stock_request
+      field: stock_request
+      name: stock_request
+      group: main
+    item:
+      type: relation
+      model: pos__item
+      field: item
+      name: item
+      group: main
+    amount:
+      type: float
+      field: amount
+      name: amount
+      group: main
+    unit:
+      type: string
+      field: unit
+      name: unit
+      group: main
+    balance:
+      type: float
+      field: balance
+      name: balance
+      group: main
+  mappings:
+    org: org
+    company: company
+  analysis:
+    main:
+      amount: amount
+      balance: balance
+pos__payout:
+  fields:
+    company:
+      type: string
+      field: company
+      name: company
+      group: main
+    org:
+      type: string
+      field: org
+      name: org
+      group: main
+    branch:
+      type: relation
+      model: org__branch
+      field: branch
+      name: branch
+      group: main
+    terminal:
+      type: relation
+      model: pos__terminal
+      field: terminal
+      name: terminal
+      group: main
+    amount:
+      type: float
+      field: amount
+      name: amount
+      group: main
+    affect:
+      type: string
+      field: affect
+      name: affect
+      group: main
+    type:
+      type: string
+      field: type
+      name: type
+      group: main
+    user:
+      type: relation
+      model: auth__account
+      field: user
+      name: user
+      group: main
+  mappings:
+    org: org
+    company: company
+  analysis:
+    main:
+      amount: amount

@@ -1,0 +1,296 @@
+fit__plan:
+  fields:
+    type:
+      type: string
+      field: type
+      name: type
+      group: main
+    coach:
+      type: relation
+      model: auth__account
+      field: coach
+      name: coach
+      group: main
+    client:
+      type: relation
+      model: auth__account
+      field: client
+      name: client
+      group: main
+    name:
+      type: string
+      field: name
+      name: name
+      group: main
+    desc:
+      type: string
+      field: desc
+      name: desc
+      group: main
+    start:
+      type: date
+      field: start
+      name: start
+      group: main
+    end:
+      type: date
+      field: end
+      name: end
+      group: main
+    status:
+      type: string
+      field: status
+      name: status
+      group: main
+    data:
+      type: raw
+      field: data
+      name: data
+      group: main
+    org:
+      type: string
+      field: org
+      name: org
+      group: main
+    company:
+      type: string
+      field: company
+      name: company
+      group: main
+  mappings:
+    org: org
+    company: company
+  select_include:
+    - Apps
+    - Auth
+    - Org
+  analysis:
+    main: {}
+fit__schedule:
+  fields:
+    type:
+      type: string
+      field: type
+      name: type
+      group: main
+    plan:
+      type: relation
+      model: fit__plan
+      field: plan
+      name: plan
+      group: main
+    repeat:
+      type: string
+      field: repeat
+      name: repeat
+      group: main
+    start:
+      type: date
+      field: start
+      name: start
+      group: main
+    end:
+      type: date
+      field: end
+      name: end
+      group: main
+    status:
+      type: string
+      field: status
+      name: status
+      group: main
+    data:
+      type: raw
+      field: data
+      name: data
+      group: main
+    org:
+      type: string
+      field: org
+      name: org
+      group: main
+    company:
+      type: string
+      field: company
+      name: company
+      group: main
+  mappings:
+    org: org
+    company: company
+  analysis:
+    main: {}
+fit__log:
+  fields:
+    type:
+      type: string
+      field: type
+      name: type
+      group: main
+    plan:
+      type: relation
+      model: fit__plan
+      field: plan
+      name: plan
+      group: main
+    start:
+      type: date
+      field: start
+      name: start
+      group: main
+    end:
+      type: date
+      field: end
+      name: end
+      group: main
+    status:
+      type: string
+      field: status
+      name: status
+      group: main
+    data:
+      type: raw
+      field: data
+      name: data
+      group: main
+    plan_data:
+      type: raw
+      field: plan_data
+      name: plan_data
+      group: main
+    client:
+      type: relation
+      model: auth__account
+      field: client
+      name: client
+      group: main
+    coach:
+      type: relation
+      model: auth__account
+      field: coach
+      name: coach
+      group: main
+    org:
+      type: string
+      field: org
+      name: org
+      group: main
+    company:
+      type: string
+      field: company
+      name: company
+      group: main
+  mappings:
+    org: org
+    company: company
+  analysis:
+    main: {}
+fit__check_out:
+  fields:
+    type:
+      type: string
+      field: type
+      name: type
+      group: main
+    client:
+      type: relation
+      model: auth__account
+      field: client
+      name: client
+      group: main
+    coach:
+      type: relation
+      model: auth__account
+      field: coach
+      name: coach
+      group: main
+    images:
+      type: raw
+      field: images
+      name: images
+      group: main
+    weight:
+      type: float
+      field: weight
+      name: weight
+      group: main
+    date:
+      type: date
+      field: date
+      name: date
+      group: main
+    org:
+      type: string
+      field: org
+      name: org
+      group: main
+    company:
+      type: string
+      field: company
+      name: company
+      group: main
+  mappings:
+    org: org
+    company: company
+  analysis:
+    main:
+      weight: weight
+fit__task:
+  fields:
+    client:
+      type: relation
+      model: auth__account
+      field: client
+      name: client
+      group: main
+    coach:
+      type: relation
+      model: auth__account
+      field: coach
+      name: coach
+      group: main
+    type:
+      type: string
+      field: type
+      name: type
+      group: main
+    plan:
+      type: relation
+      model: fit__plan
+      field: plan
+      name: plan
+      group: main
+    start:
+      type: date
+      field: start
+      name: start
+      group: main
+    end:
+      type: date
+      field: end
+      name: end
+      group: main
+    status:
+      type: string
+      field: status
+      name: status
+      group: main
+    data:
+      type: raw
+      field: data
+      name: data
+      group: main
+    org:
+      type: string
+      field: org
+      name: org
+      group: main
+    company:
+      type: string
+      field: company
+      name: company
+      group: main
+  mappings:
+    org: org
+    company: company
+  analysis:
+    main: {}

@@ -1,0 +1,167 @@
+geo__country:
+  fields:
+    name:
+      type: string
+      list: true
+      field: name
+      name: name
+      group: main
+    alter:
+      type: collection
+      field: alter
+      name: alter
+      group: main
+  search:
+    - module
+  analysis:
+    main: {}
+geo__province:
+  fields:
+    name:
+      type: string
+      list: true
+      field: name
+      name: name
+      group: main
+    alter:
+      type: collection
+      field: alter
+      name: alter
+      group: main
+  search:
+    - module
+  analysis:
+    main: {}
+geo__municipality:
+  fields:
+    name:
+      type: string
+      index: true
+      list: true
+      field: name
+      name: name
+      group: main
+    code:
+      type: string
+      hide: true
+      field: code
+      name: code
+      group: main
+    province:
+      index: true
+      type: relation
+      model: geo__province
+      field: province
+      name: province
+      group: main
+    category:
+      type: relation
+      model: common__category
+      field: category
+      name: category
+      group: main
+    country:
+      type: relation
+      model: geo__country
+      hide: true
+      field: country
+      name: country
+      group: main
+    alter:
+      type: collection
+      field: alter
+      name: alter
+      group: main
+  filters:
+    - Province
+  search:
+    - name
+    - province.name
+  analysis:
+    main: {}
+geo__district:
+  fields:
+    name:
+      type: string
+      list: true
+      field: name
+      name: name
+      group: main
+    mun:
+      type: relation
+      model: geo__municipality
+      filter: true
+      list: true
+      field: mun
+      name: mun
+      group: main
+    country:
+      type: relation
+      model: geo__country
+      field: country
+      name: country
+      group: main
+    province:
+      type: relation
+      model: geo__province
+      field: province
+      name: province
+      group: main
+    alter:
+      type: collection
+      field: alter
+      name: alter
+      group: main
+  filters:
+    - Province
+    - Mun
+  search:
+    - name
+  analysis:
+    main: {}
+geo__street:
+  fields:
+    name:
+      type: string
+      list: true
+      field: name
+      name: name
+      group: main
+    district:
+      type: relation
+      model: geo__district
+      filter: true
+      list: true
+      field: district
+      name: district
+      group: main
+    mun:
+      type: relation
+      model: geo__municipality
+      field: mun
+      name: mun
+      group: main
+    country:
+      type: relation
+      model: geo__country
+      field: country
+      name: country
+      group: main
+    province:
+      type: relation
+      model: geo__province
+      field: province
+      name: province
+      group: main
+    alter:
+      type: collection
+      field: alter
+      name: alter
+      group: main
+  filters:
+    - Province
+    - Mun
+  search:
+    - name
+  analysis:
+    main: {}

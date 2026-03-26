@@ -1,0 +1,91 @@
+modules__module:
+  fields:
+    name:
+      name: name
+      group: main
+    apps:
+      name: apps
+      group: main
+    collections:
+      name: collections
+      group: main
+    setting:
+      name: setting
+      group: main
+modules__collection:
+  fields:
+    name:
+      name: name
+      group: main
+    module:
+      name: module
+      group: main
+    fields:
+      name: fields
+      group: main
+    setting:
+      name: setting
+      group: main
+modules__field:
+  fields:
+    name:
+      name: name
+      group: main
+    type:
+      name: type
+      group: main
+    setting:
+      name: setting
+      group: main
+    validate:
+      name: validate
+      group: main
+modules__log:
+  fields:
+    type:
+      name: type
+      group: main
+    module:
+      name: module
+      group: main
+    app:
+      name: app
+      group: main
+    user:
+      name: user
+      group: main
+    diff:
+      name: diff
+      group: main
+    date:
+      name: date
+      group: main
+modules__schedule:
+  fields:
+    type:
+      name: type
+      group: main
+    model:
+      name: model
+      group: main
+    repeated:
+      name: repeated
+      group: main
+    period:
+      name: period
+      group: main
+    each:
+      name: each
+      group: main
+    from_date:
+      name: from_date
+      group: main
+    to_date:
+      name: to_date
+      group: main
+    setting:
+      name: setting
+      group: main
+    ref:
+      name: ref
+      group: main

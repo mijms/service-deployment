@@ -1,0 +1,176 @@
+service__service_type:
+  fields:
+    category:
+      type: relation
+      model: common__category
+      params:
+        type: service_type
+      field: category
+      name: category
+      group: main
+    name:
+      type: string
+      field: name
+      name: name
+      group: main
+    setting:
+      type: raw
+      field: setting
+      name: setting
+      group: main
+service__service:
+  fields:
+    name:
+      type: string
+      list: true
+      field: name
+      name: name
+      group: main
+    type:
+      type: relation
+      model: service__service_type
+      field: type
+      name: type
+      group: main
+    price:
+      type: float
+      field: price
+      name: price
+      group: main
+    org:
+      type: string
+      field: org
+      name: org
+      group: main
+    company:
+      type: string
+      field: company
+      name: company
+      group: main
+    provider:
+      type: relation
+      model: auth__account
+      params:
+        type: provider
+      field: provider
+      name: provider
+      group: main
+    status:
+      type: string
+      field: status
+      name: status
+      group: main
+    desc:
+      type: string
+      field: desc
+      name: desc
+      group: main
+  mappings:
+    org: org
+    company: company
+    provider: id
+  select_include:
+    - Apps
+    - Auth
+    - Org
+  analysis:
+    main:
+      price: price
+service__profile:
+  fields:
+    user:
+      type: relation
+      model: auth__account
+      field: user
+      name: user
+      group: main
+    bio:
+      type: string
+      field: bio
+      name: bio
+      group: main
+    url:
+      type: string
+      field: url
+      name: url
+      group: main
+    avatar:
+      type: relation
+      model: files__file
+      field: avatar
+      name: avatar
+      group: main
+    cover:
+      type: relation
+      model: files__file
+      field: cover
+      name: cover
+      group: main
+    video:
+      type: relation
+      model: files__file
+      field: video
+      name: video
+      group: main
+service__profile_section:
+  fields:
+    profile:
+      type: relation
+      model: service__profile
+      field: profile
+      name: profile
+      group: main
+    name:
+      type: string
+      field: name
+      name: name
+      group: main
+    data:
+      type: raw
+      field: data
+      name: data
+      group: main
+service__order:
+  fields:
+    type:
+      type: string
+      field: type
+      name: type
+      group: main
+    status:
+      type: string
+      field: status
+      name: status
+      group: main
+    provider:
+      type: relation
+      model: auth__account
+      params:
+        type: provider
+      field: provider
+      name: provider
+      group: main
+    client:
+      type: relation
+      model: auth__account
+      params:
+        type: client
+      field: client
+      name: client
+      group: main
+    date:
+      type: date
+      field: date
+      name: date
+      group: main
+    service:
+      type: relation
+      model: service__service
+      field: service
+      name: service
+      group: main
+    amount:
+      type: float
+      field: amount
+      name: amount
+      group: main

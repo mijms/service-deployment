@@ -1,0 +1,79 @@
+apps__app:
+  fields:
+    type:
+      type: string
+      options:
+        - pid: mobile
+          name: Mobile
+        - pid: web
+          name: Web
+      field: type
+      name: type
+      group: main
+    name:
+      type: string
+      field: name
+      name: name
+      group: main
+    de_date:
+      type: date
+      field: de_date
+      name: de_date
+      group: main
+    platform:
+      type: string
+      field: platform
+      name: platform
+      group: main
+    main_app:
+      type: string
+      field: main_app
+      name: main_app
+      group: main
+    info:
+      type: raw
+      field: info
+      name: info
+      group: main
+    models:
+      type: raw
+      group: secure
+      field: models
+      name: models
+    _props:
+      type: raw
+      field: _props
+      name: _props
+      group: main
+    setting:
+      type: raw
+      group: server
+      field: setting
+      name: setting
+    fetch:
+      type: raw
+      group: secure
+      field: fetch
+      name: fetch
+    secure:
+      type: raw
+      group: secure
+      field: secure
+      name: secure
+    langs:
+      type: hasMany
+      model: common__lang
+      field: langs
+      name: langs
+      group: main
+  generate:
+    - name
+  select_include:
+    - Geo
+    - Auth
+    - Org
+  filters:
+    CurrentApps:
+      key: id
+  analysis:
+    main: {}

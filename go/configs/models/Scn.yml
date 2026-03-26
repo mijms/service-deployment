@@ -1,0 +1,1328 @@
+scn__spu:
+  fields:
+    Code:
+      field: code
+      name: Code
+      group: main
+    Name:
+      field: name
+      name: Name
+      group: main
+    Brand:
+      field: brand
+      name: Brand
+      group: main
+    Manufacturer:
+      field: manufacturer
+      name: Manufacturer
+      group: main
+    Category:
+      field: category
+      name: Category
+      group: main
+    Description:
+      field: description
+      name: Description
+      group: main
+    Specifications:
+      field: specifications
+      name: Specifications
+      group: main
+    BaseAttributes:
+      field: base_attributes
+      name: BaseAttributes
+      group: main
+    Images:
+      field: images
+      name: Images
+      group: main
+    Video:
+      field: video
+      name: Video
+      group: main
+    TotalSkus:
+      field: total_skus
+      name: TotalSkus
+      group: main
+    Status:
+      field: status
+      name: Status
+      group: main
+    MetaTitle:
+      field: meta_title
+      name: MetaTitle
+      group: main
+    MetaDescription:
+      field: meta_description
+      name: MetaDescription
+      group: main
+    MetaKeywords:
+      field: meta_keywords
+      name: MetaKeywords
+      group: main
+    App:
+      field: app
+      name: App
+      group: main
+    Org:
+      field: org
+      name: Org
+      group: main
+    Company:
+      field: company
+      name: Company
+      group: main
+  search:
+    - code
+    - name
+    - brand
+  filters:
+    - MainApp
+    - OrgOrNull
+    - CompanyOrNull
+  mappings:
+    app: app
+    org: org
+    company: company
+scn__sku:
+  fields:
+    Code:
+      field: code
+      name: Code
+      group: main
+    Spu:
+      field: spu
+      name: Spu
+      group: main
+    Item:
+      field: item
+      name: Item
+      group: main
+    Vendor:
+      field: vendor
+      name: Vendor
+      group: main
+    VendorSku:
+      field: vendor_sku
+      name: VendorSku
+      group: main
+    Barcode:
+      field: barcode
+      name: Barcode
+      group: main
+    VariantAttributes:
+      field: variant_attributes
+      name: VariantAttributes
+      group: main
+    Price:
+      field: price
+      name: Price
+      group: main
+    CostPrice:
+      field: cost_price
+      name: CostPrice
+      group: main
+    ComparePrice:
+      field: compare_price
+      name: ComparePrice
+      group: main
+    Currency:
+      field: currency
+      name: Currency
+      group: main
+    StockQuantity:
+      field: stock_quantity
+      name: StockQuantity
+      group: main
+    ReservedQuantity:
+      field: reserved_quantity
+      name: ReservedQuantity
+      group: main
+    AvailableQuantity:
+      field: available_quantity
+      name: AvailableQuantity
+      group: main
+    Weight:
+      field: weight
+      name: Weight
+      group: main
+    WeightUnit:
+      field: weight_unit
+      name: WeightUnit
+      group: main
+    Dimensions:
+      field: dimensions
+      name: Dimensions
+      group: main
+    Images:
+      field: images
+      name: Images
+      group: main
+    LeadTimeDays:
+      field: lead_time_days
+      name: LeadTimeDays
+      group: main
+    Moq:
+      field: moq
+      name: Moq
+      group: main
+    Status:
+      field: status
+      name: Status
+      group: main
+    App:
+      field: app
+      name: App
+      group: main
+    Org:
+      field: org
+      name: Org
+      group: main
+    Company:
+      field: company
+      name: Company
+      group: main
+  search:
+    - code
+    - spu.name
+    - vendor.name
+  filters:
+    - MainApp
+    - OrgOrNull
+    - CompanyOrNull
+  mappings:
+    app: app
+    org: org
+    company: company
+scn__vendor:
+  fields:
+    Code:
+      field: code
+      name: Code
+      group: main
+    Name:
+      field: name
+      name: Name
+      group: main
+    LegalName:
+      field: legal_name
+      name: LegalName
+      group: main
+    Type:
+      field: type
+      name: Type
+      group: main
+    Category:
+      field: category
+      name: Category
+      group: main
+    Description:
+      field: description
+      name: Description
+      group: main
+    Logo:
+      field: logo
+      name: Logo
+      group: main
+    ContactName:
+      field: contact_name
+      name: ContactName
+      group: main
+    ContactEmail:
+      field: contact_email
+      name: ContactEmail
+      group: main
+    ContactPhone:
+      field: contact_phone
+      name: ContactPhone
+      group: main
+    ContactMobile:
+      field: contact_mobile
+      name: ContactMobile
+      group: main
+    Website:
+      field: website
+      name: Website
+      group: main
+    Address:
+      field: address
+      name: Address
+      group: main
+    Location:
+      field: location
+      name: Location
+      group: main
+    Country:
+      field: country
+      name: Country
+      group: main
+    Province:
+      field: province
+      name: Province
+      group: main
+    Municipality:
+      field: municipality
+      name: Municipality
+      group: main
+    TaxId:
+      field: tax_id
+      name: TaxId
+      group: main
+    BusinessLicense:
+      field: business_license
+      name: BusinessLicense
+      group: main
+    RegistrationNumber:
+      field: registration_number
+      name: RegistrationNumber
+      group: main
+    BankName:
+      field: bank_name
+      name: BankName
+      group: main
+    BankAccount:
+      field: bank_account
+      name: BankAccount
+      group: secure
+    BankRouting:
+      field: bank_routing
+      name: BankRouting
+      group: secure
+    PaymentTerms:
+      field: payment_terms
+      name: PaymentTerms
+      group: main
+    Currency:
+      field: currency
+      name: Currency
+      group: main
+    Rating:
+      field: rating
+      name: Rating
+      group: main
+    TotalOrders:
+      field: total_orders
+      name: TotalOrders
+      group: main
+    TotalProducts:
+      field: total_products
+      name: TotalProducts
+      group: main
+    OnTimeDeliveryRate:
+      field: on_time_delivery_rate
+      name: OnTimeDeliveryRate
+      group: main
+    ReturnRate:
+      field: return_rate
+      name: ReturnRate
+      group: main
+    Status:
+      field: status
+      name: Status
+      group: main
+    Verified:
+      field: verified
+      name: Verified
+      group: main
+    VerifiedAt:
+      field: verified_at
+      name: VerifiedAt
+      group: main
+    Account:
+      field: account
+      name: Account
+      group: main
+    Products:
+      field: products
+      name: Products
+      group: main
+    ApiIntegrations:
+      field: api_integrations
+      name: ApiIntegrations
+      group: main
+    Contracts:
+      field: contracts
+      name: Contracts
+      group: main
+    Setting:
+      field: setting
+      name: Setting
+      group: main
+    App:
+      field: app
+      name: App
+      group: main
+    Org:
+      field: org
+      name: Org
+      group: main
+    Company:
+      field: company
+      name: Company
+      group: main
+  search:
+    - name
+    - code
+    - contact_email
+    - contact_phone
+  filters:
+    - MainApp
+    - OrgOrNull
+    - CompanyOrNull
+  mappings:
+    app: app
+    org: org
+    company: company
+  geo:
+    - location
+scn__vendor_product:
+  fields:
+    Vendor:
+      field: vendor
+      name: Vendor
+      group: main
+    Spu:
+      field: spu
+      name: Spu
+      group: main
+    Sku:
+      field: sku
+      name: Sku
+      group: main
+    VendorSku:
+      field: vendor_sku
+      name: VendorSku
+      group: main
+    VendorProductId:
+      field: vendor_product_id
+      name: VendorProductId
+      group: main
+    Name:
+      field: name
+      name: Name
+      group: main
+    Description:
+      field: description
+      name: Description
+      group: main
+    Price:
+      field: price
+      name: Price
+      group: main
+    CostPrice:
+      field: cost_price
+      name: CostPrice
+      group: main
+    Currency:
+      field: currency
+      name: Currency
+      group: main
+    Moq:
+      field: moq
+      name: Moq
+      group: main
+    StockQuantity:
+      field: stock_quantity
+      name: StockQuantity
+      group: main
+    StockStatus:
+      field: stock_status
+      name: StockStatus
+      group: main
+    LeadTimeDays:
+      field: lead_time_days
+      name: LeadTimeDays
+      group: main
+    ShippingWeight:
+      field: shipping_weight
+      name: ShippingWeight
+      group: main
+    ShippingDimensions:
+      field: shipping_dimensions
+      name: ShippingDimensions
+      group: main
+    Images:
+      field: images
+      name: Images
+      group: main
+    LastSyncAt:
+      field: last_sync_at
+      name: LastSyncAt
+      group: main
+    SyncStatus:
+      field: sync_status
+      name: SyncStatus
+      group: main
+    Status:
+      field: status
+      name: Status
+      group: main
+    App:
+      field: app
+      name: App
+      group: main
+    Org:
+      field: org
+      name: Org
+      group: main
+    Company:
+      field: company
+      name: Company
+      group: main
+  search:
+    - vendor.name
+    - spu.name
+    - sku.code
+  filters:
+    - MainApp
+    - OrgOrNull
+    - CompanyOrNull
+  mappings:
+    app: app
+    org: org
+    company: company
+scn__vendor_contract:
+  fields:
+    Vendor:
+      field: vendor
+      name: Vendor
+      group: main
+    ContractNumber:
+      field: contract_number
+      name: ContractNumber
+      group: main
+    Name:
+      field: name
+      name: Name
+      group: main
+    Type:
+      field: type
+      name: Type
+      group: main
+    StartDate:
+      field: start_date
+      name: StartDate
+      group: main
+    EndDate:
+      field: end_date
+      name: EndDate
+      group: main
+    AutoRenew:
+      field: auto_renew
+      name: AutoRenew
+      group: main
+    PaymentTerms:
+      field: payment_terms
+      name: PaymentTerms
+      group: main
+    CommissionRate:
+      field: commission_rate
+      name: CommissionRate
+      group: main
+    MinimumOrderValue:
+      field: minimum_order_value
+      name: MinimumOrderValue
+      group: main
+    Terms:
+      field: terms
+      name: Terms
+      group: main
+    Document:
+      field: document
+      name: Document
+      group: main
+    Status:
+      field: status
+      name: Status
+      group: main
+    SignedBy:
+      field: signed_by
+      name: SignedBy
+      group: main
+    SignedAt:
+      field: signed_at
+      name: SignedAt
+      group: main
+    App:
+      field: app
+      name: App
+      group: main
+    Org:
+      field: org
+      name: Org
+      group: main
+    Company:
+      field: company
+      name: Company
+      group: main
+  search:
+    - vendor.name
+    - contract_number
+  filters:
+    - MainApp
+    - OrgOrNull
+    - CompanyOrNull
+  mappings:
+    app: app
+    org: org
+    company: company
+scn__vendor_api_integration:
+  fields:
+    Vendor:
+      field: vendor
+      name: Vendor
+      group: main
+    IntegrationName:
+      field: integration_name
+      name: IntegrationName
+      group: main
+    Type:
+      field: type
+      name: Type
+      group: main
+    ApiEndpoint:
+      field: api_endpoint
+      name: ApiEndpoint
+      group: main
+    ApiVersion:
+      field: api_version
+      name: ApiVersion
+      group: main
+    ApiKey:
+      field: api_key
+      name: ApiKey
+      group: secure
+    ApiSecret:
+      field: api_secret
+      name: ApiSecret
+      group: secure
+    AccessToken:
+      field: access_token
+      name: AccessToken
+      group: secure
+    RefreshToken:
+      field: refresh_token
+      name: RefreshToken
+      group: secure
+    TokenExpiresAt:
+      field: token_expires_at
+      name: TokenExpiresAt
+      group: main
+    AuthType:
+      field: auth_type
+      name: AuthType
+      group: main
+    Headers:
+      field: headers
+      name: Headers
+      group: secure
+    SyncFrequency:
+      field: sync_frequency
+      name: SyncFrequency
+      group: main
+    SyncEnabled:
+      field: sync_enabled
+      name: SyncEnabled
+      group: main
+    LastSync:
+      field: last_sync
+      name: LastSync
+      group: main
+    LastSyncStatus:
+      field: last_sync_status
+      name: LastSyncStatus
+      group: main
+    NextSync:
+      field: next_sync
+      name: NextSync
+      group: main
+    SyncLogs:
+      field: sync_logs
+      name: SyncLogs
+      group: main
+    WebhookUrl:
+      field: webhook_url
+      name: WebhookUrl
+      group: main
+    WebhookSecret:
+      field: webhook_secret
+      name: WebhookSecret
+      group: secure
+    WebhookEvents:
+      field: webhook_events
+      name: WebhookEvents
+      group: main
+    RateLimit:
+      field: rate_limit
+      name: RateLimit
+      group: main
+    Timeout:
+      field: timeout
+      name: Timeout
+      group: main
+    RetryAttempts:
+      field: retry_attempts
+      name: RetryAttempts
+      group: main
+    Status:
+      field: status
+      name: Status
+      group: main
+    Config:
+      field: config
+      name: Config
+      group: main
+    Mapping:
+      field: mapping
+      name: Mapping
+      group: main
+    App:
+      field: app
+      name: App
+      group: main
+    Org:
+      field: org
+      name: Org
+      group: main
+    Company:
+      field: company
+      name: Company
+      group: main
+  search:
+    - vendor.name
+    - integration_name
+  filters:
+    - MainApp
+    - OrgOrNull
+    - CompanyOrNull
+  mappings:
+    app: app
+    org: org
+    company: company
+scn__api_sync_log:
+  fields:
+    Integration:
+      field: integration
+      name: Integration
+      group: main
+    SyncType:
+      field: sync_type
+      name: SyncType
+      group: main
+    Status:
+      field: status
+      name: Status
+      group: main
+    SyncStartedAt:
+      field: sync_started_at
+      name: SyncStartedAt
+      group: main
+    SyncCompletedAt:
+      field: sync_completed_at
+      name: SyncCompletedAt
+      group: main
+    DurationSeconds:
+      field: duration_seconds
+      name: DurationSeconds
+      group: main
+    RecordsProcessed:
+      field: records_processed
+      name: RecordsProcessed
+      group: main
+    RecordsCreated:
+      field: records_created
+      name: RecordsCreated
+      group: main
+    RecordsUpdated:
+      field: records_updated
+      name: RecordsUpdated
+      group: main
+    RecordsFailed:
+      field: records_failed
+      name: RecordsFailed
+      group: main
+    ErrorMessage:
+      field: error_message
+      name: ErrorMessage
+      group: main
+    ErrorDetails:
+      field: error_details
+      name: ErrorDetails
+      group: main
+    RequestPayload:
+      field: request_payload
+      name: RequestPayload
+      group: main
+    ResponsePayload:
+      field: response_payload
+      name: ResponsePayload
+      group: main
+    App:
+      field: app
+      name: App
+      group: main
+    Org:
+      field: org
+      name: Org
+      group: main
+    Company:
+      field: company
+      name: Company
+      group: main
+  filters:
+    - MainApp
+    - OrgOrNull
+    - CompanyOrNull
+  mappings:
+    app: app
+    org: org
+    company: company
+  order_by:
+    sync_started_at: desc
+scn__provider_subscription:
+  fields:
+    Provider:
+      field: provider
+      name: Provider
+      group: main
+    Spu:
+      field: spu
+      name: Spu
+      group: main
+    SubscriptionType:
+      field: subscription_type
+      name: SubscriptionType
+      group: main
+    Priority:
+      field: priority
+      name: Priority
+      group: main
+    CommissionRate:
+      field: commission_rate
+      name: CommissionRate
+      group: main
+    BasePrice:
+      field: base_price
+      name: BasePrice
+      group: main
+    MarkupPercentage:
+      field: markup_percentage
+      name: MarkupPercentage
+      group: main
+    Regions:
+      field: regions
+      name: Regions
+      group: main
+    ServiceLevel:
+      field: service_level
+      name: ServiceLevel
+      group: main
+    MaxCapacity:
+      field: max_capacity
+      name: MaxCapacity
+      group: main
+    CurrentLoad:
+      field: current_load
+      name: CurrentLoad
+      group: main
+    StartDate:
+      field: start_date
+      name: StartDate
+      group: main
+    EndDate:
+      field: end_date
+      name: EndDate
+      group: main
+    AutoRenew:
+      field: auto_renew
+      name: AutoRenew
+      group: main
+    Status:
+      field: status
+      name: Status
+      group: main
+    PerformanceMetrics:
+      field: performance_metrics
+      name: PerformanceMetrics
+      group: main
+    Terms:
+      field: terms
+      name: Terms
+      group: main
+    Notes:
+      field: notes
+      name: Notes
+      group: main
+    App:
+      field: app
+      name: App
+      group: main
+    Org:
+      field: org
+      name: Org
+      group: main
+    Company:
+      field: company
+      name: Company
+      group: main
+  search:
+    - provider.name
+    - spu.name
+  filters:
+    - MainApp
+    - OrgOrNull
+    - CompanyOrNull
+  mappings:
+    app: app
+    org: org
+    company: company
+scn__dropship_order:
+  fields:
+    Order:
+      field: order
+      name: Order
+      group: main
+    Vendor:
+      field: vendor
+      name: Vendor
+      group: main
+    VendorOrderId:
+      field: vendor_order_id
+      name: VendorOrderId
+      group: main
+    Items:
+      field: items
+      name: Items
+      group: main
+    Status:
+      field: status
+      name: Status
+      group: main
+    Subtotal:
+      field: subtotal
+      name: Subtotal
+      group: main
+    ShippingCost:
+      field: shipping_cost
+      name: ShippingCost
+      group: main
+    TaxAmount:
+      field: tax_amount
+      name: TaxAmount
+      group: main
+    TotalAmount:
+      field: total_amount
+      name: TotalAmount
+      group: main
+    Currency:
+      field: currency
+      name: Currency
+      group: main
+    ShippingAddress:
+      field: shipping_address
+      name: ShippingAddress
+      group: main
+    TrackingNumber:
+      field: tracking_number
+      name: TrackingNumber
+      group: main
+    TrackingUrl:
+      field: tracking_url
+      name: TrackingUrl
+      group: main
+    Carrier:
+      field: carrier
+      name: Carrier
+      group: main
+    EstimatedDelivery:
+      field: estimated_delivery
+      name: EstimatedDelivery
+      group: main
+    ActualDelivery:
+      field: actual_delivery
+      name: ActualDelivery
+      group: main
+    SubmittedAt:
+      field: submitted_at
+      name: SubmittedAt
+      group: main
+    ConfirmedAt:
+      field: confirmed_at
+      name: ConfirmedAt
+      group: main
+    ShippedAt:
+      field: shipped_at
+      name: ShippedAt
+      group: main
+    DeliveredAt:
+      field: delivered_at
+      name: DeliveredAt
+      group: main
+    CancelledAt:
+      field: cancelled_at
+      name: CancelledAt
+      group: main
+    CancellationReason:
+      field: cancellation_reason
+      name: CancellationReason
+      group: main
+    VendorNotes:
+      field: vendor_notes
+      name: VendorNotes
+      group: main
+    InternalNotes:
+      field: internal_notes
+      name: InternalNotes
+      group: main
+    ApiRequest:
+      field: api_request
+      name: ApiRequest
+      group: main
+    ApiResponse:
+      field: api_response
+      name: ApiResponse
+      group: main
+    App:
+      field: app
+      name: App
+      group: main
+    Org:
+      field: org
+      name: Org
+      group: main
+    Company:
+      field: company
+      name: Company
+      group: main
+  search:
+    - order.order_number
+    - vendor.name
+    - tracking_number
+  filters:
+    - MainApp
+    - OrgOrNull
+    - CompanyOrNull
+  mappings:
+    app: app
+    org: org
+    company: company
+  analysis:
+    main:
+      total_amount:
+        field: $total_amount
+        fun: sum
+scn__dropship_order_item:
+  fields:
+    DropshipOrder:
+      field: dropship_order
+      name: DropshipOrder
+      group: main
+    OrderItem:
+      field: order_item
+      name: OrderItem
+      group: main
+    Sku:
+      field: sku
+      name: Sku
+      group: main
+    VendorProduct:
+      field: vendor_product
+      name: VendorProduct
+      group: main
+    VendorSku:
+      field: vendor_sku
+      name: VendorSku
+      group: main
+    Quantity:
+      field: quantity
+      name: Quantity
+      group: main
+    UnitCost:
+      field: unit_cost
+      name: UnitCost
+      group: main
+    TotalCost:
+      field: total_cost
+      name: TotalCost
+      group: main
+    Status:
+      field: status
+      name: Status
+      group: main
+    App:
+      field: app
+      name: App
+      group: main
+    Org:
+      field: org
+      name: Org
+      group: main
+    Company:
+      field: company
+      name: Company
+      group: main
+  search:
+    - dropship_order.order.order_number
+    - sku.sku_code
+  filters:
+    - MainApp
+    - OrgOrNull
+    - CompanyOrNull
+  mappings:
+    app: app
+    org: org
+    company: company
+scn__supply_chain_node:
+  fields:
+    Code:
+      field: code
+      name: Code
+      group: main
+    Name:
+      field: name
+      name: Name
+      group: main
+    Type:
+      field: type
+      name: Type
+      group: main
+    Vendor:
+      field: vendor
+      name: Vendor
+      group: main
+    Warehouse:
+      field: warehouse
+      name: Warehouse
+      group: main
+    Provider:
+      field: provider
+      name: Provider
+      group: main
+    Location:
+      field: location
+      name: Location
+      group: main
+    Address:
+      field: address
+      name: Address
+      group: main
+    Capacity:
+      field: capacity
+      name: Capacity
+      group: main
+    CurrentUtilization:
+      field: current_utilization
+      name: CurrentUtilization
+      group: main
+    TotalConnections:
+      field: total_connections
+      name: TotalConnections
+      group: main
+    Status:
+      field: status
+      name: Status
+      group: main
+    Metadata:
+      field: metadata
+      name: Metadata
+      group: main
+    App:
+      field: app
+      name: App
+      group: main
+    Org:
+      field: org
+      name: Org
+      group: main
+    Company:
+      field: company
+      name: Company
+      group: main
+  search:
+    - name
+    - code
+    - type
+  filters:
+    - MainApp
+    - OrgOrNull
+    - CompanyOrNull
+  mappings:
+    app: app
+    org: org
+    company: company
+  geo:
+    - location
+scn__supply_chain_route:
+  fields:
+    Name:
+      field: name
+      name: Name
+      group: main
+    FromNode:
+      field: from_node
+      name: FromNode
+      group: main
+    ToNode:
+      field: to_node
+      name: ToNode
+      group: main
+    TransportType:
+      field: transport_type
+      name: TransportType
+      group: main
+    ShippingProvider:
+      field: shipping_provider
+      name: ShippingProvider
+      group: main
+    DistanceKm:
+      field: distance_km
+      name: DistanceKm
+      group: main
+    LeadTimeDays:
+      field: lead_time_days
+      name: LeadTimeDays
+      group: main
+    Cost:
+      field: cost
+      name: Cost
+      group: main
+    CostPerKg:
+      field: cost_per_kg
+      name: CostPerKg
+      group: main
+    Currency:
+      field: currency
+      name: Currency
+      group: main
+    Capacity:
+      field: capacity
+      name: Capacity
+      group: main
+    Priority:
+      field: priority
+      name: Priority
+      group: main
+    Status:
+      field: status
+      name: Status
+      group: main
+    Restrictions:
+      field: restrictions
+      name: Restrictions
+      group: main
+    App:
+      field: app
+      name: App
+      group: main
+    Org:
+      field: org
+      name: Org
+      group: main
+    Company:
+      field: company
+      name: Company
+      group: main
+  search:
+    - name
+    - from_node.name
+    - to_node.name
+  filters:
+    - MainApp
+    - OrgOrNull
+    - CompanyOrNull
+  mappings:
+    app: app
+    org: org
+    company: company
+scn__supply_chain_flow:
+  fields:
+    Spu:
+      field: spu
+      name: Spu
+      group: main
+    Sku:
+      field: sku
+      name: Sku
+      group: main
+    FromNode:
+      field: from_node
+      name: FromNode
+      group: main
+    ToNode:
+      field: to_node
+      name: ToNode
+      group: main
+    Route:
+      field: route
+      name: Route
+      group: main
+    Order:
+      field: order
+      name: Order
+      group: main
+    DropshipOrder:
+      field: dropship_order
+      name: DropshipOrder
+      group: main
+    Quantity:
+      field: quantity
+      name: Quantity
+      group: main
+    FlowType:
+      field: flow_type
+      name: FlowType
+      group: main
+    Status:
+      field: status
+      name: Status
+      group: main
+    FlowDate:
+      field: flow_date
+      name: FlowDate
+      group: main
+    ExpectedArrival:
+      field: expected_arrival
+      name: ExpectedArrival
+      group: main
+    ActualArrival:
+      field: actual_arrival
+      name: ActualArrival
+      group: main
+    Cost:
+      field: cost
+      name: Cost
+      group: main
+    TrackingNumber:
+      field: tracking_number
+      name: TrackingNumber
+      group: main
+    Notes:
+      field: notes
+      name: Notes
+      group: main
+    App:
+      field: app
+      name: App
+      group: main
+    Org:
+      field: org
+      name: Org
+      group: main
+    Company:
+      field: company
+      name: Company
+      group: main
+  search:
+    - spu.name
+    - from_node.name
+    - to_node.name
+  filters:
+    - MainApp
+    - OrgOrNull
+    - CompanyOrNull
+  mappings:
+    app: app
+    org: org
+    company: company
+  order_by:
+    flow_date: desc

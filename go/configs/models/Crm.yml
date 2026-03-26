@@ -1,0 +1,166 @@
+crm__client:
+  fields:
+    type:
+      type: string
+      list: true
+      front:
+        type: Select
+        options:
+          - pid: client
+            name: Client
+          - pid: patient
+            name: Patient
+          - pid: lead
+            name: Lead
+      field: type
+      name: type
+      group: main
+    name:
+      type: string
+      field: name
+      name: name
+      group: main
+    contacts:
+      type: inversed
+      model: crm__contact
+      field: contacts
+      name: contacts
+      group: main
+    campaign:
+      type: relation
+      model: marketing__campaign
+      field: campaign
+      name: campaign
+      group: main
+    lead:
+      type: relation
+      model: marketing__lead
+      field: lead
+      name: lead
+      group: main
+    register:
+      type: string
+      field: register
+      name: register
+      group: main
+    license:
+      type: string
+      field: license
+      name: license
+      group: main
+    logo:
+      type: relation
+      model: files__file
+      field: logo
+      name: logo
+      group: main
+    files:
+      type: hasMany
+      model: files__file
+      field: files
+      name: files
+      group: main
+    creator:
+      type: relation
+      model: auth__account
+      field: creator
+      name: creator
+      group: main
+    setting:
+      type: raw
+      field: setting
+      name: setting
+      group: main
+    app:
+      type: relation
+      model: apps__app
+      field: app
+      name: app
+      group: main
+    org:
+      type: relation
+      model: org__org
+      field: org
+      name: org
+      group: main
+    company:
+      type: relation
+      model: org__company
+      field: company
+      name: company
+      group: main
+    branch:
+      type: relation
+      model: org__branch
+      field: branch
+      name: branch
+      group: main
+  filters:
+    - Org
+    - Company
+    - MainApp
+  mappings:
+    app: app
+    org: org
+    company: company
+    branch: branch
+  analysis:
+    main: {}
+crm__contact:
+  fields:
+    client:
+      type: relation
+      model: crm__client
+      field: client
+      name: client
+      group: main
+    type:
+      type: string
+      field: type
+      name: type
+      group: main
+    name:
+      type: string
+      field: name
+      name: name
+      group: main
+    value:
+      type: string
+      field: value
+      name: value
+      group: main
+    app:
+      type: relation
+      model: apps__app
+      field: app
+      name: app
+      group: main
+    org:
+      type: relation
+      model: org__org
+      field: org
+      name: org
+      group: main
+    company:
+      type: relation
+      model: org__company
+      field: company
+      name: company
+      group: main
+    branch:
+      type: relation
+      model: org__branch
+      field: branch
+      name: branch
+      group: main
+  filters:
+    - Org
+    - Company
+    - MainApp
+  mappings:
+    app: app
+    org: org
+    company: company
+    branch: branch
+  analysis:
+    main: {}

@@ -1,0 +1,194 @@
+marketing__audience:
+  fields:
+    type:
+      type: string
+      field: type
+      name: type
+      group: main
+    category:
+      type: relation
+      model: common__category
+      field: category
+      name: category
+      group: main
+    name:
+      type: string
+      field: name
+      name: name
+      group: main
+    org:
+      type: relation
+      model: org__org
+      field: org
+      name: org
+      group: main
+    info:
+      type: raw
+      field: info
+      name: info
+      group: main
+marketing__campaign:
+  fields:
+    type:
+      type: string
+      field: type
+      name: type
+      group: main
+    channels:
+      type: hasMany
+      model: marketing__channel
+      field: channels
+      name: channels
+      group: main
+    name:
+      type: string
+      field: name
+      name: name
+      group: main
+    start_date:
+      type: date
+      field: start_date
+      name: start_date
+      group: main
+    end_date:
+      type: date
+      field: end_date
+      name: end_date
+      group: main
+    desc:
+      type: string
+      field: desc
+      name: desc
+      group: main
+    objective:
+      type: string
+      field: objective
+      name: objective
+      group: main
+    audience:
+      type: hasMany
+      model: marketing__audience
+      field: audience
+      name: audience
+      group: main
+    budget:
+      type: relation
+      model: marketing__budget
+      field: budget
+      name: budget
+      group: main
+    allocated:
+      type: float
+      field: allocated
+      name: allocated
+      group: main
+    actual:
+      type: float
+      field: actual
+      name: actual
+      group: main
+marketing__lead:
+  fields:
+    type:
+      type: string
+      field: type
+      name: type
+      group: main
+    name:
+      type: string
+      field: name
+      name: name
+      group: main
+    contact:
+      type: string
+      field: contact
+      name: contact
+      group: main
+    campaign:
+      type: relation
+      model: marketing__campaign
+      field: campaign
+      name: campaign
+      group: main
+    label:
+      type: hasMany
+      model: common__category
+      field: label
+      name: label
+      group: main
+marketing__channel:
+  fields:
+    type:
+      type: string
+      field: type
+      name: type
+      group: main
+    name:
+      type: string
+      field: name
+      name: name
+      group: main
+    org:
+      type: relation
+      model: org__org
+      field: org
+      name: org
+      group: main
+marketing__budget:
+  fields:
+    type:
+      type: string
+      field: type
+      name: type
+      group: main
+    allocated:
+      type: float
+      field: allocated
+      name: allocated
+      group: main
+    actual:
+      type: float
+      field: actual
+      name: actual
+      group: main
+    org:
+      type: relation
+      model: org__org
+      field: org
+      name: org
+      group: main
+marketing__kpis:
+  fields:
+    campaign:
+      type: relation
+      model: marketing__campaign
+      field: campaign
+      name: campaign
+      group: main
+    type:
+      type: string
+      field: type
+      name: type
+      group: main
+    target:
+      type: float
+      field: target
+      name: target
+      group: main
+    actual:
+      type: float
+      field: actual
+      name: actual
+      group: main
+    org:
+      type: relation
+      model: org__org
+      field: org
+      name: org
+      group: main
+    budget:
+      type: relation
+      model: marketing__budget
+      field: budget
+      name: budget
+      group: main
