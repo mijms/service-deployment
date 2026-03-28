@@ -1,0 +1,34 @@
+version: '3.8'
+services:
+  go-auth:
+    image: alpine:3.20
+    container_name: go-auth
+    working_dir: /app
+    restart: ${RESTART_POLICY}
+    env_file:
+      - .env.prod
+    environment:
+      - APP_ROOT=/app
+      - APP_NAME=auth
+      - TZ
+      - SERVER_PORT
+      - MONGODB_URL
+      - MONGODB_DATABASE
+      - MONGODB_USER
+      - MONGODB_PASS
+      - JWT_SECRET
+      - JWT_EXPIRATION_MS
+    ports:
+      - ${SERVER_PORT}:${SERVER_PORT}
+    volumes:
+      - ../build/auth:/app/server
+      - ../templates:/app/templates
+      - ../.env.prod:/app/.env
+      - ../go.mod:/app/go.mod
+      - ../configs:/app/configs
+    command: ./server
+    networks:
+      - ukkera
+networks:
+  ukkera:
+    external: true
